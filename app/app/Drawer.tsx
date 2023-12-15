@@ -8,7 +8,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LoginIcon from '@mui/icons-material/Login';
 import StorageIcon from '@mui/icons-material/Storage';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
 import SearchIcon from '@mui/icons-material/Search';
 import { ListItemIcon, SwipeableDrawer, Box, IconButton, AppBar, Drawer, Toolbar, Typography, Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -17,13 +16,14 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useRouter } from 'next/navigation';
 import { getTheme } from './Theme';
 import MusicNote from '@mui/icons-material/MusicNote';
+import TagIcon from '@mui/icons-material/Tag';
 
 const DRAWER_WIDTH = 240;
 
 const LINKS = [
     { text: 'UserChap', href: '/userchap/1', icon: LocalCafeIcon },
     { text: 'Search', href: '/search', icon: SearchIcon },
-    { text: 'Popular', href: '/popular', icon: WhatshotIcon },
+    { text: 'Tags', href: '/tag', icon: TagIcon },
     { text: 'Subscription', href: '/watched', icon: LoyaltyIcon },
     { text: 'Bookmark', href: '/bookmark', icon: BookmarksIcon },
 ];

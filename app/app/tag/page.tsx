@@ -1,3 +1,4 @@
+import { Button, Container, Stack } from '@mui/material'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -88,7 +89,7 @@ let tags = ['2020年度最佳',
     '第四天灾']
 
 export default async function Page() {
-    return <>
+    return <Container>
         {/* <div className="center">
             <form>
                 <input
@@ -103,10 +104,10 @@ export default async function Page() {
                 </button>
             </form>
         </div> */}
-        <div>
-            {tags.map((t) => <Link prefetch={false} href={`/tag/${t}`} key={t}>
-                <button className="shadowed small">{t}</button>
-            </Link>)}
-        </div>
-    </>
+        <Stack direction="row" useFlexGap flexWrap="wrap" spacing={2}>
+            {tags.map((t) => <Button LinkComponent={Link} href={`/tag/${t}`} key={t}>
+                {t}
+            </Button>)}
+        </Stack>
+    </Container>
 }
