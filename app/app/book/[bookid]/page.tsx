@@ -197,7 +197,7 @@ export default async function Page({ params }: { params: { bookid: string } }) {
                 </Stack>
                 <Stack sx={{ p: 1, wordBreak: 'break-all', textAlign: 'start' }} color="text.secondary" justifyContent="flex-start" spacing={2}>
                     {
-                        r.data.book_info.description.split("\n").map((l) => <p style={{ wordBreak: 'break-all' }}>{l}<br /></p>)
+                        r.data.book_info.description.split("\n").map((l) => <p style={{ wordBreak: 'break-all' }} key={l.slice(0, 10)}>{l}<br /></p>)
                     }
                 </Stack>
             </Grid>

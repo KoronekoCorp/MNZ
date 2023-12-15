@@ -128,7 +128,7 @@ export default function Bookmark() {
             <MenuBookIcon />小说<b>(<span id="total_book">{bookmark.length}</span>)</b>
         </H2>
         <Grid container spacing={2} sx={{ p: 1 }} alignItems="center" justifyContent="center">
-            {bookmark.map(b => <Grid item xs={6} md={3}>
+            {bookmark.map(b => <Grid item xs={6} md={3} key={b.id}>
                 <BookCard
                     url={`/book/${b.id}`}
                     img={{ url: b.cover }}
