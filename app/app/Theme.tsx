@@ -24,16 +24,8 @@ export function getTheme(mode: "dark" | "light") {
             ...(
                 mode == "light"
                     ? {
-                        // primary: {
-                        //     main: '#3f51b5',
-                        // },
-                        // secondary: {
-                        //     main: '#f50057',
-                        // },
-
                         text: {
                             primary: "#000000",
-                            // secondary: "#e5dfdf"
                         },
                     }
                     : {
@@ -83,7 +75,5 @@ export function getTheme(mode: "dark" | "light") {
             }),
         },
     })
-    // console.log(theme)
-
     return theme
 }

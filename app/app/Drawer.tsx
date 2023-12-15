@@ -36,9 +36,9 @@ const PLACEHOLDER_LINKS = [
     // { text: 'Logout', href: '/api/auth/signout', icon: LogoutIcon },
 ];
 
-export function Root({ children }: { children: ReactNode }) {
+export function Root({ darkmode, children }: { darkmode?: boolean, children: ReactNode }) {
     const [open, setOpen] = useState(false);
-    const [dark, setdark] = useState(false);
+    const [dark, setdark] = useState(darkmode ?? false);
     let mode: "dark" | "light"
     if (dark) { mode = 'dark' } else { mode = 'light' }
     const router = useRouter()
@@ -70,7 +70,11 @@ export function Root({ children }: { children: ReactNode }) {
                 </Typography>
                 {/* <MenuItem> */}
                 <Box sx={{ flexGrow: 1 }} />
-                <IconButton sx={{ ml: 1 }} onClick={() => { localStorage.setItem('mode', (!dark).toString()); setdark(!dark) }} color="inherit">
+                <IconButton sx={{ ml: 1 }} onClick={() => {
+                    document.cookie = `dark=${!dark}; max-age=604800; path=/`;
+                    localStorage.setItem('mode', (!dark).toString());
+                    setdark(!dark)
+                }} color="inherit">
                     {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
                 {/* </MenuItem> */}

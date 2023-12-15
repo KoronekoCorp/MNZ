@@ -48,11 +48,15 @@ export function Prefetch({ url, time }: { url: string[], time: number }) {
  */
 export function S({ index, id }: { index: string, id: string }) {
     useEffect(() => {
-        document.getElementById(id)?.scrollIntoView({
-            behavior: 'smooth', // 可以设置为 'auto' 或 'smooth'，'smooth' 会有平滑滚动效果
-            block: 'start',    // 滚动到目标元素的位置，可以设置为 'start'、'center'、'end'、'nearest'
-            inline: 'nearest'
-        })
+        if (!window.TOP) window.TOP = {}
+        if (!window.TOP[index]) {
+            window.TOP[index] = true
+            document.getElementById(id)?.scrollIntoView({
+                behavior: 'smooth', // 可以设置为 'auto' 或 'smooth'，'smooth' 会有平滑滚动效果
+                block: 'start',    // 滚动到目标元素的位置，可以设置为 'start'、'center'、'end'、'nearest'
+                inline: 'nearest'
+            })
+        }
     }, [index])
 
     return <></>

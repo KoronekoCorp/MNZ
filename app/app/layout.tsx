@@ -7,6 +7,7 @@ import Sync from './Sync';
 import { Security } from '@/Security/Layout.Client';
 import { Music } from '@/Music/Client';
 import { Root } from './Drawer';
+import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'Koroneko Corp',
@@ -18,13 +19,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="zh">
       <head>
         <Heads />
       </head>
       <body style={{ margin: "auto" }}>
-        <Root>
+        <Root darkmode={cookies().get("dark")?.value == "true"}>
           <Snackbar>
             <Suspense fallback={<Loading />}>
               {children}
