@@ -1,0 +1,247 @@
+.console-line {
+    /* Font & Text */
+    font-family: monospace;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 24px;
+    text-decoration: none solid rgb(173, 173, 173);
+    text-indent: 0px;
+    text-transform: uppercase;
+    vertical-align: baseline;
+    white-space: normal;
+    word-spacing: 0px;
+
+    /* Color & Background */
+    background-attachment: scroll;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    color: rgb(173, 173, 173);
+
+    /* Box */
+    height: 24px;
+    /* width: 1518.4px; */
+    margin: 0px;
+    padding: 0px;
+    max-height: none;
+    min-height: 0px;
+    max-width: none;
+    min-width: 0px;
+
+    /* Positioning */
+    position: static;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    float: none;
+    display: block;
+    clear: none;
+    z-index: auto;
+
+    /* List */
+    list-style-image: none;
+    list-style-type: disc;
+    list-style-position: outside;
+
+    /* Table */
+    caption-side: top;
+    empty-cells: show;
+    table-layout: auto;
+
+    /* Miscellaneous */
+    overflow: visible;
+    cursor: auto;
+    visibility: visible;
+
+    /* Effects */
+    transform: none;
+    transition: all 0s ease 0s;
+
+    box-sizing: content-box;
+    resize: none;
+    text-shadow: none;
+    text-overflow: clip;
+    word-wrap: normal;
+    box-shadow: none;
+}
+
+.console-error {
+    /* Font & Text */
+    font-family: monospace;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 24px;
+    text-decoration: none solid rgb(231, 76, 60);
+    text-align: center;
+    text-indent: 0px;
+    text-transform: uppercase;
+    vertical-align: baseline;
+    white-space: normal;
+    word-spacing: 0px;
+
+    /* Color & Background */
+    background-attachment: scroll;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    color: rgb(231, 76, 60);
+
+    /* Box */
+    height: auto;
+    width: auto;
+    /* border: 0px none rgb(231, 76, 60);
+    border-top: 0px none rgb(231, 76, 60);
+    border-right: 0px none rgb(231, 76, 60);
+    border-bottom: 0px none rgb(231, 76, 60);
+    border-left: 0px none rgb(231, 76, 60); */
+    margin: 0px;
+    padding: 0px;
+    max-height: none;
+    min-height: 0px;
+    max-width: none;
+    min-width: 0px;
+
+    /* Positioning */
+    position: static;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    float: none;
+    display: inline;
+    clear: none;
+    z-index: auto;
+
+    /* List */
+    list-style-image: none;
+    list-style-type: disc;
+    list-style-position: outside;
+
+    /* Table */
+    /* border-collapse: separate;
+    border-spacing: 0px 0px; */
+    caption-side: top;
+    empty-cells: show;
+    table-layout: auto;
+
+    /* Miscellaneous */
+    overflow: visible;
+    cursor: auto;
+    visibility: visible;
+
+    /* Effects */
+    transform: none;
+    transition: all 0s ease 0s;
+    /* outline: rgb(255, 0, 0) dashed 0.8px; */
+    outline-offset: 0px;
+    box-sizing: content-box;
+    resize: none;
+    text-shadow: none;
+    text-overflow: clip;
+    word-wrap: normal;
+    box-shadow: none;
+    /* border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px; */
+    -webkit-animation: pulse 2s infinite linear;
+    -moz-animation: pulse 2s infinite linear;
+    -o-animation: pulse 2s infinite linear;
+    -ms-animation: pulse 2s infinite linear;
+    animation: pulse 2s infinite linear
+}
+
+
+@keyframes pulse {
+    0% {
+        opacity: 0
+    }
+
+    5% {
+        opacity: 1
+    }
+
+    30% {
+        opacity: 1
+    }
+
+    70% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        opacity: 0
+    }
+
+    5% {
+        opacity: 1
+    }
+
+    30% {
+        opacity: 1
+    }
+
+    70% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+@-moz-keyframes pulse {
+    0% {
+        opacity: 0
+    }
+
+    5% {
+        opacity: 1
+    }
+
+    30% {
+        opacity: 1
+    }
+
+    70% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+.usdt2 {
+    text-align: center;
+    background-image: -webkit-linear-gradient(left, #12d6df, #f70fff 25%, #12d6df 50%, #f70fff 75%, #12d6df);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-background-size: 200% 100%;
+    -webkit-animation: usdt2-animation 4s infinite linear;
+}
+
+@-webkit-keyframes usdt2-animation {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
+}

@@ -1,0 +1,142 @@
+"use client"
+import { useState, ReactNode, useEffect } from 'react';
+import Link from 'next/link';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import SettingsIcon from '@mui/icons-material/Settings';
+import MenuIcon from '@mui/icons-material/Menu';
+import LoginIcon from '@mui/icons-material/Login';
+import StorageIcon from '@mui/icons-material/Storage';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import SearchIcon from '@mui/icons-material/Search';
+import { ListItemIcon, SwipeableDrawer, Box, IconButton, AppBar, Drawer, Toolbar, Typography, Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { useRouter } from 'next/navigation';
+import { getTheme } from './Theme';
+import MusicNote from '@mui/icons-material/MusicNote';
+
+const DRAWER_WIDTH = 240;
+
+const LINKS = [
+    { text: 'UserChap', href: '/userchap/1', icon: LocalCafeIcon },
+    { text: 'Search', href: '/search', icon: SearchIcon },
+    { text: 'Popular', href: '/popular', icon: WhatshotIcon },
+    { text: 'Subscription', href: '/watched', icon: LoyaltyIcon },
+    { text: 'Bookmark', href: '/bookmark', icon: BookmarksIcon },
+];
+
+const PLACEHOLDER_LINKS = [
+    { text: 'Settings', href: '/settings', icon: SettingsIcon },
+    { text: 'Music', href: '/music', icon: MusicNote },
+    { text: 'Server', href: '/server', icon: StorageIcon },
+    { text: 'Login', href: '/login', icon: LoginIcon },
+    // { text: 'Logout', href: '/api/auth/signout', icon: LogoutIcon },
+];
+
+export function Root({ children }: { children: ReactNode }) {
+    const [open, setOpen] = useState(false);
+    const [dark, setdark] = useState(false);
+    let mode: "dark" | "light"
+    if (dark) { mode = 'dark' } else { mode = 'light' }
+    const router = useRouter()
+    const theme = getTheme(mode)
+
+    useEffect(() => {
+        const m = localStorage.getItem('mode')
+        if (m != null) { setdark(m == "true") }
+    }, [])
+
+    return <ThemeProvider theme={theme}>
+        <AppBar position="fixed" sx={{ zIndex: 2000, minHeight: '64px' }} color='inherit'>
+            <Toolbar sx={{ backgroundColor: 'palette.main', minHeight: '64px' }}>
+                {/* <IconButton onClick={() => { setOpen(!open) }}>
+                <MenuIcon sx={{ color: '#444', transform: 'translateY(-2px)' }} />
+              </IconButton> */}
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="open drawer"
+                    sx={{ mr: 2 }}
+                    onClick={() => { setOpen(!open) }}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" noWrap component="div" color="inherit" onClick={() => { router.push("/") }}>
+                    Nhimmeo Mui
+                </Typography>
+                {/* <MenuItem> */}
+                <Box sx={{ flexGrow: 1 }} />
+                <IconButton sx={{ ml: 1 }} onClick={() => { localStorage.setItem('mode', (!dark).toString()); setdark(!dark) }} color="inherit">
+                    {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                </IconButton>
+                {/* </MenuItem> */}
+            </Toolbar>
+        </AppBar>
+        <SwipeableDrawer onClose={() => { setOpen(false) }} onOpen={() => { setOpen(true) }} open={open}>
+            <Drawer
+                sx={{
+                    width: DRAWER_WIDTH,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                        width: DRAWER_WIDTH,
+                        boxSizing: 'border-box',
+                        top: ['56px', '64px'],
+                        height: 'auto',
+                        bottom: 0,
+                    },
+                    // display: { xs: 'none', sm: 'block' },
+                }}
+                variant="permanent"
+                anchor="left"
+                open={open}
+            >
+                <Divider />
+                <List>
+                    {LINKS.map(({ text, href, icon: Icon }) => (
+                        <ListItem key={href} disablePadding>
+                            <ListItemButton component={Link} href={href}>
+                                <ListItemIcon>
+                                    <Icon />
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider sx={{ mt: 'auto' }} />
+                <List>
+                    {PLACEHOLDER_LINKS.map(({ text, href, icon: Icon }) => (
+                        <ListItem key={href} disablePadding>
+                            <ListItemButton component={Link} href={href}>
+                                <ListItemIcon>
+                                    <Icon />
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Drawer>
+        </SwipeableDrawer>
+
+        <Box
+            component="main"
+            sx={{
+                flexGrow: 1,
+                bgcolor: 'background.default',
+                // ml: `${DRAWER_WIDTH}px`,
+                mt: ['48px', '56px', '64px'],
+                pb: ['48px', '56px', '64px'],
+                // p: 3,
+                pt: 3,
+                minHeight: "100vh"
+            }}
+        >
+            {children}
+        </Box>
+    </ThemeProvider>
+}
