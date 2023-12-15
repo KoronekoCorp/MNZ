@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { Buy, Catalog, Chaper, Register, Search, Tags, bookinfo, booklistinfo, booklists, geetest, login, tsukkomi, tsukkomi_info, tsukkomi_reply, tsukkomis } from './CiweiType';
+import type { Buy, Catalog, Chaper, Register, Search, Tags, bookinfo, booklistinfo, booklists, geetest, login, tsukkomi, tsukkomi_info, tsukkomi_reply, tsukkomis } from './CiweiType';
 import * as crypto from 'crypto';
 import { unstable_cache } from 'next/cache';
 

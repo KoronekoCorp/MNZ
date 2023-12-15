@@ -1,10 +1,14 @@
+import { Suspense } from "react";
 import Search from "../search";
 import { Metadata } from 'next'
+import Loading from "../loading";
 
 export const metadata: Metadata = {
     title: '搜索',
 }
 
 export default async function Page({ params }: { params: { word: string, page: string } }) {
-    return <Search search_word={params.word} page={parseInt(params.page)}></Search>
+    return <Suspense fallback={<Loading word={params.word} page={parseInt(params.page)} />}>
+        <Search search_word={params.word} page={parseInt(params.page)}></Search>
+    </Suspense>
 }

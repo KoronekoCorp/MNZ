@@ -10,7 +10,6 @@ import Battery2BarIcon from '@mui/icons-material/Battery2Bar';
 import BookIcon from '@mui/icons-material/Book';
 
 export default function Loading({ page }: { page?: number }) {
-    console.log(page)
     return <Container sx={{ textAlign: 'center' }}>
         <H2>
             <ShareIcon />用户分享的Ciweimao VIP章节
