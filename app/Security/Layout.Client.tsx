@@ -13,7 +13,7 @@ export function Security() {
             setunsafe(e)
             clearTimeout(id)
         })
-        const u = new URL("https://n.koroneko.co")
+        const u = new URL("https://mn.koroneko.co")
         u.pathname = document.location.pathname
         seturl(u.href)
     }, [])
