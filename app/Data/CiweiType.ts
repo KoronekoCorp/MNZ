@@ -15,7 +15,7 @@ interface BookOwn {
     "total_word_count": string,
     "up_status": string,
     "update_status": string,
-    "is_paid": string,
+    "is_paid": "0" | "1",
     "discount": string,
     "discount_end_time": string,
     "cover": string,

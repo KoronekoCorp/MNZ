@@ -91,7 +91,7 @@ export function BookSingle({ book, req }: { book: Userchap, req: bookinfo }) {
             {r.data.book_info.book_name}
         </Typography>
         <Stack direction="row" justifyContent="center" sx={{ "& > svg": { color: "#6C00FF" } }}>
-            {book.chapters}
+            {`${book.chapters} | `}
             {book.modes.includes("vip") && <BatteryFullIcon />}
             {book.modes.includes("marauder") && <Battery5BarIcon />}
             {book.modes.includes("post") && <Battery2BarIcon />}

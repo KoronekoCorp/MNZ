@@ -5,6 +5,14 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { UserchapInfo } from "@/Data/DataType"
 import { R, Back } from '@/components/push';
+import { Container, Grid } from '@mui/material';
+import { H2 } from '@/components/H2';
+import { BookCard } from '@/components/AutoBookCard';
+import SearchIcon from '@mui/icons-material/Search';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { PaginationElement } from '@/components/Pagination';
+
+
 export const metadata: Metadata = {
     title: '搜索',
 }
@@ -48,72 +56,21 @@ export default async function Search({ search_word, page }: { search_word: strin
         return icons;
     }
 
-    return <>
+    return <Container sx={{ textAlign: 'center' }}>
         <title>{`${word}的搜索结果`}</title>
-        <div className="card fluid center div_color_yellow1">
-            <h3>
-                <i className="fa fa-search" aria-hidden="true" />
-                {" "} <u>{word}</u>{" "}
-            </h3>
-        </div>
-        <div className="row center" id="search_result">
-            {r.data.book_list.map((e) => (<div className="col-sm-6 col-md-3" key={e.book_id}>
-                <div className="card fluid">
-                    <div className="section" style={{ height: 'auto' }}>
-                        <Link prefetch={false} href={`/book/${e.book_id}`} title={e.book_name}>
-                            <img
-                                style={{ border: "1px ridge black", height: "60%" }}
-                                loading="lazy"
-                                src="/assets/images/off.gif"
-                                className="lazyload blur-up"
-                                data-src={e.cover}
-                            />
-                        </Link>
-                        <h5>
-                            <Link prefetch={false}
-                                className="book_title_search"
-                                href={`/book/${e.book_id}`}
-                                title={e.book_name}
-                            >
-                                {e.book_name}
-                            </Link>
-                        </h5>
-                        <p style={{ fontSize: 14 }}>
-                            <i className="fa fa-user" aria-hidden="true" />{" "}
-                            <Link prefetch={false}
-                                className="book_author_search"
-                                href={`/search/${e.author_name}`}
-                                title={e.author_name}
-                            >
-                                {e.author_name}
-                            </Link>
-                        </p>
-                        <p>{e.is_paid === "0" ? <span className='console-line'>FREE</span> : <Userchap bookid={e.book_id} />}</p>
-                    </div>
-                </div>
-            </div>
-            ))}
-        </div>
-        {r.data.book_list.length == 0 && <div className="card fluid center" style={{ backgroundColor: "rgb(255 180 180)" }}>
-            <h3>
-                <i className="fa fa-warning" aria-hidden="true" />{" "}
-                什么都没有了呢,5秒后返航
-                <Back time={5000}></Back>
-            </h3>
-        </div>}
-
-        <div className="center">
-            <div className="pagination" id="paginationSection">
-                {page - 1 > 0 && <Link prefetch={false} href={`/search/${word}/${page - 1}`} >«</Link>}
-                {page - 2 > 0 && <Link prefetch={false} href={`/search/${word}/${page - 2}`} >{page - 2}</Link>}
-                {page - 1 > 0 && <Link prefetch={false} href={`/search/${word}/${page - 1}`} >{page - 1}</Link>}
-                <a aria-disabled className="active">{page}</a>
-                {r.data.book_list.length >= 10 && (<>
-                    <Link prefetch={false} href={`/search/${word}/${page + 1}`} >{page + 1}</Link>
-                    <Link prefetch={false} href={`/search/${word}/${page + 2}`} >{page + 2}</Link>
-                    <Link prefetch={false} href={`/search/${word}/${page + 1}`} >»</Link>
-                </>)}
-            </div>
-        </div>
-    </>
+        <H2>
+            <SearchIcon />{word}
+        </H2>
+        <Grid container spacing={2} sx={{ p: 1 }} alignItems="center" justifyContent="center">
+            {r.data.book_list.map((book) => <Grid item xs={6} md={3} key={book.book_id}>
+                <BookCard book={book} db={db} />
+            </Grid>)}
+        </Grid>
+        {r.data.book_list.length == 0 && <H2 sx={{ backgroundColor: "rgb(255 180 180)" }}>
+            <WarningAmberIcon />
+            什么都没有了呢,5秒后返航
+            <Back time={5000}></Back>
+        </H2>}
+        <PaginationElement currentUri={`/search/${word}`} pageShow={page} end={r.data.book_list.length < 10} />
+    </Container>
 }

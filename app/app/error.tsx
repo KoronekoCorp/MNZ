@@ -1,12 +1,12 @@
 'use client' // Error components must be Client Components
 
-import { useEffect, useState } from 'react'
-import { RadioGroup, FormControl, FormLabel, FormControlLabel, Radio, Container, Button } from "@mui/material"
-import { enqueueSnackbar } from 'notistack'
+import { useEffect, useId, useState } from 'react'
+import { Container, Button } from "@mui/material"
 import Cookies from 'js-cookie'
 import { H2 } from '@/components/H2'
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { DatabaseSetting } from '@/components/DatabaseSetting'
+import { Top } from '@/components/push'
 
 export default function Error({
     error,
@@ -40,5 +40,6 @@ export default function Error({
             }}>重新加载</Button>
         <br />
         <img src='/assets/images/憧憬成為魔法少女-50-3.png' />
+        <Top index={useId()} />
     </Container>
 }

@@ -2,8 +2,9 @@
 
 import { Card, CardActionArea, CardActions, CardContent } from "@mui/material"
 import Link from "next/link"
+import type { ReactNode } from "react"
 
-type jsxs = JSX.Element | JSX.Element[]
+type jsxs = JSX.Element | JSX.Element[] | ReactNode
 
 export function BookCard({ url, img, children, cardActions }:
     { url: string, img: { url: string, alt?: string }, children: jsxs, cardActions?: jsxs }) {

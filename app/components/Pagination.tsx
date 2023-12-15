@@ -1,8 +1,12 @@
 "use client"
-import { Box, Pagination } from "@mui/material";
+import { Box, Button, Pagination, Stack } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 
 /**
  * 
@@ -30,40 +34,43 @@ function PaginationTotalElement({ currentUri, pageShow, totalSearch }: { current
  * @param pageShow 当前页数
  * @returns 
  */
-function PaginationElement({ currentUri, pageShow }: { currentUri: string, pageShow: number }) {
+function PaginationElement({ currentUri, pageShow, end }: { currentUri: string, pageShow: number, end?: boolean }) {
     const pageID = pageShow;
     const pageIDm1 = pageID - 1;
     const pageIDm2 = pageID - 2;
     const pageIDp1 = pageID + 1;
     const pageIDp2 = pageID + 2;
 
-    const renderPaginationLinks = () => {
-        const links = [];
-        if (pageID > 1) {
-            links.push(<Link prefetch={false} href={`${currentUri}/${pageIDm1}`}>«</Link>);
-        }
-        if (pageID > 2) {
-            links.push(<Link prefetch={false} href={`${currentUri}/${pageIDm2}`}>{pageIDm2}</Link>);
-        }
-        if (pageID > 1) {
-            links.push(<Link prefetch={false} href={`${currentUri}/${pageIDm1}`}>{pageIDm1}</Link>);
-        }
-        links.push(<a className="active">{pageID}</a>);
-        links.push(<Link prefetch={false} href={`${currentUri}/${pageIDp1}`}>{pageIDp1}</Link>);
-        links.push(<Link prefetch={false} href={`${currentUri}/${pageIDp2}`}>{pageIDp2}</Link>);
-        links.push(<Link prefetch={false} href={`${currentUri}/${pageIDp1}`}>»</Link>);
-        return links;
-    };
+    const links = [];
+    if (pageID > 2) {
+        links.push(<Button variant='outlined' LinkComponent={Link} href={`${currentUri}/${pageIDm2}`}
+            startIcon={<KeyboardDoubleArrowLeftIcon />}>
+            {pageIDm2}
+        </Button>)
+    }
+    if (pageID > 1) {
+        links.push(<Button variant='outlined' LinkComponent={Link} href={`${currentUri}/${pageIDm1}`}
+            startIcon={<KeyboardArrowLeftIcon />}>
+            {pageIDm1}
+        </Button>);
+    }
+    links.push(<Button variant='outlined' disabled>
+        {pageID}
+    </Button>);
+    if (!end) {
+        links.push(<Button variant='outlined' LinkComponent={Link} href={`${currentUri}/${pageIDp1}`}
+            endIcon={<KeyboardArrowRightIcon />}>
+            {pageIDp1}
+        </Button>)
+        links.push(<Button variant='outlined' LinkComponent={Link} href={`${currentUri}/${pageIDp2}`}
+            endIcon={<KeyboardDoubleArrowRightIcon />}>
+            {pageIDp2}
+        </Button>)
+    }
 
-    // return <Pagination count={10}/>
-
-    return (
-        <div className="center">
-            <div className="pagination" id="paginationSection">
-                {renderPaginationLinks()}
-            </div>
-        </div>
-    );
+    return <Stack direction="row" sx={{ p: 2, justifyContent: 'center', display: 'flex' }} spacing={2}>
+        {links}
+    </Stack>
 }
 
 export default PaginationTotalElement;
