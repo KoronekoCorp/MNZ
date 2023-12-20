@@ -5,8 +5,19 @@ import Link from "next/link"
 
 type jsxs = JSX.Element | JSX.Element[]
 
-export function BookCard({ url, img, children, cardActions }:
-    { url: string, img: { url: string, alt?: string }, children: jsxs, cardActions?: jsxs }) {
+/**
+ * Img Card
+ * @returns 
+ */
+export function ImgCard({ url, img, children, cardActions }:
+    {
+        /**
+         * URL地址
+         */
+        url: string,
+        img: { url: string, alt?: string },
+        children: jsxs, cardActions?: jsxs
+    }) {
 
     return <Card>
         <CardActionArea LinkComponent={Link} href={url}>

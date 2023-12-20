@@ -1,6 +1,6 @@
 "use client"
-import { Chaper } from "@/Data/CiweiType"
-import { get, set, uuid } from "@/Data/Storge.Server"
+import type { Chaper } from "@/Data/CiweiType"
+import { get, set } from "@/Data/Storge.Server"
 import { useEffect } from "react"
 import { createHash } from "crypto"
 

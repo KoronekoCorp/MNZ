@@ -6,7 +6,7 @@ import { convertTimestamp } from './convertTimestamp'
 import { closeSnackbar, enqueueSnackbar } from 'notistack'
 import { Button, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material'
 import { H2 } from '@/components/H2'
-import { BookCard } from '@/components/BookCard'
+import { ImgCard } from '@/components/ImgCard'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
@@ -129,7 +129,7 @@ export default function Bookmark() {
         </H2>
         <Grid container spacing={2} sx={{ p: 1 }} alignItems="center" justifyContent="center">
             {bookmark.map(b => <Grid item xs={6} md={3} key={b.id}>
-                <BookCard
+                <ImgCard
                     url={`/book/${b.id}`}
                     img={{ url: b.cover }}
                     cardActions={<>
@@ -141,7 +141,7 @@ export default function Bookmark() {
                     <Typography gutterBottom variant="subtitle2" component="h6">
                         {b.name}
                     </Typography>
-                </BookCard>
+                </ImgCard>
             </Grid>)}
         </Grid>
 

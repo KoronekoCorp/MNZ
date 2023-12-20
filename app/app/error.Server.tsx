@@ -4,8 +4,8 @@ function E(e: Error) {
     return <ErrorClient error={{ message: e.message, name: "" }} />
 }
 
-export function ServerError(func: (Prop: any) => Promise<JSX.Element>) {
-    return async function Server(Prop: any) {
+export function ServerError<T>(func: (Prop: T) => Promise<JSX.Element>) {
+    return async function Server(Prop: T) {
         let D: JSX.Element
         try {
             D = await func(Prop)

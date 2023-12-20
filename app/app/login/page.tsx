@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect } from "react"
-import { lang } from "../lang.zh";
 import { enqueueSnackbar } from "notistack";
 import Cookies from "js-cookie";
 import { geetest, login } from "./server";
@@ -73,11 +72,11 @@ export default function Login() {
                 </H2>
                 <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                     <KeyIcon />
-                    <p>Account: </p><b>{account.account ?? lang["default_account_by_admin"]}</b>
+                    <p>Account: </p><b>{account.account ?? "default"}</b>
                 </Stack>
                 <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                     <KeyIcon />
-                    <p>Token: </p><b>{account.login_token ?? lang["default_account_by_admin"]}</b>
+                    <p>Token: </p><b>{account.login_token ?? "default"}</b>
                 </Stack>
                 <Accordions title={<p style={{ textAlign: "center", width: "100%", margin: 0 }}>说明</p>}
                     sx={{ margin: 1 }}>
@@ -147,85 +146,5 @@ export default function Login() {
             </Grid>
         </Grid>
     </Container>
-
-    return (
-        <div className="row">
-            <div className="col-sm-12 col-md-6">
-                <div className="card fluid">
-                    <div className="section">
-                        <h2>
-                            <i className="fa fa-sign-in" aria-hidden="true"></i> 登录
-                        </h2>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-12 col-md-6">
-                            <form action="" method="post" id="form_token">
-                                <b>Account:</b>
-                                <br />
-                                <input className="form-control" id="ci_account" type="text" name="ci_account" maxLength={100}
-                                    onChange={(e) => { setci_account(e.target.value.trim()) }} />
-                                <br />
-                                <b>Login token:</b>
-                                <br />
-                                <input className="form-control" id="ci_login_token" type="text" name="ci_login_token" maxLength={100}
-                                    onChange={(e) => { setci_login_token(e.target.value.trim()) }} />
-                                <br />
-                                <button type="button" className="primary" onClick={putCookie}>
-                                    登录
-                                </button>
-                            </form>
-                        </div>
-                        <div className="col-sm-12 col-md-6">
-                            <div className="section ">
-                                <p>
-                                    <a href="https://forum.nhimmeo.cf/d/25-instructions-to-get-ciweimao-token">指引(English)</a>
-                                </p>
-                                <p>
-                                    <a href="https://forum.nhimmeo.cf/d/26-faq">FAQ(English)</a>
-                                </p>
-                                <p>
-                                    示例
-                                    <ul>
-                                        <li>
-                                            account - <b>书客644333222111</b>
-                                        </li>
-                                        <li>
-                                            token - <b>d8c5e9f227ec11fda1ee023ea1ea5337</b>
-                                        </li>
-                                    </ul>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="col-sm-12 col-md-6">
-                <div className="card fluid">
-                    <div className="section">
-                        <h2>
-                            <i className="fa fa-sign-in" aria-hidden="true"></i> 登录(实验性)
-                        </h2>
-                    </div>
-                    <div className="section">
-                        <form action="" method="post">
-                            <b>手机号:</b>
-                            <br />
-                            <input className="form-control" id="phone" type="text" maxLength={100}
-                                onChange={(e) => { setphone(e.target.value.trim()) }} />
-                            <br />
-                            <b>密码:</b>
-                            <br />
-                            <input className="form-control" id="pwd" type="password" maxLength={100}
-                                onChange={(e) => { setpwd(e.target.value.trim()) }} />
-                            <br />
-                            <button type="button" className="primary" onClick={extralogin}>
-                                登录
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
 };
 

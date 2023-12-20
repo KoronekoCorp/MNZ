@@ -1,10 +1,10 @@
 import { UseAPI } from "@/Data/Use";
 import { UseDB } from "@/Data/UseDB"
-import { Userchap } from "@/Data/DataType";
+import type { Userchap } from "@/Data/DataType";
 import PaginationTotalElement from "@/components/Pagination"
 import { unstable_cache } from 'next/cache'
 import Fix, { BookSingle } from "./client";
-import { bookinfo } from "@/Data/CiweiType";
+import type { bookinfo } from "@/Data/CiweiType";
 import { Box, Container, Grid, Stack } from "@mui/material";
 import { H2 } from "@/components/H2";
 import ShareIcon from '@mui/icons-material/Share';

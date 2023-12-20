@@ -1,6 +1,6 @@
 
 import PaginationTotalElement from "@/components/Pagination"
-import Fix, { BookSingle } from "./client";
+import Fix from "./client";
 import { Box, Card, Container, Grid, Skeleton, Stack } from "@mui/material";
 import { H2 } from "@/components/H2";
 import ShareIcon from '@mui/icons-material/Share';

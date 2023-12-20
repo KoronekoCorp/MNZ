@@ -1,7 +1,7 @@
 "use client"
 
 import { Button, Stack, Typography } from "@mui/material"
-import { BookCard } from "../BookCard"
+import { ImgCard } from "../ImgCard"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import type { UserchapInfo } from "@/Data/DataType"
@@ -20,6 +20,7 @@ export function AutoBookCard({ book, userchap, free, error }:
     useEffect(() => {
         if (error) bookChap(book.book_id).then(e => setUserchap(e))
     }, [book.book_id, error])
+
     const icons: (JSX.Element | string)[] = []
     if (free) icons.push(<span className='console-line'>FREE</span>)
     else if (error) icons.push(<span className="console-error">数据库错误</span>)
@@ -36,7 +37,7 @@ export function AutoBookCard({ book, userchap, free, error }:
         }
     }
 
-    return <BookCard
+    return <ImgCard
         url={`/book/${book.book_id}`}
         img={{ url: book.cover }}
         cardActions={<Button LinkComponent={Link} href={`/search/${book.author_name}`}>
@@ -48,5 +49,5 @@ export function AutoBookCard({ book, userchap, free, error }:
         <Stack direction="row" justifyContent="center" sx={{ "& > svg": { color: "#6C00FF" } }}>
             {icons}
         </Stack>
-    </BookCard>
+    </ImgCard>
 }

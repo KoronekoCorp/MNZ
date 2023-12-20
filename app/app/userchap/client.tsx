@@ -2,15 +2,15 @@
 import { useEffect, useState } from "react"
 import { enqueueSnackbar } from "notistack"
 import Cookies from "js-cookie"
-import { Userchap } from "@/Data/DataType"
+import type { Userchap } from "@/Data/DataType"
 import Link from "next/link"
-import { bookinfo } from "@/Data/CiweiType"
+import type { bookinfo } from "@/Data/CiweiType"
 import { Bookinfo } from "./server"
-import { Button, Card, CardActionArea, CardActions, CardContent, FormControlLabel, Grid, Stack, Switch, TextField, Typography } from "@mui/material"
+import { Button, FormControlLabel, Grid, Stack, Switch, TextField, Typography } from "@mui/material"
 import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import Battery5BarIcon from '@mui/icons-material/Battery5Bar';
 import Battery2BarIcon from '@mui/icons-material/Battery2Bar';
-import { BookCard } from "@/components/BookCard"
+import { ImgCard } from "@/components/ImgCard"
 
 export default function Fix() {
     const [username, setuser] = useState("Anonymous")
@@ -80,7 +80,7 @@ export function BookSingle({ book, req }: { book: Userchap, req: bookinfo }) {
             }
         }
     }
-    return <BookCard
+    return <ImgCard
         url={`/book/${book.book_id}`}
         img={{ url: r.data.book_info.cover, alt: r.data.book_info.book_name }}
         cardActions={<Button LinkComponent={Link} href={`/search/${r.data.book_info.author_name}`}>
@@ -96,5 +96,5 @@ export function BookSingle({ book, req }: { book: Userchap, req: bookinfo }) {
             {book.modes.includes("marauder") && <Battery5BarIcon />}
             {book.modes.includes("post") && <Battery2BarIcon />}
         </Stack>
-    </BookCard>
+    </ImgCard>
 }

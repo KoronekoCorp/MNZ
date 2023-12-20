@@ -1,8 +1,6 @@
-import { unstable_cache } from 'next/cache'
 import { UseAPI } from "@/Data/Use";
 import { UseDB } from "@/Data/UseDB"
 import { Metadata } from 'next'
-import { UserchapInfo } from "@/Data/DataType"
 import { R, Back } from '@/components/push';
 import { Container, Grid } from '@mui/material';
 import { H2 } from '@/components/H2';
@@ -29,32 +27,6 @@ export default async function Search({ search_word, page }: { search_word: strin
     const r = await a.search(word, page)
 
     const [db, db_n] = UseDB()
-    const Userchap = async ({ bookid }: { bookid: number | string }) => {
-        let userchap: UserchapInfo[]
-        let error: JSX.Element | undefined
-        try {
-            userchap = await unstable_cache(async () => db.UserchapInfo(bookid),
-                [`UserchapInfo_${bookid}`], { revalidate: 86400, tags: [`UserchapInfo_${bookid}`] })()
-        } catch { userchap = [{ chapters: 0, modes: null }]; error = <span className="console-error">数据库错误</span> }
-
-        const Userchap = userchap
-        const icons = [];
-        if (error) { icons.push(error) }
-        if (Userchap[0].chapters) {
-            icons.push(`${Userchap[0].chapters} | `)
-            if (Userchap[0].modes?.includes('vip')) {
-                icons.push(<><span key="vip" style={{ color: '#6C00FF' }}><i className="fa fa-battery-full" aria-hidden="true"></i></span>  </>);
-            }
-            if (Userchap[0].modes?.includes('marauder')) {
-                icons.push(<><span key="marauder" style={{ color: '#6C00FF' }}><i className="fa fa-battery-half" aria-hidden="true"></i></span>  </>);
-            }
-            if (Userchap[0].modes?.includes('post')) {
-                icons.push(<span key="post" style={{ color: '#6C00FF' }}><i className="fa fa-battery-quarter" aria-hidden="true"></i></span>);
-            }
-        }
-
-        return icons;
-    }
 
     return <Container sx={{ textAlign: 'center' }}>
         <title>{`${word}的搜索结果`}</title>
