@@ -14,6 +14,12 @@ declare namespace NodeJS {
         DB_DB_New: string
         DB_POOT_New: string
 
+        DB_HOST_1: string
+        DB_USER_1: string
+        DB_SECRET_1: string
+        DB_CHARSET_1: string
+        DB_DB_1: string
+
         SENTRY_DSN: string
         SENTRY_ORG: string
         CWM_MIRROR?: string

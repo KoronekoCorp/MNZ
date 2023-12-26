@@ -25,6 +25,18 @@ const newest = new DDB({
     queueLimit: 10,
 })
 
+const a = new DDB({
+    host: process.env.DB_HOST_1,
+    user: process.env.DB_USER_1,
+    password: process.env.DB_SECRET_1,
+    database: process.env.DB_DB_1,
+    charset: process.env.DB_CHARSET_1,
+    port: 3306,
+    connectTimeout: 2000,
+    connectionLimit: 5,
+    queueLimit: 10,
+})
+
 export const stable = new PDB(process.env.DB_PROXY)
 
 export function UseDB(): [DDB | PDB, string] {
@@ -35,7 +47,7 @@ export function UseDB(): [DDB | PDB, string] {
         case "filess": return [filess, "filess"]
         case "stable": return [stable, "stable"]
         case "newest": return [newest, "newest"]
-        // default: return [stable, "stable"]
+        case "a": return [a, "newest"]
         default: return [newest, "newest"]
     }
 }

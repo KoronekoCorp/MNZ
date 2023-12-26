@@ -21,6 +21,7 @@ export function DatabaseSetting() {
         }} value={value}>
             <FormControlLabel value="filess" control={<Radio />} label="独立数据库(filess)" />
             <FormControlLabel value="newest" control={<Radio />} label="中心数据库(alwaysdata)" />
+            <FormControlLabel value="a" control={<Radio />} label="IP数据库(IP)" />
             <FormControlLabel value="stable" control={<Radio />} label="独立数据库(维护中)" />
         </RadioGroup>
     </FormControl>
