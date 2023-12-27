@@ -1,6 +1,6 @@
 import { UseAPI } from '@/Data/Use'
 import { tsukkomi_info_single, tsukkomi_reply_info } from '@/Data/CiweiType'
-import { Roll } from './client'
+import ModalS, { Roll } from './client'
 import { Nested } from './Nested'
 import { ListItemAvatar, Avatar, ListItem, Typography, ListItemText, Divider } from '@mui/material'
 
@@ -100,13 +100,10 @@ export async function Tsukkomis({ chapid, tsukkomis, searchParams }: { chapid: s
     }
 
 
-    return <>
-        <p style={{ paddingBottom: "10px" }}>
-            {r.data.paragraph_info.paragraph_content.length >= 15
-                ? r.data.paragraph_info.paragraph_content.slice(0, 15) + "..."
-                : r.data.paragraph_info.paragraph_content}
-        </p>
-        <Roll page={page} end={end} name='page'>
+    return <ModalS index={tsukkomis} title={r.data.paragraph_info.paragraph_content.length >= 15
+        ? r.data.paragraph_info.paragraph_content.slice(0, 15) + "..."
+        : r.data.paragraph_info.paragraph_content}>
+        <Roll page={page} end={end} name='page' notop>
             {r.data.tsukkomi_list.map((t) => (
                 t.reply_num == "0" ?
                     <Single t={t} key={t.tsukkomi_id} /> :
@@ -115,5 +112,5 @@ export async function Tsukkomis({ chapid, tsukkomis, searchParams }: { chapid: s
                     </Nested>
             ))}
         </Roll>
-    </>
+    </ModalS>
 }

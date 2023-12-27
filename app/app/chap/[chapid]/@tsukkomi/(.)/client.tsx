@@ -1,56 +1,32 @@
 "use client"
 import { useEffect, useState, BaseSyntheticEvent, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { Modal, Backdrop, Fade, Box, List, CircularProgress, ListItem } from '@mui/material'
+import { List, CircularProgress, ListItem } from '@mui/material'
+import { Dig } from '@/components/Modals'
 
 /**
  * 模态
  * @param index 序列号，唯一
  * @returns 
  */
-export default function ModalS({ children, index }: { children: JSX.Element[] | JSX.Element, index: string }) {
-    const [open, setOpen] = useState(true)
-    const router = useRouter()
-    useEffect(() => {
-        setOpen(true)
-    }, [index])
-
-
+export default function ModalS({ title, children, index }: { title: string, children: JSX.Element[] | JSX.Element, index: string }) {
     if (index == null) { return <></> }
 
-    return (
-        <Modal open={open}
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            onClose={() => { setOpen(false); setTimeout(router.push, 500, document.location.origin + document.location.pathname) }}
-            closeAfterTransition
-            slots={{ backdrop: Backdrop }}
-            slotProps={{
-                backdrop: {
-                    timeout: 500,
-                },
-            }}
-        >
-            <Fade in={open}>
-                <Box sx={{
-                    position: 'absolute' as 'absolute',
-                    top: '55%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '80%',
-                    height: '75%',
-                    color: "text.primary",
-                    bgcolor: 'background.paper',
-                    // border: '2px solid #000',
-                    boxShadow: 24,
-                    borderRadius: '20px',
-                    p: 4,
-                    zIndex: 10000
-                }}>
-                    {children}
-                </Box>
-            </Fade>
-        </Modal>)
+    return <Dig index={index} actions={[]} title={title} sx={{ zIndex: 9999 }}
+        closeAction={(r) => {
+            const s = new URLSearchParams(location.search)
+            s.delete("tsukkomis")
+            const keys = Array.from(s.keys())
+            let i = 1
+            keys.forEach(k => {
+                i += parseInt(s.get(k) ?? "1") - 1
+            })
+            for (let t = 0; t < i; t++) {
+                r.back()
+            }
+        }}>
+        {children}
+    </Dig>
 }
 
 /**
