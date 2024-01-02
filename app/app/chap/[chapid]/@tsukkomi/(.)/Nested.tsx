@@ -29,7 +29,7 @@ export function Nested({ children, title }: { children: JSX.Element[] | JSX.Elem
                 maxHeight: '100%',
                 borderRadius: '20px',
                 '& ul': { padding: 0 },
-            }} style={{ paddingTop: "10px", paddingBottom: "10px", padding: "0px" }}>
+            }} >
                 {children}
             </List>
         </Collapse>

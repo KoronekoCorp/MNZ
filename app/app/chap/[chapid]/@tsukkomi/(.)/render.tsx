@@ -8,7 +8,7 @@ import { ListItemAvatar, Avatar, ListItem, Typography, ListItemText, Divider } f
  * 单个间贴的UI
  * @returns JSX.Element
  */
-const Single = ({ t }: { t: tsukkomi_info_single | tsukkomi_reply_info }): JSX.Element => {
+const Single = ({ t, noli }: { t: tsukkomi_info_single | tsukkomi_reply_info, noli?: boolean }): JSX.Element => {
     //@ts-ignore
     const msg = t.tsukkomi_content ?? t.tsukkomi_reply_content
     return <>
@@ -30,7 +30,7 @@ const Single = ({ t }: { t: tsukkomi_info_single | tsukkomi_reply_info }): JSX.E
                 }
             />
         </ListItem>
-        <Divider variant="inset" component="li" />
+        {noli ? <></> : <Divider variant="inset" component="li" />}
     </>
 }
 
@@ -107,7 +107,7 @@ export async function Tsukkomis({ chapid, tsukkomis, searchParams }: { chapid: s
             {r.data.tsukkomi_list.map((t) => (
                 t.reply_num == "0" ?
                     <Single t={t} key={t.tsukkomi_id} /> :
-                    <Nested title={<Single t={t} />} key={t.tsukkomi_id}>
+                    <Nested title={<Single t={t} noli />} key={t.tsukkomi_id}>
                         <Reply t={t} key={t.tsukkomi_id} />
                     </Nested>
             ))}

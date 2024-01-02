@@ -1,14 +1,9 @@
 "use client"
-import { useEffect, useState, BaseSyntheticEvent, useRef } from 'react'
+import { useEffect, useState, type BaseSyntheticEvent, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { List, CircularProgress, ListItem } from '@mui/material'
 import { Dig } from '@/components/Modals'
 
-/**
- * 模态
- * @param index 序列号，唯一
- * @returns 
- */
 export default function ModalS({ title, children, index }: { title: string, children: JSX.Element[] | JSX.Element, index: string }) {
     if (index == null) { return <></> }
 
@@ -64,7 +59,7 @@ export function Roll({ children, page, end, name, notop }:
     }
 
     const init = () => {
-        var observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(item => {
                 /*
                  * item.time发生相交到相应的时间，毫秒
@@ -95,7 +90,7 @@ export function Roll({ children, page, end, name, notop }:
         borderRadius: '20px',
         color: "text.primary",
         bgcolor: "background.paper",
-        '& ul': { padding: 10 },
+        '& ul': { padding: 0 },
     }}
         subheader={<li />}
         onScroll={Scroll}
