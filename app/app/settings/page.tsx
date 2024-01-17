@@ -1,23 +1,60 @@
 "use client"
 
 import { uuid } from "@/Data/Storge.Server"
-import { Button, TextField, Grid, Stack } from "@mui/material"
+import { Button, TextField, Grid, Stack, Table, TableHead, TableCell, TableBody, TableRow } from "@mui/material"
 import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { H2 } from "@/components/H2"
+import { DatabaseSetting } from "@/components/DatabaseSetting"
 import SyncIcon from '@mui/icons-material/Sync';
 import StorageIcon from '@mui/icons-material/Storage';
-import { DatabaseSetting } from "@/components/DatabaseSetting"
+import CachedIcon from '@mui/icons-material/Cached';
 
 export default function Setting() {
     const [syncid, setsyncid] = useState("")
 
+    const [data, setdata] = useState<{ key: string; length: number; }[]>([])
+
+    async function cache() {
+        const keys = await caches.keys()
+        setdata(await Promise.all(keys.map(async i => {
+            const t = await caches.open(i)
+            return {
+                key: i,
+                length: (await t.keys()).length
+            }
+        })))
+    }
+
+    function key(k: string) {
+        switch (k) {
+            case "cross-origin":
+                return k + "(引用文件)"
+            case "pages-rsc":
+                return k + "(动态数据)"
+            case "pages-rsc-prefetch":
+                return k + "(预加载)"
+            case "next-static-css-assets":
+                return k + "(静态文件)"
+            case "next-static-js-assets":
+                return k + "(静态文件)"
+            case "static-data-assets":
+                return k + "(静态数据)"
+            case "static-image-assets":
+                return k + "(图片缓存)"
+            case "pages":
+                return k + "(页面缓存)"
+            default:
+                return k
+        }
+    }
 
     useEffect(() => {
         const key = localStorage.getItem("SyncKey")
         if (key) {
             setsyncid(key)
         }
+        cache()
     }, [])
 
     return <>
@@ -59,7 +96,54 @@ export default function Setting() {
                     </Button>
                 </Stack>
                 <p>同步数据在云端将保存48小时，每次同步会自动续期数据</p>
+                <H2>
+                    <CachedIcon /> 缓存控制
+                </H2>
+                <div style={{ padding: 10 }}>
+                    <Table sx={{ "th": { textAlign: 'center' }, "td": { textAlign: 'center' } }}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>储存桶</TableCell>
+                                <TableCell>总数</TableCell>
+                                <TableCell>管理</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {data.map((row) => (
+                                <TableRow
+                                    key={row.key}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                    <TableCell component="th" scope="row">
+                                        {key(row.key)}
+                                    </TableCell>
+                                    <TableCell>{row.length}</TableCell>
+                                    <TableCell>
+                                        <Button variant="contained" color="warning" onClick={async () => {
+                                            const status = await caches.delete(row.key)
+                                            cache()
+                                            if (status) {
+                                                enqueueSnackbar(`${row.key}清除成功`, { variant: 'success' })
+                                            } else {
+                                                enqueueSnackbar(`${row.key}清除失败`, { variant: 'error' })
+                                            }
+                                        }}>
+                                            清空
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Button variant="contained" sx={{ m: 3 }} color="error" onClick={async () => {
+                        await Promise.all(data.map(async i => caches.delete(i.key)))
+                        cache()
+                        enqueueSnackbar(`已清空`, { variant: 'info' })
+                    }}>
+                        全部清空
+                    </Button>
+                </div>
             </Grid>
+
             <Grid item xs={12} md={6}>
                 <H2>
                     <StorageIcon />数据库设置
