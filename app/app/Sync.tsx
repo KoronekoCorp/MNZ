@@ -81,8 +81,14 @@ export default function Sync() {
         }
     }
 
+    async function check() {
+        const r = await navigator.serviceWorker.getRegistrations()
+        return Promise.all(r.map(i => i.update()))
+    }
+
     useEffect(() => {
         sync()
+        check()
         const id = setInterval(() => sync(), 60000)
         return () => { clearInterval(id) }
     }, [])

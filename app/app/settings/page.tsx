@@ -12,10 +12,16 @@ import CachedIcon from '@mui/icons-material/Cached';
 
 export default function Setting() {
     const [syncid, setsyncid] = useState("")
-
+    const [CacheStatus, setCS] = useState(false)
     const [data, setdata] = useState<{ key: string; length: number; }[]>([])
 
     async function cache() {
+        const r = await navigator.serviceWorker.getRegistrations()
+        if (r.length > 0) {
+            setCS(true)
+        } else {
+            setCS(false)
+        }
         const keys = await caches.keys()
         setdata(await Promise.all(keys.map(async i => {
             const t = await caches.open(i)
@@ -71,7 +77,7 @@ export default function Setting() {
                         value={syncid}
                         onChange={(e) => { setsyncid(e.target.value) }} />
                 </Stack>
-                <Stack sx={{ m: 1 }} direction="row" spacing={2} justifyContent="center">
+                <Stack sx={{ m: 1 }} direction="row" spacing={2} justifyContent="center" useFlexGap flexWrap="wrap">
                     <Button variant="contained"
                         onClick={() => {
                             uuid().then((e) => {
@@ -99,6 +105,25 @@ export default function Setting() {
                 <H2>
                     <CachedIcon /> 缓存控制
                 </H2>
+                <Stack direction="row" spacing={2} justifyContent="center" useFlexGap flexWrap="wrap">
+                    <p>当前缓存服务</p>
+                    <Button variant="outlined" color={CacheStatus ? "success" : "error"} onClick={async () => {
+                        if (CacheStatus) {
+                            localStorage.setItem("noSw", "true")
+                            const r = await navigator.serviceWorker.getRegistrations()
+                            await Promise.all(r.map(i => i.unregister()))
+                            enqueueSnackbar(`已尝试注销服务进程`, { variant: 'info' })
+                        } else {
+                            localStorage.setItem("noSw", "false")
+                            await navigator.serviceWorker.register("/sw.js")
+                            enqueueSnackbar(`已尝试注册服务进程`, { variant: 'info' })
+                        }
+                        cache()
+                    }}>
+                        {CacheStatus ? "已启用" : "未启用"}
+                    </Button>
+                </Stack>
+
                 <div style={{ padding: 10 }}>
                     <Table sx={{ "th": { textAlign: 'center' }, "td": { textAlign: 'center' } }}>
                         <TableHead>
