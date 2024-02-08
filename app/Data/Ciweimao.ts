@@ -45,17 +45,10 @@ class API {
     }
 
     async fetch(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response> {
-        return new Promise((resolve, reject) => {
-            const id = setTimeout(() => {
-                reject(Error("CWM"))
-            }, 8000);
-            fetch(input, {
-                ...init
-            }).then((e) => {
-                resolve(e)
-                clearTimeout(id)
-            })
-        }) as Promise<Response>
+        const controller = new AbortController();
+        const promise = fetch(input, { ...init, signal: controller.signal })
+        const timeout = setTimeout(() => controller.abort(Error("CWM")), 8000);
+        return promise.finally(() => clearTimeout(timeout));
     }
 
     async get(url: URL, tags: string[] | undefined, revalidate: number | false | undefined = 7200) {

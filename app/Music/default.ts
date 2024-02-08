@@ -3,7 +3,7 @@ import { type AudioInfo } from "aplayer-react";
 export const audiolist: AudioInfo[] = [
     {
         name: 'fly,my wings',
-        url: "https://koroneko.co/mirror/n.koroneko.co/api/music/url/2058124989",
+        url: "https://cos.koroneko.co/Mili%20-%20Fly%2C%20My%20Wings.flac",
         // url: "/api/music/download/2058124989",
         cover: "/api/music/cover/2058124989",
         artist: "Mili",

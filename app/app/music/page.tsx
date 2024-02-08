@@ -53,11 +53,11 @@ export default function Music() {
                     const r = await (await fetch(`https://w.koroneko.co/playlist/track/all?id=${playid}&limit=50&offset=${offset}`)).json() as Info
                     if (r.code === 200) {
                         r.songs.forEach((one) => {
-                            if (!data.find(i => i.url === `https://koroneko.co/mirror/n.koroneko.co/api/music/url/${one.id}`)) {
+                            if (!data.find(i => i.url === `https://koroneko.co/mirror/mn.koroneko.co/api/music/url/${one.id}`)) {
                                 data.push({
                                     name: one.name,
                                     cover: one.al.picUrl,
-                                    url: `https://koroneko.co/mirror/n.koroneko.co/api/music/url/${one.id}`,
+                                    url: `https://koroneko.co/mirror/mn.koroneko.co/api/music/url/${one.id}`,
                                     artist: one.ar[0].name
                                 })
                             }
