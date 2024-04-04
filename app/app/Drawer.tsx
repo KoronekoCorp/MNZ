@@ -44,13 +44,8 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
     const router = useRouter()
     const theme = getTheme(mode)
 
-    useEffect(() => {
-        const m = localStorage.getItem('mode')
-        if (m != null) { setdark(m == "true") }
-    }, [])
-
     return <ThemeProvider theme={theme}>
-        <AppBar position="fixed" sx={{ zIndex: 2000, minHeight: '64px' }} color='inherit'>
+        <AppBar position="fixed" sx={{ zIndex: 1205, minHeight: '64px' }} color='inherit'>
             <Toolbar sx={{ backgroundColor: 'palette.main', minHeight: '64px' }}>
                 {/* <IconButton onClick={() => { setOpen(!open) }}>
                 <MenuIcon sx={{ color: '#444', transform: 'translateY(-2px)' }} />
@@ -71,8 +66,7 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
                 {/* <MenuItem> */}
                 <Box sx={{ flexGrow: 1 }} />
                 <IconButton sx={{ ml: 1 }} onClick={() => {
-                    document.cookie = `dark=${!dark}; max-age=604800; path=/`;
-                    localStorage.setItem('mode', (!dark).toString());
+                    document.cookie = `dark=${!dark}; max-age=604800; path=/; domain=${document.location.hostname.replace(/.*?\./, ".")}`;
                     setdark(!dark)
                 }} color="inherit">
                     {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}

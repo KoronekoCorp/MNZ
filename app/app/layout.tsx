@@ -33,11 +33,11 @@ export default function RootLayout({
               {children}
             </Suspense>
           </Snackbar>
+          <AnnouncementProvider endpoint='https://ann.koroneko.co' />
         </Root>
         <Music />
         <Sync />
         <Security />
-        <AnnouncementProvider endpoint='https://ann.koroneko.co' />
       </body>
     </html>
   )

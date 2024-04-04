@@ -27,8 +27,9 @@ export default function Login() {
             enqueueSnackbar('不为空', { variant: "warning" });
             return false;
         }
-        document.cookie = `ci_login_token=${ci_login_token}; max-age=604800; path=/`;
-        document.cookie = `ci_account=${encodeURI(ci_account)}; max-age=604800; path=/`;
+        const domain = document.location.hostname.replace(/.*?\./, ".")
+        document.cookie = `ci_login_token=${ci_login_token}; max-age=604800; path=/; domain=${domain}`;
+        document.cookie = `ci_account=${encodeURI(ci_account)}; max-age=604800; path=/; domain=${domain}`;
         setaccount({ account: ci_account, login_token: ci_login_token })
         enqueueSnackbar('登录成功', { variant: 'success' });
         return false
