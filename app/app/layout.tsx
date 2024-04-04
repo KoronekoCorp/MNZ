@@ -8,6 +8,7 @@ import { Security } from '@/Security/Layout.Client';
 import { Music } from '@/Music/Client';
 import { Root } from './Drawer';
 import { cookies } from 'next/headers';
+import { AnnouncementProvider } from '@/components/Announcement';
 
 export const metadata: Metadata = {
   title: 'Koroneko Corp',
@@ -36,6 +37,7 @@ export default function RootLayout({
         <Music />
         <Sync />
         <Security />
+        <AnnouncementProvider endpoint='https://ann.koroneko.co' />
       </body>
     </html>
   )

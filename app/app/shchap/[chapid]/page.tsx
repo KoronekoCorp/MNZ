@@ -27,15 +27,17 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
     const [db, db_n] = UseDB()
-    const _shchp = unstable_cache(async () => db.Shchap(params.chapid),
-        [`${db_n}_shChap_${params.chapid}`], { revalidate: 2592000, tags: [`${db_n}_shChap_${params.chapid}`] })()
-
     const a = await UseAPI()
-    const _jt = a.tsukkomis(params.chapid)
     const r = await a.chaper(params.chapid)
+    if (r.code != "100000") { notFound() }
     if (r.data.chapter_info.is_paid == "0" && r.data.chapter_info.auth_access == "1") {
         return <R url={`/chap/${params.chapid}`} />
     }
+    const _shchp = unstable_cache(async () => db.Shchap(params.chapid, r.data.chapter_info.book_id),
+        [`${db_n}_shChap_${params.chapid}`], { revalidate: 2592000, tags: [`${db_n}_shChap_${params.chapid}`] })()
+
+    const _jt = a.tsukkomis(params.chapid)
+
     const _ln = a.find(params.chapid, r.data.chapter_info.book_id)
 
     const shchap = await _shchp
@@ -46,10 +48,6 @@ export default async function Page({ params, searchParams }: { params: { chapid:
     const jt = await _jt
     const ln = await _ln
 
-    if (r.code != "100000") { notFound() }
-
-    // const user_share = shchap.author_name;
-    // const user_title = shchap.title;
     const date = new Date((shchap.stime + 7 * 3600) * 1000).toLocaleString('zh-CN', { timeZone: 'GMT' });
 
     return <Container sx={{
@@ -167,7 +165,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
             <Stack useFlexGap flexWrap="wrap" justifyContent="center" alignItems="center" spacing={2}
                 sx={{ mt: 1, "div": { mt: 1 } }}>
                 <Card raised>
-                    <Stack direction="row" spacing={2} sx={{ m: 1 }}>
+                    <Stack direction="row" spacing={2} sx={{ m: 1, mr: 2, ml: 2 }}>
                         <ShareIcon />
                         Shared by:
                         <AccountCircleIcon />

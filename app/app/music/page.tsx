@@ -29,7 +29,7 @@ export default function Music() {
         setaudio(audio.filter((e, j) => { if (i !== j) return e }))
         enqueueSnackbar(`已移除歌曲${d.name ?? "未知歌曲"}`, {
             autoHideDuration: 5000,
-            action: (id) => <button onClick={() => { Recover(d); closeSnackbar(id) }} className='shadowed small'>撤销</button>,
+            action: (id) => <Button onClick={() => { Recover(d); closeSnackbar(id) }} color="inherit" variant="outlined">撤销</Button>,
             variant: 'error'
         })
     }

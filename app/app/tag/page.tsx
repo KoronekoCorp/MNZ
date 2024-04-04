@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 let tags = ['2020年度最佳',
     '2021年度最佳',
     '2022年度最佳',
+    '2023年度最佳',
     'ACG',
     'fate',
     '修罗场',

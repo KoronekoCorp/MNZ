@@ -14,7 +14,8 @@ export default function R({ url }: { url: string }) {
 export function Back({ time }: { time: number }) {
     const router = useRouter()
     useEffect(() => {
-        setTimeout(router.back, time)
+        const id = setTimeout(router.back, time)
+        return () => clearTimeout(id)
     }, [])
     return <></>
 }

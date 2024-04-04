@@ -13,18 +13,6 @@ const filess = new DDB({
     queueLimit: 10,
 })
 
-const newest = new DDB({
-    host: process.env.DB_HOST_New,
-    user: process.env.DB_USER_New,
-    password: process.env.DB_SECRET_New,
-    database: process.env.DB_DB_New,
-    charset: process.env.DB_CHARSET_New,
-    port: parseInt(process.env.DB_POOT_New ?? "3306"),
-    connectTimeout: 2000,
-    connectionLimit: 10,
-    queueLimit: 10,
-})
-
 const a = new DDB({
     host: process.env.DB_HOST_1,
     user: process.env.DB_USER_1,
@@ -46,8 +34,7 @@ export function UseDB(): [DDB | PDB, string] {
     switch (t) {
         case "filess": return [filess, "filess"]
         case "stable": return [stable, "stable"]
-        case "newest": return [newest, "newest"]
         case "a": return [a, "newest"]
-        default: return [newest, "newest"]
+        default: return [stable, "stable"]
     }
 }

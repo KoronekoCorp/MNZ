@@ -68,7 +68,7 @@ function PaginationElement({ currentUri, pageShow, end }: { currentUri: string, 
         </Button>)
     }
 
-    return <Stack direction="row" sx={{ p: 2, justifyContent: 'center', display: 'flex' }} spacing={2}>
+    return <Stack direction="row" sx={{ p: 2, justifyContent: 'center', display: 'flex' }} spacing={2} useFlexGap flexWrap="wrap">
         {links}
     </Stack>
 }

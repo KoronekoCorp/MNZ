@@ -23,6 +23,6 @@ export default function Search() {
             </TextField>
         </Stack>
         <Top index={useId()} />
-        <img src="/assets/images/T_UI_Talk_Face_00100_0008.png" />
+        <img src="https://cos.koroneko.co/T_UI_Talk_Face_00100_0008.png" />
     </Container>
 }

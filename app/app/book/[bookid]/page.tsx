@@ -68,7 +68,7 @@ export default async function Page({ params }: { params: { bookid: string } }) {
                 <img
                     style={{ width: "100%", height: "auto" }}
                     loading="lazy"
-                    src="/assets/images/off.gif"
+                    src="https://cos.koroneko.co/off.gif"
                     className="lazyload blur-up"
                     data-src={r.data.book_info.cover}
                 />

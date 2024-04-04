@@ -58,7 +58,7 @@ export default async function Page({ type, page }: { type: "hot" | "new" | "top"
                                         <img
                                             style={{ border: "1px ridge black", height: "60%" }}
                                             loading="lazy"
-                                            src="/assets/images/off.gif"
+                                            src="https://cos.koroneko.co/off.gif"
                                             className="lazyload blur-up"
                                             data-src={e.cover}
                                         />

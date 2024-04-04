@@ -177,7 +177,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
             </div>}
             <Stack useFlexGap flexWrap="wrap" justifyContent="center" alignItems="center" spacing={2}
                 sx={{ mt: 1, "div": { mt: 1 } }}>
-                {isChapterPurchased && <Card raised sx={{ width: 'max-content', mt: 1, maxWidth: "100%" }}>
+                {isChapterPurchased && <Card raised sx={{ width: 'max-content', p: 2, maxWidth: "100%" }}>
                     <div>
                         有道友分享了这一章
                         <div>
@@ -196,7 +196,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                         </p>
                     </div>
                 </Card>}
-                {r.data.chapter_info.auth_access === "0" && <Card raised sx={{ width: 'fit-content', mt: 1, maxWidth: "100%" }}>
+                {r.data.chapter_info.auth_access === "0" && <Card raised sx={{ width: 'fit-content', p: 2, maxWidth: "100%" }}>
                     <p style={{ margin: 8 }}>本章为VIP章节，请先订阅！</p>
                     <Button variant='contained' LinkComponent={Link} href={`/buy/${params.chapid}`} color="error" sx={{ m: 1 }}>
                         购买章节 <b>({r.data.chapter_info.unit_hlb}币)</b>

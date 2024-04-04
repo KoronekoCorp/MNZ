@@ -7,9 +7,9 @@ import Cookies from "js-cookie"
 
 
 export function DatabaseSetting() {
-    const [value, setValue] = useState('newest');
+    const [value, setValue] = useState('stable');
     useEffect(() => {
-        setValue(Cookies.get("db") ?? "newest")
+        setValue(Cookies.get("db") ?? "stable")
     }, [])
 
     return <FormControl component="fieldset" sx={{ color: 'text.primary' }}>
@@ -20,9 +20,8 @@ export function DatabaseSetting() {
             enqueueSnackbar("数据库设置已保存", { variant: 'info' })
         }} value={value}>
             <FormControlLabel value="filess" control={<Radio />} label="独立数据库(filess)" />
-            <FormControlLabel value="newest" control={<Radio />} label="中心数据库(alwaysdata)" />
             <FormControlLabel value="a" control={<Radio />} label="IP数据库(IP)" />
-            <FormControlLabel value="stable" control={<Radio />} label="独立数据库(维护中)" />
+            <FormControlLabel value="stable" control={<Radio />} label="独立数据库(默认)" />
         </RadioGroup>
     </FormControl>
 }

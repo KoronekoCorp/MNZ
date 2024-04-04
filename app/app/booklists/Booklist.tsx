@@ -78,7 +78,7 @@ export default async function Booklist({ id, page }: { id: number, page: number 
                             <img
                                 style={{ border: "1px ridge black", height: 196 }}
                                 loading="lazy"
-                                src="/assets/images/off.gif"
+                                src="https://cos.koroneko.co/off.gif"
                                 className="lazyload blur-up"
                                 data-src={e.cover}
                             />

@@ -12,7 +12,7 @@ export function Image({ src, style }: { src: string, style?: CSSProperties }) {
     return <>
         {mir && <img
             loading="lazy"
-            src="/assets/images/logo.png"
+            src="https://cos.koroneko.co/logo.png"
             className="lazyload blur-up"
             data-src={`https://${mir}/v7/${src}`}
             style={style}
