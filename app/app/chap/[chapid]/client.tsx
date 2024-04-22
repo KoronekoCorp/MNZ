@@ -1,9 +1,9 @@
 "use client"
 import { Chaper } from "@/Data/CiweiType"
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { Button } from "@mui/material"
 import { enqueueSnackbar } from "notistack"
 import { useEffect } from "react"
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export function History({ chap }: { chap: Chaper }) {
     const SetHistory = (chap: Chaper) => {

@@ -1,41 +1,40 @@
-import { notFound } from 'next/navigation'
-import { unstable_cache } from 'next/cache'
-import { UseAPI } from "@/Data/Use";
-import { UseDB } from "@/Data/UseDB"
-import { cookies } from 'next/headers'
-import { Badge, Button, Card, Container, Stack, Link as LinkC } from '@mui/material';
-import Link from 'next/link'
-import { R, Prefetch, S } from '@/components/push'
-import { ClientButton, History } from './client'
 import { H2 } from '@/components/H2';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import BookIcon from '@mui/icons-material/Book';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { Prefetch, R, S } from '@/components/push';
+import { UseAPI } from "@/Data/Use";
+import { UseDB } from "@/Data/UseDB";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import DataUsageIcon from '@mui/icons-material/DataUsage';
-import MoneyIcon from '@mui/icons-material/Money';
-import SortIcon from '@mui/icons-material/Sort';
-import DeleteIcon from '@mui/icons-material/Delete';
-import LockIcon from '@mui/icons-material/Lock';
+import BookIcon from '@mui/icons-material/Book';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ReviewsIcon from '@mui/icons-material/Reviews';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
+import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import LockIcon from '@mui/icons-material/Lock';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import MoneyIcon from '@mui/icons-material/Money';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import SortIcon from '@mui/icons-material/Sort';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { Badge, Button, Card, Container, Link as LinkC, Stack } from '@mui/material';
+import { unstable_cache } from 'next/cache';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { ClientButton, History } from './client';
 // import { Baned } from '@/Security/Chap.server';
 
 
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
     // const b = Baned()
     const [db, db_n] = UseDB()
-    // 性能优先，增加数据库压力
-    const _isChapterPurchased = unstable_cache(async () => db.isChapterPurchased(params.chapid),
-        [`${db_n}_Chap_${params.chapid}`], { revalidate: 86400, tags: [`${db_n}_Chap_${params.chapid}`] })()
-
     const a = await UseAPI()
-    const _jt = a.tsukkomis(params.chapid)
 
     const r = await a.chaper(params.chapid)
     if (r.code != "100000") { notFound() }
+    // 性能优先，增加数据库压力
+    const _isChapterPurchased = unstable_cache(async () => db.isChapterPurchased(params.chapid, r.data.chapter_info.book_id),
+        [`${db_n}_Chap_${params.chapid}`], { revalidate: 86400, tags: [`${db_n}_Chap_${params.chapid}`] })()
+    const _jt = a.tsukkomis(params.chapid)
     const _ln = a.find(params.chapid, r.data.chapter_info.book_id)
 
     const cookie = cookies()

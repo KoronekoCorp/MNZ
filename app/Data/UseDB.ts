@@ -1,17 +1,6 @@
 import { cookies } from "next/headers";
 import { DDB, PDB } from "./Database";
 
-const filess = new DDB({
-    host: process.env.DB_HOST_U,
-    user: process.env.DB_USER_U,
-    password: process.env.DB_SECRET_U,
-    database: process.env.DB_DB_U,
-    charset: process.env.DB_CHARSET_U,
-    port: parseInt(process.env.DB_POOT_U ?? "3306"),
-    connectTimeout: 2000,
-    connectionLimit: 10,
-    queueLimit: 10,
-})
 
 const a = new DDB({
     host: process.env.DB_HOST_1,
@@ -26,15 +15,16 @@ const a = new DDB({
 })
 
 export const stable = new PDB(process.env.DB_PROXY)
+export const stable2 = new PDB(process.env.DB_PROXY2)
 
 export function UseDB(): [DDB | PDB, string] {
     const c = cookies()
     const t = c.get("db")?.value ?? "stable"
     console.log(t)
     switch (t) {
-        case "filess": return [filess, "filess"]
         case "stable": return [stable, "stable"]
+        case "stable2": return [stable2, "stable"]
         case "a": return [a, "newest"]
-        default: return [stable, "stable"]
+        default: return [stable2, "stable"]
     }
 }

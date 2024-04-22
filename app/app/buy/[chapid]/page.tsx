@@ -1,26 +1,26 @@
-import { History } from '@/app/chap/[chapid]/client'
-import { revalidateTag } from 'next/cache'
-import { cookies } from 'next/headers'
-import { API } from '@/Data/Ciweimao';
-import { Badge, Button, Card, Container, Stack } from '@mui/material';
-import Link from 'next/link'
-import Share from './client';
-import { R, Back, S, Prefetch } from '@/components/push'
+import { History } from '@/app/chap/[chapid]/client';
 import { H2 } from '@/components/H2';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import BookIcon from '@mui/icons-material/Book';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { Back, Prefetch, R, S } from '@/components/push';
+import { API } from '@/Data/Ciweimao';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import DataUsageIcon from '@mui/icons-material/DataUsage';
-import MoneyIcon from '@mui/icons-material/Money';
-import SortIcon from '@mui/icons-material/Sort';
-import LockIcon from '@mui/icons-material/Lock';
+import BookIcon from '@mui/icons-material/Book';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ReviewsIcon from '@mui/icons-material/Reviews';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import InfoIcon from '@mui/icons-material/Info';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import InfoIcon from '@mui/icons-material/Info';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import LockIcon from '@mui/icons-material/Lock';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import MoneyIcon from '@mui/icons-material/Money';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import SortIcon from '@mui/icons-material/Sort';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { Badge, Button, Card, Container, Stack } from '@mui/material';
+import { revalidateTag } from 'next/cache';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
+import Share from './client';
 
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
     const cookie = cookies()

@@ -1,19 +1,5 @@
 declare namespace NodeJS {
     export interface ProcessEnv {
-        DB_HOST_U: string
-        DB_USER_U: string
-        DB_SECRET_U: string
-        DB_CHARSET_U: string
-        DB_DB_U: string
-        DB_POOT_U: string
-
-        DB_HOST_New: string
-        DB_USER_New: string
-        DB_SECRET_New: string
-        DB_CHARSET_New: string
-        DB_DB_New: string
-        DB_POOT_New: string
-
         DB_HOST_1: string
         DB_USER_1: string
         DB_SECRET_1: string
@@ -25,6 +11,7 @@ declare namespace NodeJS {
         CWM_MIRROR?: string
 
         DB_PROXY: string
+        DB_PROXY2: string
 
         s3_access_key: string
         s3_secret_key: string
