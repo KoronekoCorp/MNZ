@@ -39,7 +39,7 @@ export default function Error({
                 document.location.href = document.location.href
             }}>重新加载</Button>
         <br />
-        <img src='/assets/images/憧憬成為魔法少女-50-3.png' />
+        <img src='https://cos.koroneko.co/憧憬成為魔法少女-50-3.png' />
         <Top index={useId()} />
     </Container>
 }

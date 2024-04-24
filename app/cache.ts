@@ -10,7 +10,7 @@ import { revalidateTag, unstable_cache } from "next/cache";
  */
 export function CacheEveryThing<T>(func: () => Promise<T>, tag: string[], revalidate?: number | false, check?: (v: T) => boolean): () => Promise<T> {
     if (!check) {
-        return unstable_cache(async () => func(), tag, { revalidate: revalidate, tags: tag })
+        return unstable_cache(func, tag, { revalidate: revalidate, tags: tag })
     } else {
         const re = (v: T) => {
             if (check(v)) {

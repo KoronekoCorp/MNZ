@@ -25,6 +25,6 @@ export function UseDB(): [DDB | PDB, string] {
         case "stable": return [stable, "stable"]
         case "stable2": return [stable2, "stable"]
         case "a": return [a, "newest"]
-        default: return [stable2, "stable"]
+        default: return [stable, "stable"]
     }
 }

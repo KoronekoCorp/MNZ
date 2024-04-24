@@ -89,7 +89,7 @@ const nextConfig = {
       {
         source: "/:path(.*)",
         headers: [
-          { key: "X-FRAME-OPTIONS", value: "Deny" }
+          { key: "X-Robots-Tag", value: "nofollow" }
         ]
       }
     ]
