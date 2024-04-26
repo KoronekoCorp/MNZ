@@ -24,6 +24,8 @@ declare namespace NodeJS {
 
         OA_URL: string
         OACOOKIE: string
+
+        secrets: string
     }
 }
 

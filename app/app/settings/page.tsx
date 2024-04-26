@@ -1,6 +1,5 @@
 "use client"
 
-import { uuid } from "@/Data/Storge.Server"
 import { Button, TextField, Grid, Stack, Table, TableHead, TableCell, TableBody, TableRow } from "@mui/material"
 import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
@@ -80,11 +79,10 @@ export default function Setting() {
                 <Stack sx={{ m: 1 }} direction="row" spacing={2} justifyContent="center" useFlexGap flexWrap="wrap">
                     <Button variant="contained"
                         onClick={() => {
-                            uuid().then((e) => {
-                                setsyncid(e)
-                                localStorage.setItem("SyncKey", e);
-                                enqueueSnackbar("同步ID已生成并保存", { variant: 'info' })
-                            })
+                            const e = crypto.randomUUID()
+                            setsyncid(e)
+                            localStorage.setItem("SyncKey", e);
+                            enqueueSnackbar("同步ID已生成并保存", { variant: 'info' })
                         }}>
                         自动生成同步ID
                     </Button>

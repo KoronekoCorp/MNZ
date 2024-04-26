@@ -5,7 +5,7 @@ export const audiolist: AudioInfo[] = [
         name: 'fly,my wings',
         url: "https://cos.koroneko.co/Mili%20-%20Fly%2C%20My%20Wings.flac",
         // url: "/api/music/download/2058124989",
-        cover: "/api/music/cover/2058124989",
+        cover: "https://zapi.koroneko.co/music/cover/2058124989",
         artist: "Mili",
         lrc: `[by:已过期i]
         [00:13.535]飞呀，破碎的翅膀

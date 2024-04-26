@@ -1,17 +1,17 @@
 "use client"
 
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Divider, TextField, Grid, Stack, Button, IconButton } from "@mui/material";
+import { H2 } from "@/components/H2";
+import { audiolist } from "@/Music/default";
+import { Info, Playlist } from "@/Music/NeteaseType";
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import QueueMusic from '@mui/icons-material/QueueMusic';
+import Save from '@mui/icons-material/Save';
+import { Button, FormControl, FormControlLabel, FormLabel, Grid, IconButton, Radio, RadioGroup, Stack, TextField } from "@mui/material";
+import { AudioInfo } from "aplayer-react";
+import Cookies from "js-cookie";
 import { closeSnackbar, enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie"
-import { audiolist } from "@/Music/default";
-import { AudioInfo } from "aplayer-react";
-import { Info, Playlist } from "@/Music/NeteaseType";
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import DeleteForever from '@mui/icons-material/DeleteForever'
-import QueueMusic from '@mui/icons-material/QueueMusic'
-import Save from '@mui/icons-material/Save'
-import { H2 } from "@/components/H2";
 
 export default function Music() {
     const [value, setValue] = useState("on")
@@ -53,11 +53,11 @@ export default function Music() {
                     const r = await (await fetch(`https://w.koroneko.co/playlist/track/all?id=${playid}&limit=50&offset=${offset}`)).json() as Info
                     if (r.code === 200) {
                         r.songs.forEach((one) => {
-                            if (!data.find(i => i.url === `https://koroneko.co/mirror/mn.koroneko.co/api/music/url/${one.id}`)) {
+                            if (!data.find(i => i.url === `https://koroneko.co/mirror/zapi.koroneko.co/music/url/${one.id}`)) {
                                 data.push({
                                     name: one.name,
                                     cover: one.al.picUrl,
-                                    url: `https://koroneko.co/mirror/mn.koroneko.co/api/music/url/${one.id}`,
+                                    url: `https://koroneko.co/mirror/zapi.koroneko.co/music/url/${one.id}`,
                                     artist: one.ar[0].name
                                 })
                             }

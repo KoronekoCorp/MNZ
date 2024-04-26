@@ -1,6 +1,5 @@
 "use client"
 import type { Chaper } from "@/Data/CiweiType"
-import { get, set } from "@/Data/Storge.Server"
 import { useEffect } from "react"
 import { createHash } from "crypto"
 
@@ -16,6 +15,12 @@ interface book_mark {
     "id": string
     "cover": string
 }
+
+const get = async (key: string) => (await fetch(`https://zapi.koroneko.co/Sync?key=${key}`)).text()
+const set = async (key: string, data: string) => fetch(`https://zapi.koroneko.co/Sync?key=${key}`, {
+    method: "POST",
+    body: data
+})
 
 export default function Sync() {
     const getDataLocal = () => {
@@ -105,6 +110,7 @@ export default function Sync() {
         sync()
         update()
         check()
+        fetch("https://zapi.koroneko.co/auth/check")
         const id = setInterval(() => sync(), 60000)
         return () => { clearInterval(id) }
     }, [])
