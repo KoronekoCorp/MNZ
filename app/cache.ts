@@ -12,20 +12,13 @@ export function CacheEveryThing<T>(func: () => Promise<T>, tag: string[], revali
     if (!check) {
         return unstable_cache(func, tag, { revalidate: revalidate, tags: tag })
     } else {
-        const re = (v: T) => {
-            if (check(v)) {
+        return async () => {
+            const r = await unstable_cache(func, tag, { revalidate: revalidate, tags: tag })()
+            if (check(r)) {
                 tag.forEach((e) => revalidateTag(e))
                 console.log("revalidated!")
             }
+            return r
         }
-        return unstable_cache(async () => new Promise((r) => {
-            func()
-                .then((e) => {
-                    setTimeout(() => {
-                        re(e)
-                    }, 500);
-                    r(e)
-                })
-        }), tag, { revalidate: revalidate, tags: tag })
     }
 }
