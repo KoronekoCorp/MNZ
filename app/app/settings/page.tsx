@@ -1,13 +1,15 @@
 "use client"
 
-import { Button, TextField, Grid, Stack, Table, TableHead, TableCell, TableBody, TableRow } from "@mui/material"
+import { DatabaseSetting } from "@/components/DatabaseSetting"
+import { H2 } from "@/components/H2"
+import CachedIcon from '@mui/icons-material/Cached'
+import ColorLensIcon from '@mui/icons-material/ColorLens'
+import StorageIcon from '@mui/icons-material/Storage'
+import SyncIcon from '@mui/icons-material/Sync'
+import { Button, Grid, Stack, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@mui/material"
 import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
-import { H2 } from "@/components/H2"
-import { DatabaseSetting } from "@/components/DatabaseSetting"
-import SyncIcon from '@mui/icons-material/Sync';
-import StorageIcon from '@mui/icons-material/Storage';
-import CachedIcon from '@mui/icons-material/Cached';
+import ColorSetting from "./Color"
 
 export default function Setting() {
     const [syncid, setsyncid] = useState("")
@@ -173,6 +175,15 @@ export default function Setting() {
                 </H2>
                 <div style={{ paddingTop: 10 }}>
                     <DatabaseSetting />
+                </div >
+            </Grid>
+
+            <Grid item xs={12} md={12}>
+                <H2>
+                    <ColorLensIcon />主题配色
+                </H2>
+                <div style={{ paddingTop: 10 }}>
+                    <ColorSetting />
                 </div >
             </Grid>
         </Grid>

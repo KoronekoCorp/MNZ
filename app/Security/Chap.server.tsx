@@ -19,7 +19,6 @@ async function Pre(chapid: string) {
         const uuid = randomUUID()
         const d = await redis.sendCommand(["TFCALL", "SecurityV2.count", "0", ip, uuid])
         console.log(d)
-        redis.disconnect()
         return uuid
     }
 }
@@ -31,7 +30,6 @@ async function check(uuid: string, chapid: string) {
         const redis = await UseRedis()
         const d = await redis.sendCommand(["TFCALL", "SecurityV2.success", "0", ip, uuid])
         console.log(d)
-        redis.disconnect()
         return ip
     }
 }

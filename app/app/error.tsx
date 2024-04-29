@@ -1,12 +1,11 @@
 'use client' // Error components must be Client Components
 
-import { useEffect, useId, useState } from 'react'
-import { Container, Button } from "@mui/material"
-import Cookies from 'js-cookie'
-import { H2 } from '@/components/H2'
+import { DatabaseSetting } from '@/components/DatabaseSetting';
+import { H2 } from '@/components/H2';
+import { Top } from '@/components/push';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { DatabaseSetting } from '@/components/DatabaseSetting'
-import { Top } from '@/components/push'
+import { Button, Container } from "@mui/material";
+import { useId } from 'react';
 
 export default function Error({
     error,
@@ -15,14 +14,6 @@ export default function Error({
     error: Error & { digest?: string }
     reset: () => void
 }) {
-    const [value, setValue] = useState('newest');
-    useEffect(() => {
-        // Log the error to an error reporting service
-        // console.error(error)
-
-        setValue(Cookies.get("db") ?? "newest")
-    }, [error])
-
     return <Container sx={{ textAlign: "center", }}>
         <H2 sx={{ backgroundColor: "error.main", color: "error.contrastText" }}>
             <WarningAmberIcon />某些东西出了点毛病，也许换个数据库可以解决？
@@ -34,8 +25,9 @@ export default function Error({
             <DatabaseSetting />
         </div>
         <Button variant="contained" sx={{ m: 1 }}
-            onClick={() => {
+            onClick={async () => {
                 // reset()
+                await caches.delete("pages")
                 document.location.href = document.location.href
             }}>重新加载</Button>
         <br />

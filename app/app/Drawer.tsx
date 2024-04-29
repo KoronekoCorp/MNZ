@@ -1,22 +1,22 @@
 "use client"
-import { useState, type ReactNode, useEffect } from 'react';
-import Link from 'next/link';
-import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
-import SettingsIcon from '@mui/icons-material/Settings';
-import MenuIcon from '@mui/icons-material/Menu';
-import LoginIcon from '@mui/icons-material/Login';
-import StorageIcon from '@mui/icons-material/Storage';
-import LoyaltyIcon from '@mui/icons-material/Loyalty';
-import SearchIcon from '@mui/icons-material/Search';
-import { ListItemIcon, SwipeableDrawer, Box, IconButton, AppBar, Drawer, Toolbar, Typography, Divider, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useRouter } from 'next/navigation';
-import { getTheme } from './Theme';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import LoginIcon from '@mui/icons-material/Login';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import MenuIcon from '@mui/icons-material/Menu';
 import MusicNote from '@mui/icons-material/MusicNote';
+import SearchIcon from '@mui/icons-material/Search';
+import SettingsIcon from '@mui/icons-material/Settings';
+import StorageIcon from '@mui/icons-material/Storage';
 import TagIcon from '@mui/icons-material/Tag';
+import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Toolbar, Typography } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState, type ReactNode } from 'react';
+import { useTheme } from './Theme';
 
 const DRAWER_WIDTH = 240;
 
@@ -40,12 +40,7 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
     const [open, setOpen] = useState(false);
     const [dark, setdark] = useState(darkmode ?? false);
     const router = useRouter()
-    const theme = getTheme(dark ? "dark" : "light")
-
-    useEffect(() => {
-        const d = document.cookie.match(/dark=(true|false)/)
-        if (d) setdark(d[1] === "true")
-    }, [typeof document !== "undefined" ? document.cookie : ""])
+    const theme = useTheme(dark ? "dark" : "light")
 
     return <ThemeProvider theme={theme}>
         <AppBar position="fixed" sx={{ zIndex: 1205, minHeight: '64px' }} color='inherit'>

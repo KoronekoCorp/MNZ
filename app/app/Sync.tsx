@@ -110,7 +110,7 @@ export default function Sync() {
         sync()
         update()
         check()
-        fetch("https://zapi.koroneko.co/auth/check")
+        fetch("https://zapi.koroneko.co/auth/check", { credentials: "include" })
         const id = setInterval(() => sync(), 60000)
         return () => { clearInterval(id) }
     }, [])
