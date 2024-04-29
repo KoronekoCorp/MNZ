@@ -36,7 +36,7 @@ function ColorDemo({ theme }: { theme: Theme }) {
                 textAlign: "center",
                 color: "text.primary",
                 "a": { textDecoration: 'none' },
-                "article": { color: "text.secondary", bgcolor: 'background.paper', p: 1, "img": { width: "100%" } },
+                "article": { color: "text.secondary", bgcolor: 'background.paper', p: 1, "img": { width: "100%" }, fontSize: (theme) => theme.typography.body1.fontSize },
                 "p": { wordBreak: 'break-word' },
                 mt: 2
             }}>
@@ -50,7 +50,7 @@ function ColorDemo({ theme }: { theme: Theme }) {
                     itemScope={true}
                     itemType="http://schema.org/BlogPosting"
                     style={{
-                        fontSize: 20,
+                        // fontSize: 20,
                         fontFamily: "Bookerly",
                         textAlign: 'start',
                         borderRadius: 12

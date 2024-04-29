@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Grid, Input, Stack } from "@mui/material"
+import { Button, Grid, Input, Slider, Stack } from "@mui/material"
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles"
 import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
@@ -79,7 +79,33 @@ export default function ColorSetting() {
                             }
                         }))
                     }} />
-                    <br />
+                    {/* <Slider min={0.1} max={10} step={0.05} value={theme.typography.fontSize} onChange={(e, v) => {
+                        if (typeof v === 'number') {
+                            settheme(createTheme(theme, {
+                                typography: {
+                                    fontSize: v
+                                }
+                            }))
+                        }
+                    }} valueLabelDisplay="auto" valueLabelFormat={() => `fontSize ${theme.typography.fontSize}`} /> */}
+                    <Slider min={0.1} max={2} step={0.05} value={parseFloat(theme.typography.body1.fontSize as string)} onChange={(e, v) => {
+                        if (typeof v === 'number') {
+                            settheme(createTheme(theme, {
+                                typography: {
+                                    body1: { fontSize: `${v}rem` },
+                                }
+                            }))
+                        }
+                    }} valueLabelDisplay="auto" valueLabelFormat={() => `body1 ${theme.typography.body1.fontSize}`} />
+                    <Slider min={0.5} max={1.5} step={0.025} value={parseFloat(theme.typography.body2.fontSize as string)} onChange={(e, v) => {
+                        if (typeof v === 'number') {
+                            settheme(createTheme(theme, {
+                                typography: {
+                                    body2: { fontSize: `${v}rem` },
+                                }
+                            }))
+                        }
+                    }} valueLabelDisplay="auto" valueLabelFormat={() => `body2 ${theme.typography.body2.fontSize}`} />
                     <Button variant="contained" color="success" onClick={() => {
                         if (theme.palette.mode === "dark") {
                             localStorage.setItem("darkm", JSON.stringify(theme))

@@ -11,7 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import StorageIcon from '@mui/icons-material/Storage';
 import TagIcon from '@mui/icons-material/Tag';
-import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Slide, SwipeableDrawer, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -41,37 +41,40 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
     const [dark, setdark] = useState(darkmode ?? false);
     const router = useRouter()
     const theme = useTheme(dark ? "dark" : "light")
+    const trigger = useScrollTrigger({ target: typeof window !== "undefined" ? window : undefined });
 
     return <ThemeProvider theme={theme}>
-        <AppBar position="fixed" sx={{ zIndex: 1205, minHeight: '64px' }} color='inherit'>
-            <Toolbar sx={{ backgroundColor: 'palette.main', minHeight: '64px' }}>
-                {/* <IconButton onClick={() => { setOpen(!open) }}>
+        <Slide appear={false} direction="down" in={!trigger}>
+            <AppBar position="fixed" sx={{ zIndex: 1205, minHeight: '64px' }} color='inherit'>
+                <Toolbar sx={{ backgroundColor: 'palette.main', minHeight: '64px' }}>
+                    {/* <IconButton onClick={() => { setOpen(!open) }}>
                 <MenuIcon sx={{ color: '#444', transform: 'translateY(-2px)' }} />
               </IconButton> */}
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    sx={{ mr: 2 }}
-                    onClick={() => { setOpen(!open) }}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div" color="inherit" onClick={() => { router.push("/") }}>
-                    Nhimmeo Mui
-                </Typography>
-                {/* <MenuItem> */}
-                <Box sx={{ flexGrow: 1 }} />
-                <IconButton sx={{ ml: 1 }} onClick={() => {
-                    document.cookie = `dark=${!dark}; max-age=604800; path=/; domain=${document.location.hostname.replace(/.*?\./, ".")}`;
-                    setdark(!dark)
-                }} color="inherit">
-                    {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-                </IconButton>
-                {/* </MenuItem> */}
-            </Toolbar>
-        </AppBar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        sx={{ mr: 2 }}
+                        onClick={() => { setOpen(!open) }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div" color="inherit" onClick={() => { router.push("/") }}>
+                        Nhimmeo Mui
+                    </Typography>
+                    {/* <MenuItem> */}
+                    <Box sx={{ flexGrow: 1 }} />
+                    <IconButton sx={{ ml: 1 }} onClick={() => {
+                        document.cookie = `dark=${!dark}; max-age=604800; path=/; domain=${document.location.hostname.replace(/.*?\./, ".")}`;
+                        setdark(!dark)
+                    }} color="inherit">
+                        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                    </IconButton>
+                    {/* </MenuItem> */}
+                </Toolbar>
+            </AppBar>
+        </Slide>
         <SwipeableDrawer onClose={() => { setOpen(false) }} onOpen={() => { setOpen(true) }} open={open}>
             <Drawer
                 sx={{
