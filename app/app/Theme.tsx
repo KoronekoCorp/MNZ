@@ -21,7 +21,7 @@ declare module '@mui/material/styles' {
 
 
 export function useTheme(mode: "dark" | "light") {
-    const [theme, settheme] = useState((() => {
+    const getOri = () => {
         let theme = createTheme({
             palette: {
                 mode: mode,
@@ -80,7 +80,9 @@ export function useTheme(mode: "dark" | "light") {
             },
         })
         return theme
-    })())
+    }
+
+    const [theme, settheme] = useState(getOri())
 
     const load = () => {
         const d = document.cookie.match(/dark=(true|false)/)
@@ -90,33 +92,14 @@ export function useTheme(mode: "dark" | "light") {
                 if (config) {
                     settheme(createTheme(theme, JSON.parse(config)))
                 } else {
-                    settheme(createTheme({
-                        palette: {
-                            mode: "dark",
-                            text: {
-                                primary: "#ffffff",
-                                secondary: "#B0B8C4"
-                            },
-                            background: {
-                                default: "#121212",
-                                paper: "#1f1f1f"
-                            }
-                        }
-                    }))
+                    settheme(getOri())
                 }
             } else {
                 const config = localStorage.getItem("lightm")
                 if (config) {
                     settheme(createTheme(theme, JSON.parse(config)))
                 } else {
-                    settheme(createTheme({
-                        palette: {
-                            mode: "light",
-                            text: {
-                                primary: "#000000",
-                            },
-                        }
-                    }))
+                    settheme(getOri())
                 }
             }
         }
