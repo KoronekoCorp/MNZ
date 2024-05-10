@@ -4,7 +4,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import LoginIcon from '@mui/icons-material/Login';
-import LoyaltyIcon from '@mui/icons-material/Loyalty';
+// import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import MenuIcon from '@mui/icons-material/Menu';
 import MusicNote from '@mui/icons-material/MusicNote';
 import SearchIcon from '@mui/icons-material/Search';
@@ -24,7 +24,7 @@ const LINKS = [
     { text: 'UserChap', href: '/userchap/1', icon: LocalCafeIcon },
     { text: 'Search', href: '/search', icon: SearchIcon },
     { text: 'Tags', href: '/tag', icon: TagIcon },
-    { text: 'Subscription', href: '/watched', icon: LoyaltyIcon },
+    // { text: 'Subscription', href: '/watched', icon: LoyaltyIcon },
     { text: 'Bookmark', href: '/bookmark', icon: BookmarksIcon },
 ];
 
@@ -128,7 +128,7 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
                 flexGrow: 1,
                 bgcolor: 'background.default',
                 // ml: `${DRAWER_WIDTH}px`,
-                pt: ['48px', '56px', '64px'],
+                pt: ['72px', '80px', '88px'],
                 pb: ['48px', '56px', '64px'],
                 // p: 3,
                 mt: 3,

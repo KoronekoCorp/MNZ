@@ -33,7 +33,7 @@ export function ImgCard({ url, img, children, cardActions }:
                 {children}
             </CardContent>
         </CardActionArea>
-        {cardActions && <CardActions sx={{ justifyContent: 'center', "& > a": { ml: 1, mr: 1 } }} >
+        {cardActions && <CardActions sx={{ justifyContent: 'center', flexDirection: { sm: "row", xs: "column" }, "& > a": { ml: 1, mr: 1 } }} >
             {cardActions}
         </CardActions>}
     </Card>

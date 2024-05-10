@@ -113,7 +113,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                             if (l.includes("<img")) {
                                 return <div key={id} id={id.toString()}>
                                     <Badge
-                                        component={Link} prefetch={false} href={`/chap/${params.chapid}?tsukkomis=${id}`}
+                                        component={Link} prefetch={false} href={`/buy/${params.chapid}?tsukkomis=${id}`}
                                         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
                                         badgeContent={jt[id.toString()].tsukkomi_num}
                                         color="secondary">
@@ -123,7 +123,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                             } else {
                                 return <div key={id} id={id.toString()}>
                                     <Badge
-                                        component={Link} prefetch={false} href={`/chap/${params.chapid}?tsukkomis=${id}`}
+                                        component={Link} prefetch={false} href={`/buy/${params.chapid}?tsukkomis=${id}`}
                                         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
                                         badgeContent={jt[id.toString()].tsukkomi_num}
                                         color="secondary" sx={{ "div": { color: "text.secondary" } }}>

@@ -124,9 +124,6 @@ export default async function Page({ params }: { params: { bookid: string } }) {
                 <Stack direction="row" sx={{ p: 1 }} useFlexGap flexWrap="wrap" justifyContent="flex-start" alignItems="center" spacing={2}>
                     <AirplanemodeActiveIcon />
                     <b>网站:</b>
-                    <LinkC href={`https://n.koroneko.co/book/${r.data.book_info.book_id}`}>
-                        NhimmeoNext
-                    </LinkC>
                     <LinkC
                         target="_blank"
                         rel="noopener noreferrer"

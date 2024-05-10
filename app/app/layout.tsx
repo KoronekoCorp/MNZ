@@ -26,7 +26,7 @@ export default function RootLayout({
       <head>
         <Heads />
       </head>
-      <body style={{ margin: "auto" }}>
+      <body style={{ margin: "auto" }} suppressHydrationWarning={true}>
         <Root darkmode={cookies().get("dark")?.value == "true"}>
           <Snackbar>
             <Suspense fallback={<Loading />}>

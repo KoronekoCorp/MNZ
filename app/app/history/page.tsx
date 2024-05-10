@@ -52,7 +52,7 @@ export default function History() {
     }
 
     const Book = ({ r, index }: { r: Chaper, index: number }) => {
-        const b = Bookinfo[r.data.chapter_info.book_id] ?? { data: { book_info: { cover: "/favicon.ico", book_name: "加载中" } } }
+        const b = Bookinfo[r.data.chapter_info.book_id] ?? { data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "加载中" } } }
 
         return <div className="col-sm-6 col-md-3" key={r.data.chapter_info.book_id}>
             <div className="card fluid">

@@ -14,7 +14,7 @@ const Single = ({ t, noli }: { t: tsukkomi_info_single | tsukkomi_reply_info, no
     return <>
         <ListItem alignItems="flex-start">
             <ListItemAvatar>
-                <Avatar alt={t.reader_info.reader_name} src={t.reader_info.avatar_thumb_url == "" ? "/favicon.ico" : t.reader_info.avatar_thumb_url} />
+                <Avatar alt={t.reader_info.reader_name} src={t.reader_info.avatar_thumb_url == "" ? undefined : t.reader_info.avatar_thumb_url} />
             </ListItemAvatar>
             <ListItemText
                 primary={t.reader_info.reader_name}

@@ -1,15 +1,18 @@
 'use client'
-import { Chaper } from '@/Data/CiweiType'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { convertTimestamp } from './convertTimestamp'
-import { closeSnackbar, enqueueSnackbar } from 'notistack'
-import { Button, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material'
 import { H2 } from '@/components/H2'
 import { ImgCard } from '@/components/ImgCard'
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import { Chaper } from '@/Data/CiweiType'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore'
+import { Button, Container, Grid, IconButton, Tooltip, Typography } from '@mui/material'
+import Link from 'next/link'
+import { closeSnackbar, enqueueSnackbar } from 'notistack'
+import { useEffect, useState } from 'react'
+import { convertTimestamp } from './convertTimestamp'
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 interface book_mark {
     "name": string
@@ -77,6 +80,7 @@ export default function Bookmark() {
         link.href = URL.createObjectURL(blob);
         link.click();
         URL.revokeObjectURL(link.href);
+        enqueueSnackbar("已导出", { variant: "success" })
     }
 
     const input = async (input: (value: any) => void, key: string) => {
@@ -96,9 +100,11 @@ export default function Bookmark() {
             const f = await file.getFile()
             const d = await f.text()
             inputtext(d, input, key)
+            enqueueSnackbar("已恢复", { variant: "success" })
         } catch {
             //@ts-ignore
             document.querySelector(`#${key}`)?.click();
+            enqueueSnackbar("已尝试恢复", { variant: "info" })
         }
     }
 
@@ -133,10 +139,10 @@ export default function Bookmark() {
                     url={`/book/${b.id}`}
                     img={{ url: b.cover }}
                     cardActions={<>
+                        <History id={b.id} />
                         <IconButton onClick={() => { delBookmarks(b) }}>
                             <DeleteForeverIcon color='error' />
                         </IconButton>
-                        <History id={b.id} />
                     </>}>
                     <Typography gutterBottom variant="subtitle2" component="h6">
                         {b.name}
@@ -146,14 +152,9 @@ export default function Bookmark() {
         </Grid>
 
 
-        <div className="card fluid center div_color_yellow1">
-            <h3>
-                <i className="fa fa-folder" aria-hidden="true" /> 书单{" "}
-                <b>
-                    (<span id="total_booklist">{booklist.length}</span>)
-                </b>
-            </h3>
-        </div>
+        <H2>
+            <MenuBookIcon />书单<b>(<span id="total_book">{booklist.length}</span>)</b>
+        </H2>
         <div className="row center" id="search_result_booklist">
             {booklist.map((b) => <div className="col-sm-6 col-md-3" key={b.id}>
                 <div className="card fluid">
@@ -176,51 +177,25 @@ export default function Bookmark() {
             </div>
             )}
         </div>
-        <div className="card fluid center div_color_yellow1">
-            <h3>
-                <i className="fa fa-hdd-o" aria-hidden="true" /> 备份与还原
-            </h3>
-        </div>
-        <div className="row center">
-            <div className="col-sm-12 col-md-12">
-                <p>
-                    注意此处的书架未链接到 Ciweimao
-                    中的书架，因为并非此站点上的每个人都登录到 Ciweimao。
-                </p>
-            </div>
-            <div className="col-sm-12 col-md-6">
-                <div className="card fluid">
-                    <div className="section dark">
-                        <h3>小说</h3>
-                        <p>
-                            <button className="inverse" onClick={() => output(bookmark, "bookmarks")}>
-                                <i className="fa fa-cloud-download" aria-hidden="true" /> 备份
-                            </button>
-                            |
-                            <button className="inverse" onClick={() => { input(setbookmark, "book_mark") }}>
-                                <i className="fa fa-cloud-upload" aria-hidden="true" /> 还原
-                            </button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-sm-12 col-md-6">
-                <div className="card fluid">
-                    <div className="section dark">
-                        <h3>书单</h3>
-                        <p>
-                            <button className="inverse" onClick={() => { output(booklist, "booklists") }}>
-                                <i className="fa fa-cloud-download" aria-hidden="true" /> Backup
-                            </button>
-                            |
-                            <button className="inverse" onClick={() => { input(setbooklist, "booklist_mark") }}>
-                                <i className="fa fa-cloud-upload" aria-hidden="true" /> Restore
-                            </button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div >
+        <H2>
+            <SettingsBackupRestoreIcon />备份与还原
+        </H2>
+        <Grid container spacing={2} sx={{ p: 1, "button": { m: 2 } }} alignItems="center" justifyContent="center" color="text.primary">
+            <Grid item xs={12}>
+                注意此处的书架未链接到 Ciweimao
+                中的书架，因为并非此站点上的每个人都登录到 Ciweimao。
+            </Grid>
+            <Grid item xs={6}>
+                <h3>小说</h3>
+                <Button variant='contained' onClick={() => output(bookmark, "bookmarks")} startIcon={<CloudDownloadIcon />}>备份</Button>
+                <Button variant='contained' onClick={() => input(setbookmark, "book_mark")} startIcon={<CloudUploadIcon />}>还原</Button>
+            </Grid>
+            <Grid item xs={6}>
+                <h3>书单</h3>
+                <Button variant='contained' onClick={() => output(booklist, "booklists")} startIcon={<CloudDownloadIcon />}>备份</Button>
+                <Button variant='contained' onClick={() => input(setbooklist, "booklist_mark")} startIcon={<CloudUploadIcon />}>还原</Button>
+            </Grid>
+        </Grid>
         <input type="file" style={{ display: "none" }} id="book_mark" accept=".json"
             onInput={(e) => {
                 //@ts-ignore

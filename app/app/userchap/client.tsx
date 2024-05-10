@@ -75,7 +75,7 @@ export function BookSingle({ book, req }: { book: Userchap, req: bookinfo }) {
             //@ts-ignore 修复书籍不存在的问题
             "book_info": {
                 "book_name": "书籍不存在",
-                "cover": "/favicon.ico",
+                "cover": "https://cos.koroneko.co/off.gif",
                 "author_name": "书籍不存在",
             }
         }

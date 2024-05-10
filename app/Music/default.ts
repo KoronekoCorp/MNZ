@@ -2,10 +2,11 @@ import { type AudioInfo } from "aplayer-react";
 
 export const audiolist: AudioInfo[] = [
     {
-        name: 'fly,my wings',
+        name: 'Fly,my wings',
         url: "https://cos.koroneko.co/Mili%20-%20Fly%2C%20My%20Wings.flac",
         // url: "/api/music/download/2058124989",
-        cover: "https://zapi.koroneko.co/music/cover/2058124989",
+        // cover: "https://zapi.koroneko.co/music/cover/2058124989",
+        cover: "https://cos.koroneko.co/Mili%20-%20Fly%2C%20My%20Wings.jpg",
         artist: "Mili",
         lrc: `[by:已过期i]
         [00:13.535]飞呀，破碎的翅膀
@@ -93,4 +94,86 @@ export const audiolist: AudioInfo[] = [
         [02:36.408] "THAT'S ALL"
         `
     },
+    {
+        name: "Compass",
+        url: "https://cos.koroneko.co/Mili%20-%20Compass.flac",
+        cover: "https://cos.koroneko.co/Mili%20-%20Compass.jpg",
+        artist: "Mili",
+        lrc: `[00:00.000] 作词 : Cassie Wei
+        [00:01.000] 作曲 : Yamato Kasai/Cassie Wei
+        [00:02.000] 编曲 : Yamato Kasai
+        [00:22.409] Bon voyage
+        [00:26.254] Your mermaid's setting sail
+        [00:30.174] At last
+        [00:31.507] Full speed towards your heart
+        [00:37.020] Full speed towards your heart
+        [00:41.476] I've had enough
+        [00:47.963] I'm reclaiming myself
+        [00:52.129] The aft
+        [00:53.352] Leaving behind the hurt
+        [00:58.889] Leaving behind the hurt
+        [01:01.583]
+        [01:04.535] When it snapped
+        [01:08.473] My compass was swallowed by the sea
+        [01:13.871] My compass was swallowed by the sea
+        [01:19.225] I cursed this relationship between you and me
+        [01:26.252]
+        [01:26.414] I wanted blood
+        [01:31.513] I wanted black and white
+        [01:35.541] Clear cut
+        [01:37.059] Your evils predefined
+        [01:42.426] Your evils predefined
+        [01:45.105]
+        [01:48.343] Hold on tight
+        [01:52.068] My compass is curiosity
+        [01:57.518] My compass is curiosity
+        [02:02.813] I'm piercing through the rope that strangled you and me
+        [02:09.787] Let us be free
+        [02:11.543]
+        [02:11.938] High tide
+        [02:14.693] Low tide
+        [02:17.343] High tide
+        [02:20.138] Low tide
+        [02:22.923] High tide
+        [02:25.693] Low tide
+        [02:28.337] High tide
+        [02:31.035] Low tide
+        [by:LandMeXPro]
+        [00:22.409]一路顺风
+        [00:26.254]你的人鱼正扬帆远航
+        [00:30.174]最终
+        [00:31.507]全速向你的心脏驶去
+        [00:37.020]全速向你的心脏驶去
+        [00:41.476]我已厌倦
+        [00:47.963]我要找回自我
+        [00:52.129]在船尾
+        [00:53.352]忘却我的伤痛
+        [00:58.889]忘却我的伤痛
+        [01:01.583]
+        [01:04.535]当它断裂之时
+        [01:08.473]我的罗盘被海洋淹没
+        [01:13.871]我的罗盘被海洋淹没
+        [01:19.225]我诅咒我们之间的这段缠怨
+        [01:26.252]
+        [01:26.414]我渴望用血洗面
+        [01:31.513]我渴望黑白分明
+        [01:35.541]清空过往
+        [01:37.059]你的罪恶早已被定义
+        [01:42.426]你的罪恶早已被定义
+        [01:45.105]
+        [01:48.343]紧紧抓住那捕鲸枪
+        [01:52.068]我的罗盘即是好奇心
+        [01:57.518]我的罗盘即是好奇心
+        [02:02.813]我要刺穿那捆绑你我的绳索
+        [02:09.787]让我们都奔向自由吧
+        [02:11.543]
+        [02:11.938]潮起
+        [02:14.693]潮落
+        [02:17.343]潮起
+        [02:20.138]潮落
+        [02:22.923]潮起
+        [02:25.693]潮落
+        [02:28.337]潮起
+        [02:31.035]潮落`
+    }
 ]
