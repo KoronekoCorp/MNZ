@@ -133,7 +133,7 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
                 pt: ['72px', '80px', '88px'],
                 pb: ['48px', '56px', '64px'],
                 // p: 3,
-                mt: 3,
+                // mt: 3,
                 minHeight: "100vh",
                 "img": { maxWidth: "100%" }
             }}

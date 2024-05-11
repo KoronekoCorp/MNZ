@@ -19,7 +19,7 @@ export function AutoBookCard({ book, userchap, free, error }:
     const [Userchap, setUserchap] = useState(userchap)
     useEffect(() => {
         if (error) bookChap(book.book_id).then(e => setUserchap(e))
-    }, [book.book_id, error])
+    }, [book.book_id])
 
     const icons: (JSX.Element | string)[] = []
     if (free) icons.push(<span className='console-line'>FREE</span>)
@@ -35,7 +35,7 @@ export function AutoBookCard({ book, userchap, free, error }:
             icons.push(<Battery2BarIcon />);
         }
     }
-    else if (error) icons.push(<span className="console-error">数据库错误</span>)
+    else if (error && Userchap === undefined) icons.push(<span className="console-error">数据库错误</span>)
 
     return <ImgCard
         url={`/book/${book.book_id}`}
