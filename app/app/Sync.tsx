@@ -86,31 +86,8 @@ export default function Sync() {
         }
     }
 
-    /**
-     * 检查Build版本，清空缓存
-     */
-    async function check() {
-        const r: { buildid: string } = await (await fetch("/api/version")).json()
-        if (localStorage.getItem("buildid") !== r.buildid) {
-            const keys = await caches.keys()
-            await Promise.all(keys.map(i => caches.delete(i)))
-            localStorage.setItem("buildid", r.buildid)
-        }
-    }
-
-    /**
-     * 检查SW更新
-     */
-    async function update() {
-        const r = await navigator.serviceWorker.getRegistrations()
-        return Promise.all(r.map(i => i.update()))
-    }
-
     useEffect(() => {
         sync()
-        update()
-        check()
-        fetch("https://zapi.koroneko.co/auth/check", { credentials: "include" })
         const id = setInterval(() => sync(), 60000)
         return () => { clearInterval(id) }
     }, [])

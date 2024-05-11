@@ -5,6 +5,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import LoginIcon from '@mui/icons-material/Login';
 // import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MenuIcon from '@mui/icons-material/Menu';
 import MusicNote from '@mui/icons-material/MusicNote';
 import SearchIcon from '@mui/icons-material/Search';
@@ -24,6 +25,7 @@ const LINKS = [
     { text: 'UserChap', href: '/userchap/1', icon: LocalCafeIcon },
     { text: 'Search', href: '/search', icon: SearchIcon },
     { text: 'Tags', href: '/tag', icon: TagIcon },
+    { text: "Booklists", href: "/booklists", icon: LibraryBooksIcon },
     // { text: 'Subscription', href: '/watched', icon: LoyaltyIcon },
     { text: 'Bookmark', href: '/bookmark', icon: BookmarksIcon },
 ];

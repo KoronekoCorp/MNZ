@@ -1,46 +1,58 @@
 "use client"
+import BookmarkIcon from '@mui/icons-material/Bookmark'
+import SearchIcon from '@mui/icons-material/Search'
+import { Button, IconButton, TextField } from "@mui/material"
+import Stack from "@mui/material/Stack"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
 import { enqueueSnackbar } from "notistack"
+import { useState } from "react"
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import UpdateIcon from '@mui/icons-material/Update';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
+declare module '@mui/material/Button' {
+    interface ButtonPropsColorOverrides {
+        Doujinshi: true;
+        Manga: true;
+        ArtistCG: true;
+        GameCG: true;
+        NonH: true;
+        ImageSet: true;
+        Western: true;
+        Cosplay: true;
+        AsianPorn: true;
+        Miscellaneous: true;
+    }
+}
 
-export default function Button() {
+export default function Head() {
     const router = useRouter()
     const [word, setWord] = useState("")
 
-
     return <>
-        <div className="center">
-            <form >
-                <input
-                    type="text"
-                    name="q"
-                    style={{ width: "45%" }}
-                    placeholder="搜索感兴趣的书单"
-                    className="s search-input"
-                    onChange={(e) => { setWord(e.target.value) }}
-                />
-                <button onClick={(e) => {
-                    e.preventDefault()
-                    router.push(`/booklists/search/${word}`)
-                }}>
-                    <i className="fa fa-folder" aria-hidden="true" /> 搜索书单
-                </button>
-            </form>
-        </div>
-        <div className="center">
-            <Link prefetch={false} className="shadowed button secondary" href="/booklists/hot">
-                <i className="fa fa-fire" aria-hidden="true" /> 本月最热
-            </Link>
-            <Link prefetch={false} className="shadowed button secondary" href="/booklists/new">
-                <i className="fa fa-history" aria-hidden="true" /> 最近更新
-            </Link>
-            <Link prefetch={false} className="shadowed button secondary" href="/booklists/top">
-                <i className="fa fa-line-chart" aria-hidden="true" /> 最多收藏
-            </Link>
-        </div>
-
+        <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} sx={{ p: 1 }}>
+            <IconButton onClick={() => { router.push(`/booklists/search/${word}`) }}>
+                <SearchIcon sx={{ color: 'action.active' }} />
+            </IconButton>
+            <TextField
+                label="搜索书单(还没做好，请不要使用)"
+                fullWidth
+                value={word}
+                onChange={(e) => setWord(e.target.value)}>
+            </TextField>
+        </Stack>
+        <Stack spacing={{ xs: 1, sm: 8 }} direction="row" useFlexGap flexWrap="wrap" justifyContent="center" alignItems="center">
+            <Button LinkComponent={Link} size="large" color='warning' variant="contained" href="/booklists/hot" startIcon={<WhatshotIcon />}>
+                本月最热
+            </Button>
+            <Button LinkComponent={Link} size="large" color='success' variant="contained" href="/booklists/new" startIcon={<UpdateIcon />}>
+                最近更新
+            </Button>
+            <Button LinkComponent={Link} size="large" color='info' variant="contained" href="/booklists/top" startIcon={<BarChartIcon />}>
+                最多收藏
+            </Button>
+        </Stack>
     </>
 
 }
@@ -62,7 +74,7 @@ export function Fav({ id, cover, name }: { id: string, cover: string, name: stri
         enqueueSnackbar("添加完成~", { variant: "success" })
     }
 
-    return <button className="shadowed small primary" onClick={bookmark} style={{ maxWidth: "max-content", alignSelf: "center" }}>
-        <i className="fa fa-bookmark" aria-hidden="true" /> 放入书架
-    </button>
+    return <Button variant='contained' size='large' onClick={bookmark} startIcon={<BookmarkIcon />}>
+        放入书架
+    </Button>
 }

@@ -1,18 +1,18 @@
 "use client"
 
+import type { UserchapInfo } from "@/Data/DataType"
+import Battery2BarIcon from '@mui/icons-material/Battery2Bar'
+import Battery5BarIcon from '@mui/icons-material/Battery5Bar'
+import BatteryFullIcon from '@mui/icons-material/BatteryFull'
 import { Button, Stack, Typography } from "@mui/material"
-import { ImgCard } from "../ImgCard"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import type { UserchapInfo } from "@/Data/DataType"
-import BatteryFullIcon from '@mui/icons-material/BatteryFull';
-import Battery5BarIcon from '@mui/icons-material/Battery5Bar';
-import Battery2BarIcon from '@mui/icons-material/Battery2Bar';
+import { ImgCard } from "../ImgCard"
 import { bookChap } from "./server"
 
 export function AutoBookCard({ book, userchap, free, error }:
     {
-        book: { book_id: string, cover: string, author_name: string, book_name: string }, userchap?: UserchapInfo[],
+        book: { book_id: string, cover: string, author_name?: string, book_name: string }, userchap?: UserchapInfo[],
         free?: boolean, error?: boolean
     }) {
 
@@ -23,7 +23,6 @@ export function AutoBookCard({ book, userchap, free, error }:
 
     const icons: (JSX.Element | string)[] = []
     if (free) icons.push(<span className='console-line'>FREE</span>)
-    else if (error) icons.push(<span className="console-error">数据库错误</span>)
     else if (Userchap && Userchap[0].chapters) {
         icons.push(`${Userchap[0].chapters} | `)
         if (Userchap[0].modes?.includes('vip')) {
@@ -36,11 +35,12 @@ export function AutoBookCard({ book, userchap, free, error }:
             icons.push(<Battery2BarIcon />);
         }
     }
+    else if (error) icons.push(<span className="console-error">数据库错误</span>)
 
     return <ImgCard
         url={`/book/${book.book_id}`}
         img={{ url: book.cover }}
-        cardActions={<Button LinkComponent={Link} href={`/search/${book.author_name}`}>
+        cardActions={book.author_name === undefined ? undefined : <Button LinkComponent={Link} href={`/search/${book.author_name}`}>
             {book.author_name}
         </Button>}>
         <Typography gutterBottom variant="subtitle2" component="h6">

@@ -1,12 +1,12 @@
 import { UseAPI } from "@/Data/Use";
-import { UseDB } from "@/Data/UseDB"
-import { Back } from '@/app/push'
-import { Container, Grid } from "@mui/material";
-import { H2 } from "@/components/H2";
+import { UseDB } from "@/Data/UseDB";
+import { Back } from '@/app/push';
 import { BookCard } from "@/components/AutoBookCard";
+import { H2 } from "@/components/H2";
+import { PaginationElement } from "@/components/Pagination";
 import SearchIcon from '@mui/icons-material/Search';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { PaginationElement } from "@/components/Pagination";
+import { Container, Grid } from "@mui/material";
 
 export default async function Tags({ Tag, page }: { Tag: string, page: number }) {
     const tag = decodeURI(Tag)
@@ -24,7 +24,7 @@ export default async function Tags({ Tag, page }: { Tag: string, page: number })
                 <BookCard book={book} db={db} />
             </Grid>)}
         </Grid>
-        {r.data.book_list.length == 0 && <H2 sx={{ backgroundColor: "rgb(255 180 180)" }}>
+        {r.data.book_list.length == 0 && <H2 sx={{ backgroundColor: "error.main", color: "error.contrastText" }}>
             <WarningAmberIcon />
             什么都没有了呢,5秒后返航
             <Back time={5000}></Back>
