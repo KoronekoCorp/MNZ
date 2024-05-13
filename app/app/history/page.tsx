@@ -1,15 +1,32 @@
 'use client'
+import { H2 } from "@/components/H2"
+import { ImgCard } from "@/components/ImgCard"
+import { bookinfo, Chaper } from "@/Data/CiweiType"
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import HistoryIcon from '@mui/icons-material/History'
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
+import { Button, Container, Grid, IconButton, type Theme, Tooltip, Typography } from "@mui/material"
 import Link from "next/link"
-import { Chaper } from "@/Data/CiweiType"
-import { convertTimestamp } from '../bookmark/convertTimestamp'
-import { useEffect, useState } from "react"
-import { books, Bookinfos } from "./book"
 import { closeSnackbar, enqueueSnackbar } from "notistack"
+import { useEffect, useState } from "react"
+import { convertTimestamp } from '../bookmark/convertTimestamp'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function History() {
     const [H, setH] = useState<Chaper[]>([])
-    const [force, setforce] = useState(0)
-    const [Bookinfo, setBookinfo] = useState<Bookinfos>({})
+    const [Bookinfo, setBookinfo] = useState<bookinfo[]>([])
+    const sm = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'))
+
+    async function book(ids: number[] | string[]) {
+        return Promise.all(ids.map(i => new Promise<bookinfo>((resolve) => {
+            fetch(`https://zapi.koroneko.co/cwm/book/get_info_by_id?book_id=${i}`)
+                .then((res) => res.json())
+                .then((r) => resolve(r as bookinfo))
+                //@ts-ignore
+                .catch(() => { resolve({ data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "请求失败" } } }) })
+
+        })))
+    }
 
     useEffect(() => {
         let i = 0
@@ -26,77 +43,65 @@ export default function History() {
             ++i
         }
         setH(_h)
-        books(Ids, Bookinfo).then((e) => setBookinfo(e))
-    }, [force])
+        book(Ids).then((e) => setBookinfo(e.concat(Bookinfo)))
+    }, [])
 
-    const RemoveHis = (index: number) => {
+    function RemoveHis(index: number) {
         const chap = H[index]
         const id = chap.data.chapter_info.book_id
-        const msg = Bookinfo[id]?.data.book_info.book_name ?? id
+        const msg = Bookinfo.find(i => i.data.book_info.book_id === id)?.data.book_info.book_name ?? id
         localStorage.removeItem(id)
-        setforce(force + 1)
+        // console.log(H)
+        setH(H.filter(i => i.data.chapter_info.book_id !== chap.data.chapter_info.book_id))
         enqueueSnackbar(`已删除${msg}的历史记录`, {
-            action: (id) => <button onClick={() => { Recover(chap); closeSnackbar(id) }} className='shadowed small'>撤销</button>,
+            action: (id) => <Button variant='contained' onClick={() => { Recover(chap); closeSnackbar(id) }} color='primary'>撤销</Button>,
             autoHideDuration: 5000, variant: "error"
         })
     }
 
-    const Recover = (chap: Chaper) => {
+    function Recover(chap: Chaper) {
         localStorage.setItem(chap.data.chapter_info.book_id, JSON.stringify(chap))
-        const _h = H.slice()
-        if (!_h.find(i => i.data.chapter_info.book_id == chap.data.chapter_info.book_id)) {
-            _h.push(chap)
-        }
-        setH(_h)
+        // const _h = H.slice()
+        // if (!_h.find(i => i.data.chapter_info.book_id == chap.data.chapter_info.book_id)) {
+        //     _h.push(chap)
+        // }
+        // setH(_h)
+        // console.log(H)
+        setH(Array.from(new Set([...H, chap])))
         enqueueSnackbar('已恢复', { variant: "success" })
     }
 
     const Book = ({ r, index }: { r: Chaper, index: number }) => {
-        const b = Bookinfo[r.data.chapter_info.book_id] ?? { data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "加载中" } } }
-
-        return <div className="col-sm-6 col-md-3" key={r.data.chapter_info.book_id}>
-            <div className="card fluid">
-                <div className="section" id={r.data.chapter_info.book_id} style={{ height: "auto" }}>
-                    <Link prefetch={false} href={`/book/${r.data.chapter_info.book_id}`} title={b.data.book_info.book_name}>
-                        <img style={{ border: "1px ridge black", height: "60%" }} src={b.data.book_info.cover} />
-                    </Link>
-                    <h5>
-                        <Link prefetch={false} className="book_title_search" href={`/book/${r.data.chapter_info.book_id}`} title={b.data.book_info.book_name}>
-                            {b.data.book_info.book_name}
-                        </Link>
-                    </h5>
-                    <p style={{ fontSize: 14 }}>
-                        <i className="fa fa-hourglass-start" aria-hidden="true" />
-                        <Link prefetch={false} href={`/chap/${r.data.chapter_info.chapter_id}`}>
+        const b = Bookinfo.find(i => i.data.book_info.book_id === r.data.chapter_info.book_id) ?? { data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "加载中" } } }
+        return <Grid item xs={6} md={3} key={r.data.chapter_info.book_id}>
+            <ImgCard
+                url={`/book/${r.data.chapter_info.book_id}`}
+                img={{ url: b.data.book_info.cover }}
+                cardActions={<>
+                    <Tooltip open={sm ? undefined : true} title={convertTimestamp(parseInt(r.data.chapter_info.txt_content))} placement={sm ? undefined : "bottom-start"} arrow>
+                        <Button LinkComponent={Link} href={`/chap/${r.data.chapter_info.chapter_id}`}
+                            startIcon={<LocalLibraryIcon />}>
                             {r.data.chapter_info.chapter_title.split("#")[0]}
-                        </Link>
-                        <br />
-                        <small>
-                            {convertTimestamp(parseInt(r.data.chapter_info.txt_content))}
-                        </small>
-                    </p>
-                    <p>
-                        <button className="secondary" onClick={() => { RemoveHis(index) }}>
-                            <i className="fa fa-trash-o" aria-hidden="true" />
-                        </button>
-                    </p>
-                </div>
-            </div>
-        </div>
+                        </Button>
+                    </Tooltip>
+                    <IconButton onClick={() => { RemoveHis(index) }}>
+                        <DeleteForeverIcon color='error' />
+                    </IconButton>
+                </>}>
+                <Typography gutterBottom variant="subtitle2" component="h6">
+                    {b.data.book_info.book_name}
+                </Typography>
+            </ImgCard>
+        </Grid >
     }
 
-    return <>
+    return <Container sx={{ textAlign: 'center' }}>
         <title>历史</title>
-
-        <div className="card fluid center" style={{ backgroundColor: "#ffefc8" }}>
-            <h3>
-                <i className="fa fa-history" aria-hidden="true" /> 24本最近读过的小说
-            </h3>
-        </div>
-        <div className="container center" style={{ paddingTop: 10 }}>
-            <div className="row" id="rhistory" >
-                {H.map((r, i) => <Book r={r} index={i} key={r.data.chapter_info.book_id} />)}
-            </div>
-        </div>
-    </>
+        <H2>
+            <HistoryIcon />最近读过的小说
+        </H2>
+        <Grid container spacing={2} sx={{ p: 1 }} alignItems="center" justifyContent="center">
+            {H.sort((i, j) => parseInt(j.data.chapter_info.txt_content) - parseInt(i.data.chapter_info.txt_content)).map((r, i) => <Book r={r} index={i} key={r.data.chapter_info.book_id} />)}
+        </Grid>
+    </Container>
 }

@@ -5,6 +5,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import LoginIcon from '@mui/icons-material/Login';
 // import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import HistoryIcon from '@mui/icons-material/History';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MenuIcon from '@mui/icons-material/Menu';
 import MusicNote from '@mui/icons-material/MusicNote';
@@ -28,6 +29,7 @@ const LINKS = [
     { text: "Booklists", href: "/booklists", icon: LibraryBooksIcon },
     // { text: 'Subscription', href: '/watched', icon: LoyaltyIcon },
     { text: 'Bookmark', href: '/bookmark', icon: BookmarksIcon },
+    { text: 'History', href: '/history', icon: HistoryIcon }
 ];
 
 const PLACEHOLDER_LINKS = [
