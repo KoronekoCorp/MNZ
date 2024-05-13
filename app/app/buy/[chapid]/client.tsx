@@ -20,6 +20,7 @@ export default function Share({ chap, auto }: { chap: number | string, auto: boo
             .then((e: Data) => {
                 setloading(false)
                 setSuccess(e.success)
+                enqueueSnackbar("分享成功", { variant: "success" })
             })
             .catch(() => { handleButtonClick() })
     };

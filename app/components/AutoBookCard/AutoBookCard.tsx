@@ -6,9 +6,9 @@ import Battery5BarIcon from '@mui/icons-material/Battery5Bar'
 import BatteryFullIcon from '@mui/icons-material/BatteryFull'
 import { Button, Stack, Typography } from "@mui/material"
 import Link from "next/link"
+import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { ImgCard } from "../ImgCard"
-import { bookChap } from "./server"
 
 export function AutoBookCard({ book, userchap, free, error }:
     {
@@ -18,7 +18,10 @@ export function AutoBookCard({ book, userchap, free, error }:
 
     const [Userchap, setUserchap] = useState(userchap)
     useEffect(() => {
-        if (error) bookChap(book.book_id).then(e => setUserchap(e))
+        if (error) fetch(`https://capi.koroneko.co/UserchapInfo/${book.book_id}`, { referrer: "about:client", referrerPolicy: "origin" })
+            .then(e => e.json())
+            .then(e => setUserchap(e))
+            .catch(() => { enqueueSnackbar(`${book.book_id}数据库重连失败`, { variant: "error" }) })
     }, [book.book_id])
 
     const icons: (JSX.Element | string)[] = []
