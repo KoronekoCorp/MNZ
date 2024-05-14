@@ -5,7 +5,7 @@ interface tag {
 }
 
 /** 基础书籍元信息 */
-interface BookOwn {
+export interface BookOwn {
     "book_id": string,
     "book_name": string,
     "description": string,

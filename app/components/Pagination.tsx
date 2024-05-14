@@ -73,5 +73,44 @@ function PaginationElement({ currentUri, pageShow, end }: { currentUri: string, 
     </Stack>
 }
 
+function PaginationElementCallBack({ pageShow, end, callback }: { pageShow: number, end?: boolean, callback: (page: number) => any }) {
+    const pageID = pageShow;
+    const pageIDm1 = pageID - 1;
+    const pageIDm2 = pageID - 2;
+    const pageIDp1 = pageID + 1;
+    const pageIDp2 = pageID + 2;
+
+    const links = [];
+    if (pageID > 2) {
+        links.push(<Button variant='outlined' onClick={() => callback(pageIDm2)}
+            startIcon={<KeyboardDoubleArrowLeftIcon />}>
+            {pageIDm2}
+        </Button>)
+    }
+    if (pageID > 1) {
+        links.push(<Button variant='outlined' onClick={() => callback(pageIDm1)}
+            startIcon={<KeyboardArrowLeftIcon />}>
+            {pageIDm1}
+        </Button>);
+    }
+    links.push(<Button variant='outlined' disabled>
+        {pageID}
+    </Button>);
+    if (!end) {
+        links.push(<Button variant='outlined' onClick={() => callback(pageIDp1)}
+            endIcon={<KeyboardArrowRightIcon />}>
+            {pageIDp1}
+        </Button>)
+        links.push(<Button variant='outlined' onClick={() => callback(pageIDp2)}
+            endIcon={<KeyboardDoubleArrowRightIcon />}>
+            {pageIDp2}
+        </Button>)
+    }
+
+    return <Stack direction="row" sx={{ p: 2, justifyContent: 'center', display: 'flex' }} spacing={2} useFlexGap flexWrap="wrap">
+        {links}
+    </Stack>
+}
+
 export default PaginationTotalElement;
-export { PaginationElement }
+export { PaginationElement, PaginationElementCallBack }
