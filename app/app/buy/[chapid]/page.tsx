@@ -81,7 +81,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 <b>更新时间:</b>
                 <span>{r.data.chapter_info.ctime}</span>
             </Stack>
-            <Share chap={params.chapid} auto={share} />
+            <Share chap={params.chapid} auto={share} body={r.data.chapter_info.txt_content} />
             <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="center" alignItems="center" spacing={2}>
                 {r.data.chapter_info.is_paid === '1' && <LockIcon color='warning' fontSize='large' />}
                 {r.data.chapter_info.auth_access == '0'

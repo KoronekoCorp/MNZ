@@ -40,11 +40,11 @@ export function History({ chap }: { chap: Chaper }) {
     return <></>
 }
 
-export function ClientButton() {
+export function ClientButton({ body }: { body: string }) {
     return <Button variant="contained" sx={{ m: 2 }}
         startIcon={<ContentCopyIcon />}
         onClick={(e) => {
-            navigator.clipboard.writeText(document.title + "\n" + document.getElementsByTagName("article")[0].innerText)
+            navigator.clipboard.writeText(document.title + "\n" + body)
             enqueueSnackbar("复制成功", { variant: "success" })
         }}>
         复制文字

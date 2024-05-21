@@ -20,14 +20,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
+  const dark = cookies().get("dark")?.value === "true"
   return (
     <html lang="zh">
       <head>
         <Heads />
       </head>
       <body style={{ margin: "auto" }} suppressHydrationWarning={true}>
-        <Root darkmode={cookies().get("dark")?.value == "true"}>
+        <Root darkmode={dark}>
           <Snackbar>
             <Suspense fallback={<Loading />}>
               {children}
@@ -35,7 +35,7 @@ export default function RootLayout({
           </Snackbar>
           <AnnouncementProvider endpoint='https://ann.koroneko.co' />
         </Root>
-        <Music />
+        <Music dark={dark} />
         <Sync />
         <Security />
       </body>

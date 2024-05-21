@@ -5,7 +5,7 @@ import { AutoBookCard } from "@/components/AutoBookCard/AutoBookCard";
 import { H2 } from "@/components/H2";
 import { PaginationElementCallBack } from '@/components/Pagination';
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Stack } from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
@@ -70,6 +70,7 @@ export default function Page() {
         <p>温馨提示</p>
         <p>Tag: 表示Tag；Search：表示搜索关键词，仅允许存在一个，如若存在多个，自动使用最后输入的</p>
         <p>显示数据库错误实际上并不存在问题，只是因为懒得去动旧的设计</p>
+        <p>搜索结果不一定完全符合你的搜索标准</p>
 
         <Autocomplete
             multiple
@@ -118,7 +119,7 @@ export default function Page() {
                 />
             )}
             renderOption={(props, option) => {
-                return <li {...props} key={crypto.randomUUID()}>
+                return <li {...props} key={props.id}>
                     <Typography variant="body2" color="text.secondary">
                         {option.isTag ? "Tag" : "Search"}: {option.name}
                     </Typography>
@@ -126,6 +127,9 @@ export default function Page() {
             }}
             disabled={loading}
         />
+        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" color="text.primary">
+            
+        </Stack>
         <Grid container spacing={2} sx={{ pt: 6 }} alignItems="center" justifyContent="center">
             {loading
                 ? <CircularProgress color="inherit" size={80} />

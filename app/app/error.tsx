@@ -5,7 +5,6 @@ import { H2 } from '@/components/H2';
 import { Top } from '@/components/push';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { Button, Container } from "@mui/material";
-import { useId } from 'react';
 
 export default function Error({
     error,
@@ -32,6 +31,6 @@ export default function Error({
             }}>重新加载</Button>
         <br />
         <img src='https://cos.koroneko.co/憧憬成為魔法少女-50-3.png' />
-        <Top index={useId()} />
+        <Top index={crypto.randomUUID()} />
     </Container>
 }

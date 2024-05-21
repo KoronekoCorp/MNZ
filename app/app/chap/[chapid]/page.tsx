@@ -105,7 +105,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 <b>更新时间:</b>
                 <span>{r.data.chapter_info.ctime}</span>
             </Stack>
-            <ClientButton />
+            <ClientButton body={r.data.chapter_info.txt_content} />
             {r.data.chapter_info.auth_access == "0" && <Link prefetch={false} href={`/shchap/${params.chapid}/Cache`}>
                 <Button variant='contained' color='error' startIcon={<DeleteIcon />}>
                     清除缓存

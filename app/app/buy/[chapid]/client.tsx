@@ -9,7 +9,7 @@ interface Data {
     success: boolean
 }
 
-export default function Share({ chap, auto }: { chap: number | string, auto: boolean }) {
+export default function Share({ chap, auto, body }: { chap: number | string, auto: boolean, body: string }) {
     const [success, setSuccess] = useState(false);
     const [loading, setloading] = useState(false)
 
@@ -38,7 +38,7 @@ export default function Share({ chap, auto }: { chap: number | string, auto: boo
         <Button variant="contained" sx={{ m: 2 }}
             startIcon={<ContentCopyIcon />}
             onClick={(e) => {
-                navigator.clipboard.writeText(document.title + "\n" + document.getElementsByTagName("article")[0].innerText)
+                navigator.clipboard.writeText(document.title + "\n" + body)
                 enqueueSnackbar("复制成功", { variant: "success" })
             }}>
             复制文字

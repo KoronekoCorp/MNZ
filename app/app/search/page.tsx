@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Container, IconButton, Stack, TextField } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useId, useState } from "react";
+import { useState } from "react";
 
 
 export default function Search() {
@@ -23,7 +23,7 @@ export default function Search() {
                 onChange={(e) => setw(e.target.value)}>
             </TextField>
         </Stack>
-        <Top index={useId()} />
+        <Top index={crypto.randomUUID()} />
         <Link href={"/filter"} prefetch={false}>
             <img src="https://cos.koroneko.co/T_UI_Talk_Face_00100_0008.png" />
         </Link>

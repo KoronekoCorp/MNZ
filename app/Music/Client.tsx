@@ -6,9 +6,10 @@ import "aplayer/dist/APlayer.min.css";
 import Cookies from "js-cookie"
 import { audiolist } from './default';
 
-export function Music() {
+export function Music({ dark }: { dark: boolean }) {
     const [audio, setaudio] = useState(audiolist)
     const [enable, setenable] = useState(false)
+
 
     useEffect(() => {
         const c = JSON.parse(localStorage.getItem("audiolist") ?? "[]") as AudioInfo[]
@@ -16,5 +17,5 @@ export function Music() {
         setenable((Cookies.get("music") ?? "on") === "on")
     }, [])
 
-    return <>{(audio.length !== 0 && enable) && <APlayer audio={audio} appearance="fixed" theme="auto" initialLoop="all" />}</>
+    return <>{(audio.length !== 0 && enable) && <APlayer audio={audio} appearance="fixed" theme={dark ? "black" : "white"} initialLoop="all" />}</>
 }

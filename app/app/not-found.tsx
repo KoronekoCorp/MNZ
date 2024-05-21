@@ -12,7 +12,7 @@ import style from './error.module.css';
  * 
  * @link https://github.com/vercel/next.js/issues/63388
  */
-export default function Page({ params }: { params: { word: string[] } }) {
+export default function Page() {
     return <Container sx={{ textAlign: "center", color: "text.primary" }}>
         <h1 className={style.error} style={{ fontSize: "calc(100vw/13)" }} data-text={"404 Not Found"}>404 Not Found</h1>
         <div>

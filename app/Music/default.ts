@@ -2,7 +2,7 @@ import { type AudioInfo } from "aplayer-react";
 
 export const audiolist: AudioInfo[] = [
     {
-        name: 'Fly,my wings',
+        name: 'Fly, my wings',
         url: "https://cos.koroneko.co/Mili%20-%20Fly%2C%20My%20Wings.flac",
         // url: "/api/music/download/2058124989",
         // cover: "https://zapi.koroneko.co/music/cover/2058124989",
@@ -175,5 +175,94 @@ export const audiolist: AudioInfo[] = [
         [02:25.693]潮落
         [02:28.337]潮起
         [02:31.035]潮落`
+    },
+    {
+        name: "Through Patches of Violet",
+        url: "https://cos.koroneko.co/Mili%20-%20Through%20Patches%20of%20Violet.flac",
+        cover: "https://cos.koroneko.co/Mili%20-%20Through%20Patches%20of%20Violet.jpg",
+        artist: "Mili",
+        lrc: `[00:00.000] 作词 : Cassie Wei
+        [00:00.822] 作曲 : Cassie Wei/Yamato Kasai
+        [00:01.645] How much I wished for another
+        [00:07.894] Better happier brighter future
+        [00:13.787] Here I am at the gate I stand
+        [00:16.829] Dear old times
+        [00:18.327] I've made up my mind
+        [00:21.312]
+        [00:21.519] How much you must have suffered through my anger (How much you must have overlooked your wonder)
+        [00:29.108] Vulgar awkward composure (Forward sincere manners)
+        [00:33.569] Here we are at the fated land
+        [00:36.514] I shall make it end (Will you watch me end?)
+        [00:41.955]
+        [00:42.695] Oh
+        [00:44.285] Round and round we go
+        [00:47.198] Holding on to pain
+        [00:49.970] Driven by our egos
+        [00:53.451] Feelings untold
+        [00:56.234] Spinning our own versions of the past
+        [01:02.108] That you could never know
+        [01:04.782]
+        [01:05.003] Cause I know
+        [01:06.998] I must be the reason why
+        [01:10.693] You have given up your smiles
+        [01:13.735] And the hope inside your eyes have been stolen
+        [01:19.075] I must be the reason why
+        [01:22.967] You must tell me all these lies
+        [01:25.969] Wishing you a better life without me by your side
+        [01:32.351]
+        [01:32.512] The message has already been said through patches of violet
+        [01:41.237]
+        [01:45.065] How much we must have diverged
+        [01:51.086] Hello
+        [01:51.804] Goodnight
+        [01:52.607] Goodbye
+        [01:53.426] Hello
+        [01:54.174] Goodnight
+        [01:54.955] I'm here
+        [01:55.813] Goodbye
+        [01:56.518] Waiting
+        [01:57.087] Here we are, it's our final chance
+        [02:00.161] With your hand
+        [02:01.362] Do what must be done
+        [02:04.416]
+        [02:06.006] Delete
+        [02:08.959] Delete
+        [02:11.869] Delete
+        [02:15.031] Delete
+        [02:17.332] Delete
+        [02:17.927] Delete
+        [02:18.723] Delete
+        [02:19.447] Delete
+        [02:20.256] Delete
+        [02:21.004] Delete
+        [02:21.805] Delete
+        [02:22.643] Delete
+        [02:23.456] Delete
+        [02:24.173] Delete
+        [02:24.894] Delete
+        [02:25.614] Delete
+        [02:26.362] Delete
+        [02:27.213] Delete
+        [02:28.001] Delete
+        [02:28.728] Delete
+        [02:29.964]
+        [02:42.737] Oh
+        [02:44.220] Round and round we go
+        [02:47.277] Holding on to pain
+        [02:49.976] Driven by our egos
+        [02:52.965] Feelings untold
+        [02:56.342] Spinning our own versions of the past
+        [03:02.015] That you could never know
+        [03:04.548]
+        [03:04.671] How would I know?
+        [03:06.925] I could be the reason why
+        [03:10.762] You were able to be kind
+        [03:13.773] And the hearts we held so tight won't stay broken
+        [03:19.120] Love must be the reason why
+        [03:22.943] I still believe in this lie
+        [03:25.914] That you'll live a better life without me by your side
+        [03:32.084]
+        [03:32.689] The message has already been said through patches of violet
+        `
     }
 ]
