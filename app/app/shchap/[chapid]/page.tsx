@@ -1,29 +1,30 @@
-import { notFound } from 'next/navigation'
-import { unstable_cache } from 'next/cache'
-import { UseAPI } from "@/Data/Use";
-import { UseDB } from "@/Data/UseDB"
-import { Badge, Button, Card, Container, Stack } from '@mui/material';
-import Link from 'next/link'
-import { R, Prefetch, S } from '@/components/push'
-import { ClientButton, History } from '@/app/chap/[chapid]/client'
+import { ClientButton, History } from '@/app/chap/[chapid]/client';
 import { H2 } from '@/components/H2';
-import BookIcon from '@mui/icons-material/Book';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { Prefetch, R, S } from '@/components/push';
+import { UseAPI } from "@/Data/Use";
+import { UseDB } from "@/Data/UseDB";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import DataUsageIcon from '@mui/icons-material/DataUsage';
-import MoneyIcon from '@mui/icons-material/Money';
-import SortIcon from '@mui/icons-material/Sort';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LockIcon from '@mui/icons-material/Lock';
+import Battery2BarIcon from '@mui/icons-material/Battery2Bar';
+import Battery5BarIcon from '@mui/icons-material/Battery5Bar';
+import BatteryFullIcon from '@mui/icons-material/BatteryFull';
+import BookIcon from '@mui/icons-material/Book';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import LockIcon from '@mui/icons-material/Lock';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import MoneyIcon from '@mui/icons-material/Money';
 import ReviewsIcon from '@mui/icons-material/Reviews';
 import ShareIcon from '@mui/icons-material/Share';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import BatteryFullIcon from '@mui/icons-material/BatteryFull';
-import Battery5BarIcon from '@mui/icons-material/Battery5Bar';
-import Battery2BarIcon from '@mui/icons-material/Battery2Bar';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import SortIcon from '@mui/icons-material/Sort';
+import { Badge, Button, Card, Container, Stack } from '@mui/material';
+import { unstable_cache } from 'next/cache';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
     const [db, db_n] = UseDB()
@@ -74,6 +75,9 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 <MoneyIcon />
                 <b>章节价格:</b>
                 <span>{r.data.chapter_info.unit_hlb}</span>
+                <GroupAddIcon />
+                <b>订阅人数:</b>
+                <span>{r.data.chapter_info?.buy_amount}</span>
                 <DataUsageIcon />
                 <b>字数:</b>
                 <span>{r.data.chapter_info.word_count}</span>
@@ -177,9 +181,9 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 </Card>
                 <Card raised sx={{ p: 2, m: 2 }}>
                     {ln.last && <Button LinkComponent={Link} href={`/shchap/${ln.last}`}
-                        startIcon={<KeyboardArrowLeftIcon />}>上一页</Button>}
+                        startIcon={<KeyboardArrowLeftIcon />}>上一章</Button>}
                     {ln.newest && <Button LinkComponent={Link} href={`/shchap/${ln.newest}`}
-                        endIcon={<KeyboardArrowRightIcon />}>下一页
+                        endIcon={<KeyboardArrowRightIcon />}>下一章
                         <Prefetch url={[`/shchap/${ln.newest}`]} time={5000} />
                     </Button>}
                 </Card>

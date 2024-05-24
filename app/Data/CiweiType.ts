@@ -146,7 +146,7 @@ export interface Chaper {
             "discount": "0" | "1",
             "is_paid": "0" | "1",
             "auth_access": "0" | "1",
-            "buy_amount": "0" | "1",
+            "buy_amount": string,
             "tsukkomi_amount": "0" | "1",
             "total_hlb": "0" | "1",
             "uptime": string,

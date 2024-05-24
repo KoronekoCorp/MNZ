@@ -6,6 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import BookIcon from '@mui/icons-material/Book';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DataUsageIcon from '@mui/icons-material/DataUsage';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import InfoIcon from '@mui/icons-material/Info';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -74,6 +75,9 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 <MoneyIcon />
                 <b>章节价格:</b>
                 <span>{r.data.chapter_info.unit_hlb}</span>
+                <GroupAddIcon />
+                <b>订阅人数:</b>
+                <span>{r.data.chapter_info?.buy_amount}</span>
                 <DataUsageIcon />
                 <b>字数:</b>
                 <span>{r.data.chapter_info.word_count}</span>
@@ -151,9 +155,9 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 sx={{ mt: 1, "div": { mt: 1 } }}>
                 <Card raised sx={{ p: 2, m: 2 }}>
                     {ln.last && <Button LinkComponent={Link} href={`/chap/${ln.last}`}
-                        startIcon={<KeyboardArrowLeftIcon />}>上一页</Button>}
+                        startIcon={<KeyboardArrowLeftIcon />}>上一章</Button>}
                     {ln.newest && <Button LinkComponent={Link} href={`/chap/${ln.newest}`}
-                        endIcon={<KeyboardArrowRightIcon />}>下一页
+                        endIcon={<KeyboardArrowRightIcon />}>下一章
                         <Prefetch url={[`/chap/${ln.newest}`]} time={5000} />
                     </Button>}
                 </Card>

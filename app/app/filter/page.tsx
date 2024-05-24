@@ -5,7 +5,7 @@ import { AutoBookCard } from "@/components/AutoBookCard/AutoBookCard";
 import { H2 } from "@/components/H2";
 import { PaginationElementCallBack } from '@/components/Pagination';
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, Grid, Stack } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
@@ -29,6 +29,7 @@ export default function Page() {
     const [loading, setloading] = useState(false)
     const [books, setbooks] = useState<BookOwn[]>([])
     const [page, setpage] = useState(0)
+
     useEffect(() => {
         fetch("https://zapi.koroneko.co/cwm/book/get_official_tag_list")
             .then(e => e.json())
@@ -36,7 +37,7 @@ export default function Page() {
     }, [])
 
 
-    const Getdata = (da: item[] = data) => {
+    const Getdata = (da: item[] = data): [string | undefined, { filter: "1"; tag: string; }[]] => {
         let key: string | undefined = undefined
         const tags: { "filter": "1", "tag": string }[] = []
         for (const i of da) {
@@ -49,9 +50,8 @@ export default function Page() {
         return [key, tags]
     }
 
-    const Search = (p = 0) => {
+    const Search = (p = 0, [key, tags] = Getdata()) => {
         setpage(p)
-        const [key, tags] = Getdata()
         if (key === undefined && tags?.length == 0) {
             return enqueueSnackbar("虚空搜索？", { variant: "info" })
         }
@@ -64,6 +64,14 @@ export default function Page() {
             })
             .catch(e => { setloading(false); enqueueSnackbar("网络错误" + e, { variant: "error" }) })
     }
+
+    useEffect(() => {
+        const p = parseInt(sessionStorage.getItem("page") ?? "0")
+        // setpage(p)
+        const data = JSON.parse(sessionStorage.getItem("data") ?? "[]")
+        setdata(data)
+        if (data.length !== 0) Search(p, Getdata(data))
+    }, [])
 
     return <Container sx={{ textAlign: "center", color: "text.primary" }}>
         <H2>聚合搜索</H2>
@@ -85,7 +93,8 @@ export default function Page() {
                 setOpen(false);
                 setOptions([])
             }}
-            onChange={(e, v) => { setdata(v) }}
+            value={data}
+            onChange={(e, v) => { setdata(v); sessionStorage.setItem("data", JSON.stringify(v)) }}
             onInputChange={async (e, v) => {
                 if (v === "") return
                 setOptions([{ isTag: false, name: v, score: 1 }, { isTag: true, name: v, score: 1 }])
@@ -127,9 +136,6 @@ export default function Page() {
             }}
             disabled={loading}
         />
-        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" color="text.primary">
-            
-        </Stack>
         <Grid container spacing={2} sx={{ pt: 6 }} alignItems="center" justifyContent="center">
             {loading
                 ? <CircularProgress color="inherit" size={80} />
@@ -138,6 +144,6 @@ export default function Page() {
                 </Grid>)
             }
         </Grid>
-        {books.length !== 0 && <PaginationElementCallBack pageShow={page + 1} callback={(p) => { Search(p - 1) }} />}
+        {books.length !== 0 && <PaginationElementCallBack pageShow={page + 1} callback={(p) => { Search(p - 1); sessionStorage.setItem("page", (p - 1).toString()); }} />}
     </Container>
 }

@@ -6,7 +6,7 @@ import "aplayer/dist/APlayer.min.css";
 import Cookies from "js-cookie"
 import { audiolist } from './default';
 
-export function Music({ dark }: { dark: boolean }) {
+export function Music() {
     const [audio, setaudio] = useState(audiolist)
     const [enable, setenable] = useState(false)
 
@@ -17,5 +17,5 @@ export function Music({ dark }: { dark: boolean }) {
         setenable((Cookies.get("music") ?? "on") === "on")
     }, [])
 
-    return <>{(audio.length !== 0 && enable) && <APlayer audio={audio} appearance="fixed" theme={dark ? "black" : "white"} initialLoop="all" />}</>
+    return <>{(audio.length !== 0 && enable) && <APlayer audio={audio} appearance="fixed" initialLoop="all" />}</>
 }

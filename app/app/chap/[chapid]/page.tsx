@@ -7,6 +7,7 @@ import BookIcon from '@mui/icons-material/Book';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DataUsageIcon from '@mui/icons-material/DataUsage';
 import DeleteIcon from '@mui/icons-material/Delete';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import LockIcon from '@mui/icons-material/Lock';
@@ -22,7 +23,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ClientButton, History } from './client';
 // import { Baned } from '@/Security/Chap.server';
-
 
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
     // const b = Baned()
@@ -94,10 +94,13 @@ export default async function Page({ params, searchParams }: { params: { chapid:
             <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="center" alignItems="center" spacing={2}>
                 <SortIcon />
                 <b>章节位置:</b>
-                <span>{r.data.chapter_info.chapter_index} </span>
+                <span>{r.data.chapter_info.chapter_index}</span>
                 <MoneyIcon />
                 <b>章节价格:</b>
                 <span>{r.data.chapter_info.unit_hlb}</span>
+                <GroupAddIcon />
+                <b>订阅人数:</b>
+                <span>{r.data.chapter_info?.buy_amount}</span>
                 <DataUsageIcon />
                 <b>字数:</b>
                 <span>{r.data.chapter_info.word_count}</span>
@@ -203,9 +206,9 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 </Card>}
                 <Card raised sx={{ p: 2, m: 2 }}>
                     {ln.last && <Button LinkComponent={Link} href={`/chap/${ln.last}`}
-                        startIcon={<KeyboardArrowLeftIcon />}>上一页</Button>}
+                        startIcon={<KeyboardArrowLeftIcon />}>上一章</Button>}
                     {ln.newest && <Button LinkComponent={Link} href={`/chap/${ln.newest}`}
-                        endIcon={<KeyboardArrowRightIcon />}>下一页
+                        endIcon={<KeyboardArrowRightIcon />}>下一章
                         <Prefetch url={[`/chap/${ln.newest}`]} time={5000} />
                     </Button>}
                 </Card>
