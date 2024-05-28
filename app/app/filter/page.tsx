@@ -94,7 +94,7 @@ export default function Page() {
                 setOptions([])
             }}
             value={data}
-            onChange={(e, v) => { setdata(v); sessionStorage.setItem("data", JSON.stringify(v)) }}
+            onChange={(e, v) => { setdata(v); sessionStorage.setItem("data", JSON.stringify(v)); sessionStorage.setItem("page", "0") }}
             onInputChange={async (e, v) => {
                 if (v === "") return
                 setOptions([{ isTag: false, name: v, score: 1 }, { isTag: true, name: v, score: 1 }])

@@ -1,5 +1,5 @@
+import { H1 } from "@/components/H2";
 import { Container } from "@mui/material";
-import style from './error.module.css';
 
 /**
  * not-Found目前存在BUG
@@ -14,7 +14,7 @@ import style from './error.module.css';
  */
 export default function Page() {
     return <Container sx={{ textAlign: "center", color: "text.primary" }}>
-        <h1 className={style.error} style={{ fontSize: "calc(100vw/13)" }} data-text={"404 Not Found"}>404 Not Found</h1>
+        <H1 text="404 Not Found" />
         <div>
             <img src="https://cos.koroneko.co/%E6%86%A7%E6%86%AC%E6%88%90%E7%82%BA%E9%AD%94%E6%B3%95%E5%B0%91%E5%A5%B3-50-3.png" />
         </div>

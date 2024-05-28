@@ -3,12 +3,12 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "../app/loading";
 
-export function R({ url }: { url: string }) {
+export function R({ url, children }: { url: string, children?: JSX.Element }) {
     const router = useRouter()
     useEffect(() => {
         router.push(url)
     }, [])
-    return <Loading />
+    return children ?? <Loading />
 }
 
 export function Back({ time }: { time: number }) {

@@ -62,7 +62,7 @@ export default async function Page({ params }: { params: { bookid: string } }) {
                                 <ListItemButton LinkComponent={Link} href={`/chap/${chap.chapter_id}`}>
                                     <ListItemText
                                         primary={<Stack direction="row">
-                                            # <span className="chapter_index">{chap.chapter_index}</span> /{' '}
+                                            # <span>{chap.chapter_index}</span> /{' '}
                                             {chap.auth_access === '0' ? <HighlightOffIcon color='error' /> : <CheckCircleOutlineIcon color='success' />}
                                             {chap.is_paid === '1' && <LockIcon color='warning' />}
                                             {chap.auth_access === '0' && <MoneyIcon color='info' />}
