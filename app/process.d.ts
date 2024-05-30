@@ -26,6 +26,8 @@ declare namespace NodeJS {
         OACOOKIE: string
 
         secrets: string
+
+        TurnstileS: string
     }
 }
 

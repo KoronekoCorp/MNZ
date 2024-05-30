@@ -11,7 +11,6 @@ export function AnnouncementProvider({ endpoint }: { endpoint: string }) {
     const [ann, setann] = useState<AnnouncementData[]>([])
 
     useEffect(() => {
-        console.log("?")
         fetch(new URL(`${endpoint}/api/${location.hostname}`))
             .then(r => r.json().then((f: AnnouncementData[]) => {
                 setann(f);

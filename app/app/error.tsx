@@ -26,7 +26,9 @@ export default function Error({
         <Button variant="contained" sx={{ m: 1 }}
             onClick={async () => {
                 // reset()
-                await caches.delete("pages")
+                const keys = await caches.keys()
+                const c = await Promise.all(keys.map(i => caches.open(i)))
+                await Promise.all(c.map(j => j.delete(document.location.href, { ignoreVary: true })))
                 document.location.href = document.location.href
             }}>重新加载</Button>
         <br />

@@ -19,6 +19,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type ReactNode } from 'react';
 import { useTheme } from './Theme';
+import { CacheCleanIconButton } from '@/components/CacheCleaner';
 
 const DRAWER_WIDTH = 240;
 
@@ -69,6 +70,7 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
                     </Typography>
                     {/* <MenuItem> */}
                     <Box sx={{ flexGrow: 1 }} />
+                    <CacheCleanIconButton container={'#drawer'} />
                     <IconButton sx={{ ml: 1 }} onClick={() => {
                         document.cookie = `dark=${!dark}; max-age=604800; path=/; domain=${document.location.hostname.replace(/.*?\./, ".")}`;
                         setdark(!dark)
@@ -142,5 +144,6 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
         >
             {children}
         </Box>
+        <div id="drawer" style={{ display: "none" }}></div>
     </ThemeProvider>
 }
