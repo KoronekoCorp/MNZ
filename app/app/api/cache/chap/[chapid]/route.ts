@@ -12,17 +12,16 @@ export async function GET(request: Request) {
     })
 }
 
-export async function POST(request: Request, { params: { bookid } }: { params: { bookid: string } }) {
+export async function POST(request: Request, { params: { chapid } }: { params: { chapid: string } }) {
     try {
         const token = await request.text()
         const r = await Check(token)
-        console.log(bookid, token, r)
+        console.log(chapid, token, r)
         if (r.success) {
             const [db, db_n] = UseDB()
-            revalidateTag(`${db_n}_UserchapInfo_${bookid}`)
-            revalidateTag(`bookinfo_${bookid}`)
-            revalidateTag(`${db_n}_Catalog_${bookid}`)
-            revalidateTag(`catalog_${bookid}`)
+            revalidateTag(`${db_n}_Chap_${chapid}`)
+            revalidateTag(`chaper_${chapid}`)
+            revalidateTag(`tsukkomi_${chapid}`)
             return Response.json({ code: 200 })
         } else {
             return Response.json({ code: 401 })

@@ -5,6 +5,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import LoginIcon from '@mui/icons-material/Login';
 // import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import { CacheCleanIconButton } from '@/components/CacheCleaner';
 import HistoryIcon from '@mui/icons-material/History';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -19,7 +20,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type ReactNode } from 'react';
 import { useTheme } from './Theme';
-import { CacheCleanIconButton } from '@/components/CacheCleaner';
 
 const DRAWER_WIDTH = 240;
 

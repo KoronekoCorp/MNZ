@@ -1,5 +1,4 @@
 "use client"
-import { CacheCleanButton } from "@/components/CacheCleaner"
 import { type Chaper } from "@/Data/CiweiType"
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
@@ -54,8 +53,5 @@ export function ClientButton({ book_name, book_id, book_cover }:
             </Button>
         </>}
         <br />
-        <CacheCleanButton container={"#book"} />
-        <br />
-        <div id="book" style={{ display: "none" }}></div>
     </>
 }

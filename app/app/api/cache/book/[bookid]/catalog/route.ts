@@ -19,10 +19,8 @@ export async function POST(request: Request, { params: { bookid } }: { params: {
         console.log(bookid, token, r)
         if (r.success) {
             const [db, db_n] = UseDB()
-            revalidateTag(`${db_n}_UserchapInfo_${bookid}`)
-            revalidateTag(`bookinfo_${bookid}`)
-            revalidateTag(`${db_n}_Catalog_${bookid}`)
             revalidateTag(`catalog_${bookid}`)
+            revalidateTag(`${db_n}_Catalog_${bookid}`)
             return Response.json({ code: 200 })
         } else {
             return Response.json({ code: 401 })

@@ -1,12 +1,13 @@
 "use client"
 
 import { TurnstileC } from "@/Security/TurnstileC";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { useState } from "react";
-import IconButton from "@mui/material/IconButton";
 
 async function clearServerWorker(url: string) {
     const keys = await caches.keys()
@@ -14,15 +15,26 @@ async function clearServerWorker(url: string) {
     await Promise.all(c.map(j => j.delete(url, { ignoreVary: true })))
 }
 
+async function callback(token: string, setl: (value: boolean) => void, router: AppRouterInstance) {
+
+}
+
 export function CacheCleanButton({ container, action }: { container: string | HTMLElement, action?: string }) {
     const router = useRouter()
     const [loading, setl] = useState(false)
 
-    return <Button onClick={() => {
+    return <Button onClick={async () => {
         if (typeof turnstile === "undefined") {
             return enqueueSnackbar("Turnstile组件似乎不存在，刷新之后重试", { variant: "error" })
         }
         setl(true)
+        const allow = await (await fetch(`/api/cache${location.pathname}`)).json() as { code: 200 | 404 }
+        if (allow.code !== 200) {
+            enqueueSnackbar("远程缓存不支持刷新，仅刷新本地缓存", { variant: "warning" })
+            await clearServerWorker(location.href)
+            setl(false)
+            return router.refresh()
+        }
         turnstile.render(container, {
             sitekey: TurnstileC,
             action: action ?? location.pathname.replaceAll("/", "-"),
@@ -58,11 +70,19 @@ export function CacheCleanIconButton({ container, action }: { container: string 
     const router = useRouter()
     const [loading, setl] = useState(false)
 
-    return <IconButton onClick={() => {
+    return <IconButton onClick={async () => {
         if (typeof turnstile === "undefined") {
             return enqueueSnackbar("Turnstile组件似乎不存在，刷新之后重试", { variant: "error" })
         }
         setl(true)
+        const allow = await (await fetch(`/api/cache${location.pathname}`)).json() as { code: 200 | 404 }
+        if (allow.code !== 200) {
+            enqueueSnackbar("远程缓存不支持刷新，仅刷新本地缓存", { variant: "warning" })
+            await clearServerWorker(location.href)
+            setl(false)
+            return router.refresh()
+        }
+        enqueueSnackbar("正在刷新远程缓存，请稍后", { variant: "info" })
         turnstile.render(container, {
             sitekey: TurnstileC,
             action: action ?? location.pathname.replaceAll("/", "-"),
