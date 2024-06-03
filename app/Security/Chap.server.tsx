@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto'
 import { headers } from 'next/headers'
 import { UseRedis } from './Redis'
 import { CacheEveryThing } from '@/cache'
+import cf from './cloudflare'
 
 
 const prefix = "V2."
@@ -17,8 +18,18 @@ async function Pre(chapid: string) {
     if (ip) {
         const redis = await UseRedis()
         const uuid = randomUUID()
-        const d = await redis.sendCommand(["TFCALL", "SecurityV2.count", "0", ip, uuid])
-        console.log(d)
+        const d = await redis.sendCommand(["TFCALL", "SecurityV4.count", "0", ip, uuid]) as "ok" | "challenge" | "ban"
+        console.log(ip, d)
+        switch (d) {
+            case "ban":
+                await cf.postWAF(ip, "block")
+                break
+            case "challenge":
+                await cf.postWAF(ip, "challenge")
+                break
+            case 'ok':
+                break
+        }
         return uuid
     }
 }
@@ -54,4 +65,4 @@ async function Baned(): Promise<[true, number] | [false, undefined]> {
     return [false, undefined]
 }
 
-export { Pre, check, Baned } 
+export { Pre } 

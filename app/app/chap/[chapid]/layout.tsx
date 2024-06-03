@@ -4,17 +4,17 @@ import Loading from "@/app/loading"
 export default function RootLayout({
     children,
     tsukkomi,
-    // Security
+    Security
 }: {
     children: React.ReactNode
     tsukkomi: React.ReactNode
-    // Security: React.ReactNode
+    Security: React.ReactNode
 }) {
     return <>
         <Suspense fallback={<Loading />}>
             {children}
         </Suspense>
         <Suspense fallback={<></>}>{tsukkomi}</Suspense>
-        {/* <Suspense fallback={<></>}>{Security}</Suspense> */}
+        <Suspense fallback={<></>}>{Security}</Suspense>
     </>
 }

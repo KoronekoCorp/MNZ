@@ -1,11 +1,10 @@
 "use client"
 import { useEffect } from "react"
-import { check } from './Chap.server'
 
 export function ChapSecurityClient({ uuid, chapid }: { uuid: string, chapid: string }) {
     useEffect(() => {
         const id = setTimeout(() => {
-            check(uuid, chapid)
+            fetch(`https://zapi.koroneko.co/SecV4/${chapid}/${uuid}`)
         }, 10000);
         return () => clearTimeout(id)
     }, [uuid])

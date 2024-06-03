@@ -28,6 +28,8 @@ declare namespace NodeJS {
         secrets: string
 
         TurnstileS: string
+        cloudflare: string
+        zone: string
     }
 }
 

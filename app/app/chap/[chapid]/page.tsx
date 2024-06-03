@@ -209,7 +209,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                         startIcon={<KeyboardArrowLeftIcon />}>上一章</Button>}
                     {ln.newest && <Button LinkComponent={Link} href={`/chap/${ln.newest}`}
                         endIcon={<KeyboardArrowRightIcon />}>下一章
-                        <Prefetch url={[`/chap/${ln.newest}`]} time={5000} />
+                        <Prefetch url={[`/chap/${ln.newest}`]} time={15000} />
                     </Button>}
                 </Card>
             </Stack>
