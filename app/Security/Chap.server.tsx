@@ -22,10 +22,10 @@ async function Pre(chapid: string) {
         console.log(ip, d)
         switch (d) {
             case "ban":
-                await cf.postWAF(ip, "block")
+                await CacheEveryThing(() => cf.postWAF(ip, "block"), [`CF-postWAF-${ip}-block`], 3600 * 24 * 365)()
                 break
             case "challenge":
-                await cf.postWAF(ip, "challenge")
+                await CacheEveryThing(() => cf.postWAF(ip, "challenge"), [`CF-postWAF-${ip}-challenge`], 3600 * 24 * 365)()
                 break
             case 'ok':
                 break
