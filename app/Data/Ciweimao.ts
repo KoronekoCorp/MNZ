@@ -25,9 +25,9 @@ type params = "app_version" | "device_token" | "login_token" | "account"
 
 class API {
     BASEURL = process.env.CWM_MIRROR ?? "https://app.hbooker.com"
-    app_version = "2.9.290"
+    app_version = "2.9.327"
     device_token = "ciweimao_"
-    UserAgent = "Android  com.kuangxiangciweimao.novel  2.9.290,OPPO, PCAM00, 30, 11"
+    UserAgent = "Android  com.kuangxiangciweimao.novel.c  2.9.327,OPPO, PCAM00, 30, 11"
     login_token
     account
     constructor(login_token: string = "14be5a5a6f49a61929b403ec617c0292", account: string = "书客1043419") {
@@ -91,7 +91,7 @@ class API {
      */
     async auto_reg(mode: "get" | "post" = "post"): Promise<Register> {
         const u = this.URL(
-            `/signup/auto_reg_v2?oauth_union_id=&gender=1&app_version=2.9.290&oauth_open_id=&device_token=ciweimao_&channel=PCdownloadC&oauth_type=&uuid=android${crypto.randomUUID()}`,
+            `/signup/auto_reg_v2?oauth_union_id=&gender=1&app_version=2.9.322&oauth_open_id=&device_token=ciweimao_&channel=PCdownloadC&oauth_type=&uuid=android${crypto.randomUUID()}`,
         )
         const r = await this[mode](u, ['auto_reg_v2'], undefined)
         return JSON.parse(r) as Register
