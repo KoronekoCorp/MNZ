@@ -15,6 +15,6 @@ export default function RootLayout({
             {children}
         </Suspense>
         <Suspense fallback={<></>}>{tsukkomi}</Suspense>
-        <Suspense fallback={<></>}>{Security}</Suspense>
+        {Security}
     </>
 }

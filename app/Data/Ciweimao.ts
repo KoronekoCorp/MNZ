@@ -91,7 +91,7 @@ class API {
      */
     async auto_reg(mode: "get" | "post" = "post"): Promise<Register> {
         const u = this.URL(
-            `/signup/auto_reg_v2?oauth_union_id=&gender=1&app_version=2.9.322&oauth_open_id=&device_token=ciweimao_&channel=PCdownloadC&oauth_type=&uuid=android${crypto.randomUUID()}`,
+            `/signup/auto_reg_v2?oauth_union_id=&gender=1&app_version=${this.app_version}&oauth_open_id=&device_token=ciweimao_&channel=PCdownloadC&oauth_type=&uuid=android${crypto.randomUUID()}`,
         )
         const r = await this[mode](u, ['auto_reg_v2'], undefined)
         return JSON.parse(r) as Register
@@ -103,7 +103,7 @@ class API {
      * @returns 
      */
     async geetest(mode: "get" | "post" = "post") {
-        const u = new URL(`https://app.hbooker.com/signup/use_geetest?app_version=${this.app_version}device_token=ciweimao_`)
+        const u = new URL(`https://app.hbooker.com/signup/use_geetest?app_version=${this.app_version}&device_token=ciweimao_`)
         const r = await this[mode](u, [], false)
         return JSON.parse(r) as geetest
     }
