@@ -25,9 +25,9 @@ type params = "app_version" | "device_token" | "login_token" | "account"
 
 class API {
     BASEURL = process.env.CWM_MIRROR ?? "https://app.hbooker.com"
-    app_version = "2.9.327"
+    app_version = "2.9.313"
     device_token = "ciweimao_"
-    UserAgent = "Android  com.kuangxiangciweimao.novel.c  2.9.327,OPPO, PCAM00, 30, 11"
+    UserAgent = "Android  com.kuangxiangciweimao.novel.c  2.9.313,OPPO, PCAM00, 30, 11"
     login_token
     account
     constructor(login_token: string = "14be5a5a6f49a61929b403ec617c0292", account: string = "书客1043419") {
