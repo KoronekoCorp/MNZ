@@ -1,7 +1,7 @@
-import { join } from 'path';
-import type { Buy, Catalog, Chaper, Register, Search, Tags, bookinfo, booklistinfo, booklists, geetest, login, tsukkomi, tsukkomi_info, tsukkomi_reply, tsukkomis } from './CiweiType';
 import * as crypto from 'crypto';
 import { unstable_cache } from 'next/cache';
+import { join } from 'path';
+import type { Buy, Catalog, Chaper, Register, Search, Tags, bookinfo, booklistinfo, booklists, geetest, login, tsukkomi, tsukkomi_info, tsukkomi_reply, tsukkomis } from './CiweiType';
 
 function decrypt(encrypted: string, key: string = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKNLXn'): string {
     try {
@@ -24,13 +24,13 @@ type params = "app_version" | "device_token" | "login_token" | "account"
 
 
 class API {
-    BASEURL = process.env.CWM_MIRROR ?? "https://app.hbooker.com"
-    app_version = "2.9.313"
+    BASEURL = process.env.CWM_MIRROR ?? "https://app.happybooker.cn"
+    app_version = "2.9.327"
     device_token = "ciweimao_"
-    UserAgent = "Android  com.kuangxiangciweimao.novel.c  2.9.313,OPPO, PCAM00, 30, 11"
+    UserAgent = "Android  com.kuangxiangciweimao.novel.c  2.9.327,OPPO, PCAM00, 30, 11"
     login_token
     account
-    constructor(login_token: string = "14be5a5a6f49a61929b403ec617c0292", account: string = "书客1043419") {
+    constructor(login_token: string = "4c98719ddc0871b799e82d4933db43b2", account: string = "书客3209099") {
         this.login_token = login_token
         this.account = account
     }
@@ -93,6 +93,8 @@ class API {
         const u = this.URL(
             `/signup/auto_reg_v2?oauth_union_id=&gender=1&app_version=${this.app_version}&oauth_open_id=&device_token=ciweimao_&channel=PCdownloadC&oauth_type=&uuid=android${crypto.randomUUID()}`,
         )
+        u.searchParams.delete("login_token")
+        u.searchParams.delete("account")
         const r = await this[mode](u, ['auto_reg_v2'], undefined)
         return JSON.parse(r) as Register
     }
@@ -103,7 +105,7 @@ class API {
      * @returns 
      */
     async geetest(mode: "get" | "post" = "post") {
-        const u = new URL(`https://app.hbooker.com/signup/use_geetest?app_version=${this.app_version}&device_token=ciweimao_`)
+        const u = new URL(`https://app.hbooker.com/signup/use_geetest?app_version=${this.app_version}device_token=ciweimao_`)
         const r = await this[mode](u, [], false)
         return JSON.parse(r) as geetest
     }
@@ -347,4 +349,5 @@ class API {
     }
 }
 
-export { API }
+export { API };
+
