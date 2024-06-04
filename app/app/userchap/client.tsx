@@ -5,7 +5,6 @@ import Cookies from "js-cookie"
 import type { Userchap } from "@/Data/DataType"
 import Link from "next/link"
 import type { bookinfo } from "@/Data/CiweiType"
-import { Bookinfo } from "./server"
 import { Button, FormControlLabel, Grid, Stack, Switch, TextField, Typography } from "@mui/material"
 import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import Battery5BarIcon from '@mui/icons-material/Battery5Bar';
@@ -59,8 +58,9 @@ export function BookSingle({ book, req }: { book: Userchap, req: bookinfo }) {
     const [r, setr] = useState(req)
 
     const bookinfo = () => {
-        Bookinfo(book.book_id)
-            .then((e) => setr(e))
+        fetch(`https://zapi.koroneko.co/cwm/book/get_info_by_id?book_id=${book.book_id}`)
+            .then((res) => res.json())
+            .then((r) => setr(r as bookinfo))
             .catch(() => bookinfo())
     }
 
