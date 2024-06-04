@@ -32,7 +32,7 @@ export default function RootLayout({
               {children}
             </Suspense>
           </Snackbar>
-          <AnnouncementProvider endpoint='https://ann.koroneko.co' />
+          <AnnouncementProvider endpoint='https://zapi.koroneko.co/ann' />
         </Root>
         <Music />
         <Sync />

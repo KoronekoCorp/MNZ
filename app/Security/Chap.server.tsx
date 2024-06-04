@@ -4,9 +4,10 @@ import { headers } from 'next/headers'
 import { UseRedis } from './Redis'
 import { CacheEveryThing } from '@/cache'
 import cf from './cloudflare'
+import { encode } from '@/Data/JWE'
 
 
-const prefix = "V2."
+const prefix = "V4."
 
 /**
  * 生成唯一安全校验UUID
@@ -30,7 +31,7 @@ async function Pre(chapid: string) {
             case 'ok':
                 break
         }
-        return uuid
+        return encode({ token: { ip: ip, uuid: uuid } })
     }
 }
 

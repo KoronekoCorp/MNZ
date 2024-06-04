@@ -30,7 +30,7 @@ class API {
     UserAgent = "Android  com.kuangxiangciweimao.novel.c  2.9.327,OPPO, PCAM00, 30, 11"
     login_token
     account
-    constructor(login_token: string = "4c98719ddc0871b799e82d4933db43b2", account: string = "书客3209099") {
+    constructor(login_token: string = "29b2c98ed5f964c56adc60eb97fe6f78", account: string = "书客3210108") {
         this.login_token = login_token
         this.account = account
     }
@@ -346,6 +346,21 @@ class API {
                 return [r, buy]
             }
         }, [`buy_and_get_chaper_${chapid}`], { revalidate: 86400, tags: [`buy_and_get_chaper_${chapid}`] })()
+    }
+
+    /**
+    * 获取排行榜
+    * @param order 排序
+    * @param time_type 时间类型
+    * @param page 页数
+    * @param category_index 分类ID
+    * @param mode 请求模式,默认POST
+    * @returns 
+    */
+    async rank(order: string, time_type: "week" | "month" | "total", page: number = 1, category_index: number = 0, mode: "get" | "post" = "post") {
+        const u = this.URL(`/bookcity/get_rank_book_list?time_type=${time_type}&page=${page - 1}&count=12&category_index=${category_index}&order=${order}`)
+        const r = await this[mode](u, [`get_rank_book_list_${order}_${time_type}_${category_index}_${page}`], 86400)
+        return JSON.parse(r) as Tags
     }
 }
 
