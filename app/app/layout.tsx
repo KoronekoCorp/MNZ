@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import Loading from './loading';
 import Snackbar from './Snackbar';
 import Sync from './Sync';
-import { Security } from '@/Security/Layout.Client';
 import { Music } from '@/Music/Client';
 import { Root } from './Drawer';
 import { cookies } from 'next/headers';
@@ -36,7 +35,6 @@ export default function RootLayout({
         </Root>
         <Music />
         <Sync />
-        <Security />
       </body>
     </html>
   )
