@@ -1,8 +1,17 @@
 # MUI X Nhimmeo
 
-[mn.koroneko.co](https://mn.koroneko.co/)
+## 技术栈
 
-## Mysql2
+React+Nextjs、Redis、Mysql
+
+[mnz.koroneko.co](https://mnz.koroneko.co/)
+
+## 往期碎碎念（无用）
+
+<details>
+<summary>往期碎碎念（无用）</summary>
+
+### Mysql2
 
 连接池自动使用中不会自动释放连接
 
@@ -37,3 +46,5 @@ return rows as mysql.RowDataPacket[];
 `connection.destroy()` 当一个连接不需要使用且需要从连接池中移除时，可以使用该方法
 
 `pool.end()`当一个连接池不需要使用时，可以使用该方法关闭连接池
+
+</details>

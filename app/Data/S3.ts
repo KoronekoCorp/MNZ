@@ -79,7 +79,7 @@ const s3 = new S3Client({
 })
 
 export const tos3 = new S3(new S3Client({
-    endpoint: "https://s3.tebi.io",
+    endpoint: process.env.s3_endpoint,
     credentials: { accessKeyId: process.env.toaccessKeyId as string, secretAccessKey: process.env.tosecretAccessKey as string },
     region: "global"
 }), process.env.toBucket as string)

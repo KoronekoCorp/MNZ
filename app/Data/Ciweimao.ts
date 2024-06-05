@@ -106,7 +106,7 @@ class API {
      */
     async geetest(mode: "get" | "post" = "post") {
         const u = new URL(`https://app.hbooker.com/signup/use_geetest?app_version=${this.app_version}device_token=ciweimao_`)
-        const r = await this[mode](u, [], false)
+        const r = await this[mode](u, [`geetest`], false)
         return JSON.parse(r) as geetest
     }
 
@@ -119,7 +119,7 @@ class API {
      */
     async login(phone: string, password: string, mode: "get" | "post" = "post") {
         const u = new URL(`https://app.hbooker.com/signup/login?login_name=${phone}&app_version=${this.app_version}&passwd=${password}&device_token=ciweimao_`)
-        const r = await this[mode](u, [], false)
+        const r = await this[mode](u, [`login`, phone], false)
         return JSON.parse(r) as login
     }
 
