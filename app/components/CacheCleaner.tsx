@@ -84,7 +84,7 @@ export function CacheCleanIconButton({ container, action }: { container: string 
         }
         enqueueSnackbar("正在刷新远程缓存，请稍后", { variant: "info" })
         turnstile.render(container, {
-            sitekey: TurnstileC,
+            sitekey: location.hostname === "localhost" ? "1x00000000000000000000AA" : TurnstileC,
             action: action ?? location.pathname.replaceAll("/", "-"),
             callback: async function (token) {
                 const r = await (await fetch(`/api/cache${location.pathname}`, { method: "POST", body: token })).json() as { code: 200 | 401 | 404 | 500 }

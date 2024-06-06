@@ -132,6 +132,13 @@ export default async function Page({ params }: { params: { bookid: string } }) {
                         Ciweimao
                     </LinkC>
                     <LinkC
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`https://www.hbooker.com/book/${r.data.book_info.book_id}`}
+                    >
+                        Hbooker
+                    </LinkC>
+                    <LinkC
                         href={`https://www.bing.com/search?q=${r.data.book_info.book_name}&from=search`}
                         target="_blank"
                         rel="noopener noreferrer"

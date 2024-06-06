@@ -1,7 +1,7 @@
 "use client"
 
 import { enqueueSnackbar } from "notistack";
-import { Get_ip, IP, Link } from "./server";
+import { clearReg, Get_ip, IP, Link, Reg } from "./server";
 import { Table, TableHead, TableCell, TableRow, TableBody, Button, Grid } from "@mui/material";
 import { useState } from "react";
 import StorageIcon from '@mui/icons-material/Storage';
@@ -102,6 +102,25 @@ export default function Setting() {
                 </Grid>
                 <Button variant="contained" onClick={getlink} sx={{ m: 3 }}>
                     获取连接信息
+                </Button>
+            </Grid>
+            <Grid item xs={12} md={6}>
+                <H2>
+                    <StorageIcon />控制工具
+                </H2>
+                <Button variant="contained" onClick={() => {
+                    clearReg().then(e => {
+                        enqueueSnackbar("已清空注册", { variant: "success" })
+                    })
+                }} sx={{ m: 3 }}>
+                    清空注册
+                </Button>
+                <Button variant="contained" onClick={() => {
+                    Reg().then(e => {
+                        enqueueSnackbar(`注册完成 ${e[0]} ${e[1]}`, { variant: "success" })
+                    })
+                }} sx={{ m: 3 }}>
+                    重新注册
                 </Button>
             </Grid>
         </Grid>

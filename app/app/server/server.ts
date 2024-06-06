@@ -1,5 +1,8 @@
 "use server"
 
+import { UseAPI } from "@/Data/Use"
+import { revalidateTag } from "next/cache"
+
 export interface IP {
     "status": "success",
     "continent": string
@@ -43,4 +46,14 @@ export async function Link() {
             .then(() => r(Date.now() - start))
     })
     return Promise.all([CWM, DATA])
+}
+
+export async function clearReg() {
+    revalidateTag("auto_reg_v2")
+    return null
+}
+
+export async function Reg() {
+    const a = await UseAPI()
+    return [a.account, a.login_token]
 }

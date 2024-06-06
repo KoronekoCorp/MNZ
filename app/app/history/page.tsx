@@ -10,12 +10,16 @@ import Link from "next/link"
 import { closeSnackbar, enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { convertTimestamp } from '../bookmark/convertTimestamp'
+import { BookServer } from "./server"
 
 export default function History() {
     const [H, setH] = useState<Chaper[]>([])
     const [Bookinfo, setBookinfo] = useState<bookinfo[]>([])
 
     async function book(ids: number[] | string[]) {
+        if (location.hostname === "localhost") {
+            return Promise.all(ids.map(i => BookServer(i)))
+        }
         return Promise.all(ids.map(i => new Promise<bookinfo>((resolve) => {
             fetch(`https://zapi.koroneko.co/cwm/book/get_info_by_id?book_id=${i}`)
                 .then((res) => res.json())
@@ -47,7 +51,7 @@ export default function History() {
     function RemoveHis(index: number) {
         const chap = H[index]
         const id = chap.data.chapter_info.book_id
-        const msg = Bookinfo.find(i => i.data.book_info.book_id === id)?.data.book_info.book_name ?? id
+        const msg = Bookinfo.find(i => i.data?.book_info.book_id === id)?.data.book_info.book_name ?? id
         localStorage.removeItem(id)
         // console.log(H)
         setH(H.filter(i => i.data.chapter_info.book_id !== chap.data.chapter_info.book_id))
@@ -70,7 +74,7 @@ export default function History() {
     }
 
     const Book = ({ r, index }: { r: Chaper, index: number }) => {
-        const b = Bookinfo.find(i => i.data.book_info.book_id === r.data.chapter_info.book_id) ?? { data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "加载中" } } }
+        const b = Bookinfo.find(i => i.data?.book_info.book_id === r.data.chapter_info.book_id) ?? { data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "加载中" } } }
         const t = convertTimestamp(parseInt(r.data.chapter_info.txt_content))
         return <Grid item xs={6} md={3} key={r.data.chapter_info.book_id}>
             <ImgCard
