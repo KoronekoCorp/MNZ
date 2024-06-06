@@ -28,7 +28,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
     const ci_login_token = cookie.get("ci_login_token")
     const ci_account = cookie.get("ci_account")
     const share = cookie.get("auto_share_chapter_vip")?.value == "on"
-    if (ci_login_token == undefined || !ci_account == undefined) {
+    if (ci_login_token == undefined || ci_account == undefined) {
         return <R url='/login' />
     }
     const a = new API(ci_login_token.value, ci_account?.value)

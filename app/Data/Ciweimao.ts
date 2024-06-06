@@ -25,9 +25,9 @@ type params = "app_version" | "device_token" | "login_token" | "account"
 
 class API {
     BASEURL = process.env.CWM_MIRROR ?? "https://app.happybooker.cn"
-    app_version = "2.9.327"
+    app_version = "2.9.313"
     device_token = "ciweimao_"
-    UserAgent = "Android  com.kuangxiangciweimao.novel.c  2.9.327,OPPO, PCAM00, 30, 11"
+    UserAgent = `Android  com.kuangxiangciweimao.novel.c  ${this.app_version}, HONOR, TEL-AN10, 29, 10`
     login_token
     account
     constructor(login_token: string = "29b2c98ed5f964c56adc60eb97fe6f78", account: string = "书客3210108") {
@@ -55,7 +55,7 @@ class API {
         return unstable_cache(async () => {
             const r = await this.fetch(url, {
                 headers: {
-                    "user-agent": this.UserAgent,
+                    "User-Agent": this.UserAgent,
                     "Accept-Encoding": "gzip"
                 },
                 // next: {
@@ -76,7 +76,8 @@ class API {
                     "user-agent": this.UserAgent,
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Content-Length": data.length.toString(),
-                    "Accept-Encoding": "gzip"
+                    "Accept-Encoding": "*/*",
+                    "charsets": "utf-8"
                 },
                 body: data,
             })
