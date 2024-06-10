@@ -2,6 +2,7 @@
 
 import { UseAPI } from "@/Data/Use"
 import { revalidateTag } from "next/cache"
+import { cookies } from "next/headers"
 
 export interface IP {
     "status": "success",
@@ -32,6 +33,12 @@ export interface IP {
 }
 
 export async function Get_ip() {
+    if (process.env.secrets !== undefined && cookies().get("secrets")?.value !== process.env.secrets) {
+        return {
+            "status": "error",
+            "message": "Invalid secret key"
+        }
+    }
     return (await fetch("http://ip-api.com/json/?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query")).json() as Promise<IP>
 }
 
@@ -49,11 +56,17 @@ export async function Link() {
 }
 
 export async function clearReg() {
+    if (process.env.secrets !== undefined && cookies().get("secrets")?.value !== process.env.secrets) {
+        return null
+    }
     revalidateTag("auto_reg_v2")
     return null
 }
 
 export async function Reg() {
+    if (process.env.secrets !== undefined && cookies().get("secrets")?.value !== process.env.secrets) {
+        return ["", ""]
+    }
     const a = await UseAPI()
     return [a.account, a.login_token]
 }

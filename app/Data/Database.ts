@@ -275,6 +275,9 @@ class ProxyDB {
     async addChap(UploadChap: UploadChap, chap: chaper, shareUser: string) {
         return fetch(`${this.RemoteProxy}/addChap`, {
             method: "POST",
+            headers: {
+                "api-upload-key": process.env.API_UPLOAD_KEY
+            },
             body: JSON.stringify({
                 UploadChap: UploadChap,
                 chap: chap,

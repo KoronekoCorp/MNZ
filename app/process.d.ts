@@ -30,6 +30,8 @@ declare namespace NodeJS {
         TurnstileS: string
         cloudflare: string
         zone: string
+
+        API_UPLOAD_KEY: string
     }
 }
 
