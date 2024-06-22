@@ -22,10 +22,13 @@ function decrypt(encrypted: string, key: string = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKN
 
 type params = "app_version" | "device_token" | "login_token" | "account"
 
+/** 刺猬猫签名涉及Key */
+const key = "a90f3731745f1c30ee77cb13fc00005a"
+const signatures = "CkMxWNB666"
 
 class API {
     BASEURL = process.env.CWM_MIRROR ?? "https://app.happybooker.cn"
-    app_version = "2.9.313"
+    app_version = "2.9.328"
     device_token = "ciweimao_"
     UserAgent = `Android  com.kuangxiangciweimao.novel.c  ${this.app_version}, HONOR, TEL-AN10, 29, 10`
     login_token
@@ -37,10 +40,16 @@ class API {
 
     URL(path: string) {
         const params: params[] = ["app_version", "account", "device_token", "login_token"]
-        var url = new URL(join(this.BASEURL, path))
+        const url = new URL(join(this.BASEURL, path))
         for (let i in params) {
             url.searchParams.set(params[i], this[params[i]])
         }
+        const rand_str = crypto.randomBytes(16).toString("hex")
+        const p = crypto.createHmac("sha256", key)
+            .update(encodeURI(`account=${this.account}&app_version=${this.app_version}&rand_str=${rand_str}&signatures=${key + signatures}`))
+            .digest("base64")
+        url.searchParams.set("rand_str", rand_str)
+        url.searchParams.set("p", p)
         return url
     }
 
@@ -177,18 +186,28 @@ class API {
             return {}
         }
         const { r, chap } = Index()
-        var last
-        var newest
+        let last
+        let newest
         if (r != undefined && chap !== undefined) {
             try {
                 last = chaps.data.chapter_list[parseInt(chap)].chapter_list[r - 1].chapter_id
             } catch {
-                last = chaps.data.chapter_list[parseInt(chap) - 1]?.chapter_list.pop()?.chapter_id
+                try {
+                    //存在上一卷，但上一卷为空
+                    last = chaps.data.chapter_list[parseInt(chap) - 1]?.chapter_list.pop()?.chapter_id
+                } catch {
+
+                }
             }
             try {
                 newest = chaps.data.chapter_list[parseInt(chap)].chapter_list[r + 1].chapter_id
             } catch {
-                newest = chaps.data.chapter_list[parseInt(chap) + 1]?.chapter_list[0].chapter_id
+                try {
+                    //存在下一卷，但下一卷为空
+                    newest = chaps.data.chapter_list[parseInt(chap) + 1]?.chapter_list[0].chapter_id
+                } catch {
+
+                }
             }
         }
         return { last, newest }
