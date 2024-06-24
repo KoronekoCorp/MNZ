@@ -8,7 +8,7 @@ function decrypt(encrypted: string, key: string = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKN
         const aesKey = crypto.createHash('sha256').update(key).digest();
         const decipher = crypto.createDecipheriv('aes-256-cbc', aesKey, Buffer.alloc(16, 0));
 
-        const decrypted = decipher.update(encrypted, 'base64', 'utf-8') + decipher.final()
+        const decrypted = decipher.update(encrypted, 'base64', 'utf-8') + decipher.final('utf-8')
         return decrypted
     } catch (error) {
         console.error('Decryption error:', error);
@@ -16,7 +16,7 @@ function decrypt(encrypted: string, key: string = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKN
     }
 }
 
-// function decrypt(data: string, key = "zG2nSeEfSHfvTCHy5LCcqtBbQehKNLXn") {
+// function decrypt2(data: string, key = "zG2nSeEfSHfvTCHy5LCcqtBbQehKNLXn") {
 //     const aeskey = crypto.createHash('sha256').update(key).digest();
 //     const decipher = crypto.createDecipheriv('aes-256-cbc', aeskey, Buffer.alloc(16, 0));
 //     let decrypted = decipher.update(data, 'base64', 'utf8');
