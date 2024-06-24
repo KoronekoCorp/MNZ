@@ -15,7 +15,7 @@ export async function GET(request: Request, { params }: { params: { chapid: stri
         return NextResponse.json({ "success": false })
     }
     const a = new API(ci_login_token, ci_account)
-    const d = await a.chaper(params.chapid)
+    const d = await a.chapter_new(params.chapid)
 
     if (d.code !== "100000") {
         return NextResponse.json({ "success": false })

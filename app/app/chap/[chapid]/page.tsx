@@ -29,7 +29,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
     const [db, db_n] = UseDB()
     const a = await UseAPI()
 
-    const r = await a.chaper(params.chapid)
+    const r = await a.chapter_new(params.chapid)
     if (r.code != "100000") { notFound() }
     // 性能优先，增加数据库压力
     const _isChapterPurchased = unstable_cache(async () => db.isChapterPurchased(params.chapid, r.data.chapter_info.book_id),

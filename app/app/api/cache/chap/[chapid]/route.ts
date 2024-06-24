@@ -20,7 +20,8 @@ export async function POST(request: Request, { params: { chapid } }: { params: {
         if (r.success) {
             const [db, db_n] = UseDB()
             revalidateTag(`${db_n}_Chap_${chapid}`)
-            revalidateTag(`chaper_${chapid}`)
+            revalidateTag(`chaper_${chapid}_cmd`)
+            revalidateTag(`chaper_${chapid}_ifm`)
             revalidateTag(`tsukkomi_${chapid}`)
             return Response.json({ code: 200 })
         } else {

@@ -8,17 +8,21 @@ function decrypt(encrypted: string, key: string = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKN
         const aesKey = crypto.createHash('sha256').update(key).digest();
         const decipher = crypto.createDecipheriv('aes-256-cbc', aesKey, Buffer.alloc(16, 0));
 
-        const decrypted = Buffer.concat([
-            decipher.update(Buffer.from(encrypted, 'base64')),
-            decipher.final(),
-        ]);
-
-        return decrypted.toString();
+        const decrypted = decipher.update(encrypted, 'base64', 'utf-8') + decipher.final()
+        return decrypted
     } catch (error) {
         console.error('Decryption error:', error);
         return JSON.stringify({ "error": "Decryption error" });
     }
 }
+
+// function decrypt(data: string, key = "zG2nSeEfSHfvTCHy5LCcqtBbQehKNLXn") {
+//     const aeskey = crypto.createHash('sha256').update(key).digest();
+//     const decipher = crypto.createDecipheriv('aes-256-cbc', aeskey, Buffer.alloc(16, 0));
+//     let decrypted = decipher.update(data, 'base64', 'utf8');
+//     decrypted += decipher.final('utf8');
+//     return decrypted;
+// }
 
 type params = "app_version" | "device_token" | "login_token" | "account"
 
@@ -161,12 +165,24 @@ class API {
      * 获取章节信息
      * @param chapid 章节ID
      * @param mode 请求模式,默认POST
+     * @deprecated
      * @returns 
      */
     async chaper(chapid: number | string, mode: "get" | "post" = "post"): Promise<Chaper> {
         const u = this.URL(`/chapter/get_chapter_info?chapter_id=${chapid}`)
         const r = await this[mode](u, [`chaper_${chapid}`], 86400)
         return JSON.parse(r) as Chaper
+    }
+
+    async chapter_new(chapid: number | string, mode: "get" | "post" = "post"): Promise<Chaper> {
+        const u = this.URL(`/chapter/get_chapter_cmd?chapter_id=${chapid}`)
+        const r = JSON.parse(await this[mode](u, [`chaper_${chapid}_cmd`], 86400)) as { "code": "100000", "data": { "command": string }, "scroll_chests": [] }
+        if (r.code !== "100000") return r as any
+        const u2 = this.URL(`/chapter/get_cpt_ifm?chapter_id=${chapid}&chapter_command=${r.data.command}`)
+        const r2 = JSON.parse(await this[mode](u2, [`chaper_${chapid}_ifm`], 86400)) as Chaper
+        if (r2.code !== "100000") return r2
+        r2.data.chapter_info.txt_content = decrypt(r2.data.chapter_info.txt_content, r.data.command)
+        return r2
     }
 
     /**

@@ -29,7 +29,7 @@ import { notFound } from 'next/navigation';
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
     const [db, db_n] = UseDB()
     const a = await UseAPI()
-    const r = await a.chaper(params.chapid)
+    const r = await a.chapter_new(params.chapid)
     if (r.code != "100000") { notFound() }
     if (r.data.chapter_info.is_paid == "0" && r.data.chapter_info.auth_access == "1") {
         return <R url={`/chap/${params.chapid}`} />
