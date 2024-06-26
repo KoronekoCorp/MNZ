@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import { unstable_cache } from 'next/cache';
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { join } from 'path';
 import type { Buy, Catalog, Chaper, Register, Search, Tags, bookinfo, booklistinfo, booklists, geetest, login, tsukkomi, tsukkomi_info, tsukkomi_reply, tsukkomis } from './CiweiType';
 
@@ -368,20 +368,21 @@ class API {
      * @returns 
      */
     async buy_and_get_chaper(chapid: string, mode: "get" | "post" = "post"): Promise<[Chaper, Buy?]> {
-        return unstable_cache(async (): Promise<[Chaper, Buy?]> => {
-            const cu = this.URL(`/chapter/get_chapter_info?chapter_id=${chapid}`)
-            const pre = JSON.parse(await this[mode](cu, [`chaper_${chapid}`], false)) as Chaper
-            if (pre.data.chapter_info.auth_access == "1") {
-                return [pre]
-            } else {
-                const buy = await this.buy(chapid, mode)
-                if (buy.tip) {
-                    return [pre, buy]
-                }
-                const r = JSON.parse(await this[mode](cu, [`chaper_${chapid}`], 86400)) as Chaper
-                return [r, buy]
+        // return unstable_cache(async (): Promise<[Chaper, Buy?]> => {
+        const pre = await this.chapter_new(chapid, mode)
+        if (pre.data.chapter_info.auth_access == "1") {
+            return [pre]
+        } else {
+            revalidateTag(`chaper_${chapid}_cmd`)
+            revalidateTag(`chaper_${chapid}_ifm`)
+            const buy = await this.buy(chapid, mode)
+            if (buy.tip) {
+                return [pre, buy]
             }
-        }, [`buy_and_get_chaper_${chapid}`], { revalidate: 86400, tags: [`buy_and_get_chaper_${chapid}`] })()
+            const r = await this.chapter_new(chapid, mode)
+            return [r, buy]
+        }
+        // }, [`buy_and_get_chaper_${chapid}`], { revalidate: 86400, tags: [`buy_and_get_chaper_${chapid}`] })()
     }
 
     /**

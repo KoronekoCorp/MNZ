@@ -1,3 +1,10 @@
+/**
+ * 便于在浏览器环境下测试解密
+ * @param {string} encrypted 
+ * @param {string} key 
+ * @returns 
+ */
+
 async function decrypt(encrypted, key = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKNLXn') {
   try {
     const encodedKey = new TextEncoder().encode(key);
@@ -6,7 +13,7 @@ async function decrypt(encrypted, key = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKNLXn') {
 
     const encryptedBuffer = Uint8Array.from(atob(encrypted), c => c.charCodeAt(0));
     const decryptedBuffer = await crypto.subtle.decrypt({ name: 'AES-CBC', iv: new Uint8Array(16) }, aesKey, encryptedBuffer);
-    const decrypted = new TextDecoder().decode(decryptedBuffer);
+    const decrypted = new TextDecoder('UTF-8').decode(decryptedBuffer);
 
     return decrypted;
   } catch (error) {
