@@ -21,6 +21,7 @@ import { Badge, Button, Card, Container, Stack } from '@mui/material';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import Share from './client';
 
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
@@ -38,6 +39,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
     const jt = await _jt
     const ln = await _ln
 
+    if (r.code != "100000") { notFound() }
     if (buy?.tip) {
         revalidateTag(`buy_and_get_chaper_${params.chapid}`)
 

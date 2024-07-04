@@ -37,7 +37,7 @@ class API {
     UserAgent = `Android  com.kuangxiangciweimao.novel.c  ${this.app_version}, HONOR, TEL-AN10, 29, 10`
     login_token
     account
-    constructor(login_token: string = "29b2c98ed5f964c56adc60eb97fe6f78", account: string = "书客3210108") {
+    constructor(login_token: string = "e059b22d5f2023e20b9ac42e02082276", account: string = "书客3471572") {
         this.login_token = login_token
         this.account = account
     }
@@ -105,10 +105,10 @@ class API {
      */
     async auto_reg(mode: "get" | "post" = "post"): Promise<Register> {
         const u = this.URL(
-            `/signup/auto_reg_v2?oauth_union_id=&gender=1&app_version=${this.app_version}&oauth_open_id=&device_token=ciweimao_&channel=PCdownloadC&oauth_type=&uuid=android${crypto.randomUUID()}`,
+            `/signup/auto_reg_v2?oauth_union_id=&gender=1&app_version=${this.app_version}&oauth_open_id=&device_token=ciweimao_&channel=Common&oauth_type=&uuid=android${crypto.randomUUID()}`,
         )
         u.searchParams.delete("login_token")
-        u.searchParams.delete("account")
+        // u.searchParams.delete("account")
         const r = await this[mode](u, ['auto_reg_v2'], undefined)
         return JSON.parse(r) as Register
     }
@@ -370,6 +370,7 @@ class API {
     async buy_and_get_chaper(chapid: string, mode: "get" | "post" = "post"): Promise<[Chaper, Buy?]> {
         // return unstable_cache(async (): Promise<[Chaper, Buy?]> => {
         const pre = await this.chapter_new(chapid, mode)
+        if (pre.code !== "100000") return [pre]
         if (pre.data.chapter_info.auth_access == "1") {
             return [pre]
         } else {
