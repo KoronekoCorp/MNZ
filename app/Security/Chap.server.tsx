@@ -19,7 +19,7 @@ async function Pre(chapid: string) {
     if (ip) {
         const redis = await UseRedis()
         const uuid = randomUUID()
-        const d = await redis.sendCommand(["TFCALL", "SecurityV4.count", "0", ip, uuid]) as "ok" | "challenge" | "ban"
+        const d = await redis.sendCommand(["FCALL", "SecurityV4_count", "0", ip, uuid]) as "ok" | "challenge" | "ban"
         console.log(ip, d)
         switch (d) {
             case "ban":

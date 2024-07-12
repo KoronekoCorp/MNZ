@@ -8,9 +8,9 @@ React+Nextjs、Redis、Mysql
 
 ## 相关说明
 
-应用可以在本地部署，且个人使用（请求一多就开始烧号，即404页面）
+使用 `bash move.sh`  切换本地和服务模式
 
-一旦号烧了，请前往Server页面底端控制工具清除已逝去的账户和请求新的账户（请求多了会导致风控）
+本地部署正在支持中，用户分享章节（shchap）未开放
 
 请自行配置环境变量
 
@@ -18,8 +18,6 @@ React+Nextjs、Redis、Mysql
 DB_PROXY=https://capi.koroneko.co
 TurnstileS=1x0000000000000000000000000000000AA	
 ```
-
-用户分享章节（shchap）未开放，到时候估计会设置一个API
 
 ## 往期碎碎念（无用）
 

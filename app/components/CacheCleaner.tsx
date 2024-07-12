@@ -4,7 +4,6 @@ import { TurnstileC } from "@/Security/TurnstileC";
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { useState } from "react";
@@ -13,10 +12,6 @@ async function clearServerWorker(url: string) {
     const keys = await caches.keys()
     const c = await Promise.all(keys.map(i => caches.open(i)))
     await Promise.all(c.map(j => j.delete(url, { ignoreVary: true })))
-}
-
-async function callback(token: string, setl: (value: boolean) => void, router: AppRouterInstance) {
-
 }
 
 export function CacheCleanButton({ container, action }: { container: string | HTMLElement, action?: string }) {
@@ -84,7 +79,7 @@ export function CacheCleanIconButton({ container, action }: { container: string 
         }
         enqueueSnackbar("正在刷新远程缓存，请稍后", { variant: "info" })
         turnstile.render(container, {
-            sitekey: location.hostname === "localhost" ? "1x00000000000000000000AA" : TurnstileC,
+            sitekey: TurnstileC,
             action: action ?? location.pathname.replaceAll("/", "-"),
             callback: async function (token) {
                 const r = await (await fetch(`/api/cache${location.pathname}`, { method: "POST", body: token })).json() as { code: 200 | 401 | 404 | 500 }

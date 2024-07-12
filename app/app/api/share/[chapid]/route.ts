@@ -50,8 +50,7 @@ export async function GET(request: Request, { params }: { params: { chapid: stri
             if (oauth) {
                 await unstable_cache(async () => {
                     const rs = await UseRedis()
-                    const fin = await rs.sendCommand(["TFCALL", "OauthV1.upload", "0", oauth.email]) as number
-                    rs.disconnect()
+                    const fin = await rs.sendCommand(["FCALL", "OauthV1upload", "0", oauth.email]) as number
                     return fin
                 }, [`upload_${ci_account}_${params.chapid}_counts`], { revalidate: 3600 * 24 * 30, tags: [`upload_${ci_account}_${params.chapid}__counts`] })()
             }
