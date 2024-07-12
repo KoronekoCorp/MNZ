@@ -7,38 +7,37 @@ import { Button, Container, Grid, Link, Stack, TextField } from "@mui/material";
 import Cookies from "js-cookie";
 import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import { geetest, login } from "./server";
+import { geetest, info, login, sign } from "./server";
 
 export default function Login() {
-    const [account, setaccount] = useState<{ account?: string, login_token?: string }>({})
-    const [ci_login_token, setci_login_token] = useState("")
-    const [ci_account, setci_account] = useState("")
+    const [ci_login_token, setci_login_token] = useState<string>()
+    const [ci_account, setci_account] = useState<string>()
     const [phone, setphone] = useState("")
     const [pwd, setpwd] = useState("")
 
     useEffect(() => {
-        if (document.cookie.includes('ci_login_token') && document.cookie.includes('ci_account')) {
-            setaccount({ account: Cookies.get("ci_account"), login_token: Cookies.get("ci_login_token") })
-        }
+        setci_account(Cookies.get("ci_account"))
+        setci_login_token(Cookies.get("ci_login_token"))
     }, []);
 
-    const putCookie = () => {
-        if (ci_login_token.length < 4 || ci_account.length < 4) {
+    const putCookie = async () => {
+        if (ci_login_token && ci_account && ci_login_token.length > 4 && ci_account?.length > 4) {
+            const domain = document.location.hostname.replace(/.*?\./, ".")
+            document.cookie = `ci_login_token=${ci_login_token}; max-age=604800; path=/; domain=${domain}`;
+            document.cookie = `ci_account=${encodeURI(ci_account)}; max-age=604800; path=/; domain=${domain}`;
+            enqueueSnackbar('登录成功', { variant: 'success' });
+            return false
+        } else {
             enqueueSnackbar('不为空', { variant: "warning" });
             return false;
         }
-        const domain = document.location.hostname.replace(/.*?\./, ".")
-        document.cookie = `ci_login_token=${ci_login_token}; max-age=604800; path=/; domain=${domain}`;
-        document.cookie = `ci_account=${encodeURI(ci_account)}; max-age=604800; path=/; domain=${domain}`;
-        setaccount({ account: ci_account, login_token: ci_login_token })
-        enqueueSnackbar('登录成功', { variant: 'success' });
-        return false
     };
 
     const removeCookie = () => {
         Cookies.remove("ci_account");
         Cookies.remove("ci_login_token");
-        setaccount({ account: undefined, login_token: undefined })
+        setci_account(undefined)
+        setci_login_token(undefined)
         enqueueSnackbar('已退出登录', { variant: 'error' });
         return false
     };
@@ -51,7 +50,8 @@ export default function Login() {
                 login(phone, pwd).then((r) => {
                     console.log(r)
                     if (r?.data?.login_token && r?.data?.reader_info?.account) {
-                        setaccount({ account: r.data.reader_info.account, login_token: r.data.login_token })
+                        setci_account(r.data.reader_info.account)
+                        setci_login_token(r.data.login_token)
                         document.cookie = `ci_login_token=${r.data.login_token}; max-age=604800; path=/`;
                         document.cookie = `ci_account=${encodeURI(r.data.reader_info.account)}; max-age=604800; path=/`;
                         enqueueSnackbar('登录成功', { variant: 'success' })
@@ -73,12 +73,24 @@ export default function Login() {
                 </H2>
                 <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                     <KeyIcon />
-                    <p>Account: </p><b>{account.account ?? "default"}</b>
+                    <p>登录状态: </p>
+                    {ci_account !== undefined && ci_login_token !== undefined
+                        ? <>
+                            <Button variant="contained" onClick={removeCookie} color="error">
+                                已登录，点此注销
+                            </Button>
+                            <Button variant="contained" onClick={async () => {
+                                const r = await sign()
+                                enqueueSnackbar(r.tip, { variant: 'success' })
+                            }} color="success">
+                                签到
+                            </Button>
+                        </> :
+                        <Button variant="contained" disabled={true}>
+                            未登录
+                        </Button>}
                 </Stack>
-                <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-                    <KeyIcon />
-                    <p>Token: </p><b>{account.login_token ?? "default"}</b>
-                </Stack>
+
                 <Accordions title={<p style={{ textAlign: "center", width: "100%", margin: 0 }}>说明</p>}
                     sx={{ margin: 1 }}>
                     <p style={{ wordBreak: 'break-word', margin: 0 }}>
@@ -122,7 +134,7 @@ export default function Login() {
                 <Button variant="contained" onClick={putCookie}>
                     登录
                 </Button>
-                <p><Link href="https://forum.nhimmeo.cf/d/26-faq">FAQ(English)</Link></p>
+                <p><Link href="https://github.com/KoronekoCorp/Report/discussions/11">教程</Link></p>
             </Grid>
             <Grid item sm={12} md={6}>
                 <H2>

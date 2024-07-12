@@ -15,7 +15,6 @@ const a = new DDB({
 })
 
 export const stable = new PDB(process.env.DB_PROXY)
-export const stable2 = new PDB(process.env.DB_PROXY2)
 
 export function UseDB(): [DDB | PDB, string] {
     const c = cookies()
@@ -23,7 +22,6 @@ export function UseDB(): [DDB | PDB, string] {
     console.log(t)
     switch (t) {
         case "stable": return [stable, "stable"]
-        case "stable2": return [stable2, "stable"]
         case "a": return [a, "newest"]
         default: return [stable, "stable"]
     }

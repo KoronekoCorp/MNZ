@@ -66,7 +66,7 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div" color="inherit" onClick={() => { router.push("/") }}>
-                        Nhimmeo Mui
+                        Koroneko Corp
                     </Typography>
                     {/* <MenuItem> */}
                     <Box sx={{ flexGrow: 1 }} />

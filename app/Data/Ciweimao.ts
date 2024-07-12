@@ -37,7 +37,7 @@ class API {
     UserAgent = `Android  com.kuangxiangciweimao.novel.c  ${this.app_version}, HONOR, TEL-AN10, 29, 10`
     login_token
     account
-    constructor(login_token: string = "e059b22d5f2023e20b9ac42e02082276", account: string = "书客3471572") {
+    constructor(login_token: string = "ed54a385889abfa30a3d3bc1fe76c989", account: string = "书客3547619") {
         this.login_token = login_token
         this.account = account
     }
@@ -80,6 +80,13 @@ class API {
         }, tags, { revalidate: revalidate, tags: tags })()
     }
 
+    /**
+     * 
+     * @param url 
+     * @param tags 
+     * @param revalidate 应在多少秒后重新验证缓存。false无限期缓存，或者直到调用匹配revalidateTag()或revalidatePath()方法为止。
+     * @returns 
+     */
     async post(url: URL, tags: string[] | undefined, revalidate: number | false | undefined = 7200) {
         const data = url.search.slice(1)
         return unstable_cache(async () => {
@@ -399,6 +406,27 @@ class API {
         const u = this.URL(`/bookcity/get_rank_book_list?time_type=${time_type}&page=${page - 1}&count=12&category_index=${category_index}&order=${order}`)
         const r = await this[mode](u, [`get_rank_book_list_${order}_${time_type}_${category_index}_${page}`], 86400)
         return JSON.parse(r) as Tags
+    }
+
+    /**
+     * 签到
+     * @param mode 请求模式,默认POST
+     */
+    async bonus(mode: "get" | "post" = "post") {
+        const u = this.URL(`/reader/get_task_bonus_with_sign_recommend?task_type=1`)
+        const r = await this[mode](u, [`${this.account}_bonus`], 10)
+        return JSON.parse(r) as { "code": "100000", "tip": string }
+    }
+
+
+    /**
+     * 获取剩余代币数量，**类型data中仅存在prop_info**
+     * @param mode 请求模式,默认POST
+     */
+    async prop_info(mode: "get" | "post" = "post") {
+        const u = this.URL(`/reader/get_prop_info`)
+        const r = await this[mode](u, [`${this.account}_get_prop_info`], 3600)
+        return JSON.parse(r) as login
     }
 }
 

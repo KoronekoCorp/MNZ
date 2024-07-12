@@ -264,5 +264,85 @@ export const audiolist: AudioInfo[] = [
         [03:32.084]
         [03:32.689] The message has already been said through patches of violet
         `
+    },
+    {
+        name: "黄龄 HOYO-MiX - TruE",
+        url: "https://cos.koroneko.co/%E9%BB%84%E9%BE%84%20HOYO-MiX%20-%20TruE.flac",
+        cover: "https://cos.koroneko.co/%E9%BB%84%E9%BE%84%20HOYO-MiX%20-%20TruE.jpg",
+        artist: "爱莉爱莉爱",
+        lrc: `
+        [00:00.000] 作词 : TetraCalyx
+        [00:01.000] 作曲 : 文驰Vinchi(HOYO-MiX)
+        [00:02.000] 编曲 : 文驰Vinchi(HOYO-MiX)
+        [00:03.000] 制作人 : 文驰Vinchi(HOYO-MiX)
+        [00:05.530]
+        [00:16.696]Say my name when a tree susurrates
+        [00:27.845]Once and again telling a story lost in time
+        [00:33.729]the way it starts and the way it ends
+        [00:39.843]Never again making up stories in dismay
+        [00:45.705]With several starts, but just one end
+        [00:51.823]
+        [00:52.617]Ah, how I long to embrace
+        [01:03.538]The future breaking out of shades from the past
+        [01:13.602]Still ablaze
+        [01:16.789]
+        [01:22.647]Save your tears for the day so far away
+        [01:33.789]To irrigate the wilderness that’s still asleep
+        [01:39.902]In the world waiting to be lit
+        [01:45.771]To spread over the riverbeds so dry and dead
+        [01:51.601]Let ships that ran aground re-launch their sails
+        [01:57.977]
+        [01:58.790]Ah, how I long to embrace
+        [02:09.428]The future breaking out of shades from the past
+        [02:18.725]Still ablaze
+        [02:22.710]
+        [02:24.317]Seeds bear new life when flowers dare to fade
+        [02:38.419]
+        [02:39.216]Petals linger about
+        [02:44.268]awaiting one last dance
+        [02:49.845]Shaking off all the dust from the past
+        [02:56.220]New stories have yet to start
+        [03:01.525]
+        [03:02.525] 电吉他 Electric Guitar：宫奇Gon(HOYO-MiX)
+        [03:03.354] 木吉他 Acoustic Guitar：李智谦 Zhiqian Li
+        [03:04.183] 人声录音Vocal Recording：徐威 Wei Xu@52HzStudio
+        [03:05.012] 混音师 Mixing Engineer：文驰Vinchi(HOYO-MiX)
+        [03:05.841] 母带制作 Mastering Engineer：文驰Vinchi(HOYO-MiX)
+        [03:06.670] 出品 Produced by：HOYO-MiX
+        [00:03.153]
+        [00:03.945]
+        [00:05.530]
+        [00:16.696]当花叶呢喃之时，请呼唤我的名字
+        [00:27.845]由此开启那飘零于时间里的故事
+        [00:33.729]如是始源，如是终焉
+        [00:39.843]不再自绝望中编织传说
+        [00:45.705]分叉的起点，终将在结局交汇
+        [00:51.823]
+        [00:52.617]啊，我多渴望拥抱
+        [01:03.538]那从往世荫蔽中破土的未来
+        [01:13.602]如炬如光
+        [01:16.789]
+        [01:22.647]将眼泪留予遥远的那一天吧
+        [01:33.789]让它润泽那尚在沉睡的荒野
+        [01:39.902]在那渴盼炬火的世界
+        [01:45.771]让它流经那干涸死寂的河床
+        [01:51.601]由此，搁浅之舟得以启航
+        [01:57.977]
+        [01:58.790]啊，我多渴望拥抱
+        [02:09.428]那从往世荫蔽中破土的未来
+        [02:18.725]如炬如光
+        [02:22.710]
+        [02:24.317]繁花谢世之时，万物自此新生
+        [02:38.419]
+        [02:39.216]飞花流连
+        [02:44.268]静待长别之舞
+        [02:49.845]将往世尘埃尽数抖落
+        [02:56.220]新的篇章行将开启 
+        [03:01.525]
+        [03:02.057]
+        [03:02.057]
+        [03:02.320]
+        [03:02.586]
+        [03:02.866]`
     }
 ]
