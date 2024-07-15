@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const host = headers().get("host")
     const fin: MetadataRoute.Sitemap = []
     const a = await UseAPI()
-    const r = await a.bookcity()
+    const r = await a.bookcity("newtime", "50")
     r.data.book_list.forEach((e) => {
         fin.push({
             url: `https://${host}/book/${e.book_id}`,
