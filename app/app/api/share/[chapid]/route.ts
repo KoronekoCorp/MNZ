@@ -36,6 +36,9 @@ export async function GET(request: Request, { params }: { params: { chapid: stri
 
             await unstable_cache(async () => fetch("https://capi.koroneko.co/Upload", {
                 method: "POST",
+                headers: {
+                    "api-upload-key": process.env.API_UPLOAD_KEY
+                },
                 body: JSON.stringify({
                     book_id: d.data.chapter_info.book_id,
                     chapter_id: d.data.chapter_info.chapter_id,

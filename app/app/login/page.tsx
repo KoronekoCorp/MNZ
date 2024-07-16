@@ -7,7 +7,7 @@ import { Button, Container, Grid, Link, Stack, TextField } from "@mui/material";
 import Cookies from "js-cookie";
 import { enqueueSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import { geetest, info, login, sign } from "./server";
+import { geetest, login, sign } from "./server";
 
 export default function Login() {
     const [ci_login_token, setci_login_token] = useState<string>()

@@ -35,7 +35,25 @@ async function Pre(chapid: string) {
     }
 }
 
-/** 客户端上报安全接口 */
+/**
+ * 为购买页特别设计的安全逻辑
+ * @returns 
+ */
+async function buy(chapid: string) {
+    const ip = headers().get("cf-connecting-ip") ?? headers().get("x-forwarded-for")
+    if (ip) {
+        const redis = await UseRedis()
+        const d = await redis.json.GET(prefix + ip, { path: ".uuid" }) as string | null
+        if (d) {
+            return encode({ token: { ip: ip, uuid: d } })
+        }
+    }
+}
+
+/** 
+ * 客户端上报安全接口
+ * @deprecated
+ */
 async function check(uuid: string, chapid: string) {
     const ip = headers().get("cf-connecting-ip") ?? headers().get("x-forwarded-for")
     if (ip) {
@@ -47,7 +65,10 @@ async function check(uuid: string, chapid: string) {
 }
 
 
-/** 查询是否为黑名单IP */
+/** 
+ * 查询是否为黑名单IP
+ * @deprecated
+ */
 async function Baned(): Promise<[true, number] | [false, undefined]> {
     const ip = headers().get("cf-connecting-ip") ?? headers().get("x-forwarded-for")
     const redis = await UseRedis()
@@ -66,4 +87,4 @@ async function Baned(): Promise<[true, number] | [false, undefined]> {
     return [false, undefined]
 }
 
-export { Pre } 
+export { Pre, buy } 
