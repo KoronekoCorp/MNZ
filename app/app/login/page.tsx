@@ -57,7 +57,7 @@ export default function Login() {
                         enqueueSnackbar('登录成功', { variant: 'success' })
                         enqueueSnackbar(`账户信息:${r.data.reader_info.reader_name}\t剩余猫饼干${r.data.prop_info.rest_hlb}`, { variant: 'success' })
                     } else {
-                        enqueueSnackbar('登录失败', { variant: 'error' })
+                        enqueueSnackbar('登录失败' + JSON.stringify(r), { variant: 'error' })
                     }
                 })
             } else {
@@ -74,14 +74,14 @@ export default function Login() {
                 <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                     <KeyIcon />
                     <p>登录状态: </p>
-                    {ci_account !== undefined && ci_login_token !== undefined
+                    {ci_account !== undefined && ci_login_token !== undefined && Cookies.get("ci_account") !== undefined && Cookies.get("ci_login_token") !== undefined
                         ? <>
                             <Button variant="contained" onClick={removeCookie} color="error">
                                 已登录，点此注销
                             </Button>
                             <Button variant="contained" onClick={async () => {
                                 const r = await sign()
-                                enqueueSnackbar(r.tip, { variant: 'success' })
+                                enqueueSnackbar(r.tip ?? "签到成功" + r.data?.bonus.hlb, { variant: 'success' })
                             }} color="success">
                                 签到
                             </Button>

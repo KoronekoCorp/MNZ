@@ -410,12 +410,14 @@ class API {
 
     /**
      * 签到
+     * 
+     * 类型大致如此，未补全
      * @param mode 请求模式,默认POST
      */
     async bonus(mode: "get" | "post" = "post") {
         const u = this.URL(`/reader/get_task_bonus_with_sign_recommend?task_type=1`)
         const r = await this[mode](u, [`${this.account}_bonus`], 10)
-        return JSON.parse(r) as { "code": "100000", "tip": string }
+        return JSON.parse(r) as { "code": "100000", "tip"?: string, "data"?: { "bonus": { "exp": "5", "hlb": "5", "recommend": "6" } } }
     }
 
 

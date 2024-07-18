@@ -1,0 +1,1 @@
+importScripts("https://sw.koroneko.co/nhimmeo.js")

@@ -1,9 +1,7 @@
 import mysql from 'mysql2/promise';
-import { base64DecToArr, base64EncArr, strToUTF8Arr, UTF8ArrToStr } from './Base64';
-import type { Chaper as chaper } from './CiweiType';
-import type { BooKid, Chaper, Sh, Shchap, UploadChap, Userchap, UserchapCount, UserchapInfo, UserchapUser } from './DataType';
+import type { BooKid, Chaper, Sh, Shchap, Userchap, UserchapCount, UserchapInfo, UserchapUser } from './DataType';
 import { GetS3URL } from './S3';
-import { get_key } from './telegra';
+// import { get_key } from './telegra';
 
 class DB {
     connect?: mysql.Connection
@@ -110,69 +108,52 @@ class DB {
     async Shchap(chapid: number | string, bookid?: number | string): Promise<Sh | null> {
         const raw = await this.shchap(chapid)
         if (raw.length == 0) { return null }
-        var url
-        var txt_content
-        if (raw[0].storj_synced) {
-            url = await GetS3URL(`${raw[0].author_name}/${raw[0].book_id}/${raw[0].chapter_id}/${raw[0].id}`)
-        }
-        else if (raw[0].host === 'i') {
-            url = `https://${raw[0].spath}.ipfs.nftstorage.link/`;
-        } else {
-            url = `https://api.telegra.ph/getPage/${raw[0].spath}?return_content=true`;
-        }
-        var req = await fetch(url)
-        var t = await req.text()
-        if (raw[0].storj_synced) {
-            txt_content = t
-        }
-        else if (raw[0].host === 'i') {
-            txt_content = atob(t);
-        } else {
-            const j = JSON.parse(t);
-            txt_content = UTF8ArrToStr(base64DecToArr(j.result.content[0].children[0])).trim();
-        }
+        const url = await GetS3URL(`${raw[0].author_name}/${raw[0].book_id}/${raw[0].chapter_id}/${raw[0].id}`)
+        const req = await fetch(url)
         return {
-            txt: txt_content,
+            txt: await req.text(),
             ...raw[0]
         }
     }
 
     /**
      * 请勿使用
-     * @deprecated
-     * @param chaper 
-     * @param shareUser 
      * @returns 
      */
-    async uploadchap(chaper: chaper, shareUser: string) {
-        const key = get_key()
-        const data = base64EncArr(strToUTF8Arr(chaper.data.chapter_info.txt_content))
-        const r = await fetch('https://api.telegra.ph/createPage', {
-            method: 'POST',
-            body: new URLSearchParams({
-                "access_token": key,
-                "title": chaper.data.chapter_info.chapter_id,
-                "author_name": shareUser,
-                "content": `[{ "tag": "p", "children": ["${data}"] }]`,
-                'return_content': "false"
-            })
-        })
-        return await r.json() as UploadChap
-    }
+    // async uploadchap(chaper: chaper, shareUser: string) {
+    //     const key = get_key()
+    //     const data = base64EncArr(strToUTF8Arr(chaper.data.chapter_info.txt_content))
+    //     const r = await fetch('https://api.telegra.ph/createPage', {
+    //         method: 'POST',
+    //         body: new URLSearchParams({
+    //             "access_token": key,
+    //             "title": chaper.data.chapter_info.chapter_id,
+    //             "author_name": shareUser,
+    //             "content": `[{ "tag": "p", "children": ["${data}"] }]`,
+    //             'return_content': "false"
+    //         })
+    //     })
+    //     return await r.json() as UploadChap
+    // }
 
-    async addChap(UploadChap: UploadChap, chap: chaper, shareUser: string) {
-        return await this.cache(
-            `INSERT INTO sharing (chapter_index, book_id, chapter_id, title, author_name, stime, spath, mode, host) VALUES (?, ?, ?, ?, ?, ?, ?, 'vip', 't')`,
-            [
-                chap.data.chapter_info.chapter_index,
-                chap.data.chapter_info.book_id,
-                chap.data.chapter_info.chapter_id,
-                chap.data.chapter_info.chapter_title.split("#")[0],
-                shareUser,
-                Math.floor(new Date().getTime() / 1000),
-                UploadChap.result?.path
-            ])
-    }
+    /**
+     * 上传至数据库
+     * @deprecated 后端API已改动
+     * @returns 
+     */
+    // async addChap(UploadChap: UploadChap, chap: chaper, shareUser: string) {
+    //     return await this.cache(
+    //         `INSERT INTO sharing (chapter_index, book_id, chapter_id, title, author_name, stime, spath, mode, host) VALUES (?, ?, ?, ?, ?, ?, ?, 'vip', 't')`,
+    //         [
+    //             chap.data.chapter_info.chapter_index,
+    //             chap.data.chapter_info.book_id,
+    //             chap.data.chapter_info.chapter_id,
+    //             chap.data.chapter_info.chapter_title.split("#")[0],
+    //             shareUser,
+    //             Math.floor(new Date().getTime() / 1000),
+    //             UploadChap.result?.path
+    //         ])
+    // }
 }
 
 interface option extends RequestInit {
@@ -253,38 +234,47 @@ class ProxyDB {
         }
     }
 
-    async uploadchap(chaper: chaper, shareUser: string) {
-        const key = get_key()
-        const data = base64EncArr(strToUTF8Arr(chaper.data.chapter_info.txt_content))
-        const r = await fetch('https://api.telegra.ph/createPage', {
-            method: 'POST',
-            body: new URLSearchParams({
-                "access_token": key,
-                "title": chaper.data.chapter_info.chapter_id,
-                "author_name": shareUser,
-                "content": `[{ "tag": "p", "children": ["${data}"] }]`,
-                'return_content': "false"
-            }),
-            next: {
-                revalidate: 3600
-            }
-        })
-        return await r.json() as UploadChap
-    }
+    /**
+     * 请勿使用
+     * @returns 
+     */
+    // async uploadchap(chaper: chaper, shareUser: string) {
+    //     const key = get_key()
+    //     const data = base64EncArr(strToUTF8Arr(chaper.data.chapter_info.txt_content))
+    //     const r = await fetch('https://api.telegra.ph/createPage', {
+    //         method: 'POST',
+    //         body: new URLSearchParams({
+    //             "access_token": key,
+    //             "title": chaper.data.chapter_info.chapter_id,
+    //             "author_name": shareUser,
+    //             "content": `[{ "tag": "p", "children": ["${data}"] }]`,
+    //             'return_content': "false"
+    //         }),
+    //         next: {
+    //             revalidate: 3600
+    //         }
+    //     })
+    //     return await r.json() as UploadChap
+    // }
 
-    async addChap(UploadChap: UploadChap, chap: chaper, shareUser: string) {
-        return fetch(`${this.RemoteProxy}/addChap`, {
-            method: "POST",
-            headers: {
-                "api-upload-key": process.env.API_UPLOAD_KEY
-            },
-            body: JSON.stringify({
-                UploadChap: UploadChap,
-                chap: chap,
-                shareUser: shareUser
-            })
-        })
-    }
+    /**
+     * 上传至数据库
+     * @deprecated 后端API已改动
+     * @returns 
+     */
+    // async addChap(UploadChap: UploadChap, chap: chaper, shareUser: string) {
+    //     return fetch(`${this.RemoteProxy}/addChap`, {
+    //         method: "POST",
+    //         headers: {
+    //             "api-upload-key": process.env.API_UPLOAD_KEY
+    //         },
+    //         body: JSON.stringify({
+    //             UploadChap: UploadChap,
+    //             chap: chap,
+    //             shareUser: shareUser
+    //         })
+    //     })
+    // }
 }
 
 export { DB as DDB, ProxyDB as PDB };
