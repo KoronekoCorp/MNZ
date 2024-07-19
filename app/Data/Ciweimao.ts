@@ -31,15 +31,16 @@ const key = "a90f3731745f1c30ee77cb13fc00005a"
 const signatures = "CkMxWNB666"
 
 class API {
-    BASEURL = process.env.CWM_MIRROR ?? "https://app.happybooker.cn"
+    BASEURL: string
     app_version = "2.9.328"
     device_token = "ciweimao_"
     UserAgent = `Android  com.kuangxiangciweimao.novel.c  ${this.app_version}, HONOR, TEL-AN10, 29, 10`
     login_token
     account
-    constructor(login_token: string = "ed54a385889abfa30a3d3bc1fe76c989", account: string = "书客3547619") {
+    constructor(login_token: string = "ed54a385889abfa30a3d3bc1fe76c989", account: string = "书客3547619", endpoint = "https://app.happybooker.cn") {
         this.login_token = login_token
         this.account = account
+        this.BASEURL = endpoint
     }
 
     URL(path: string) {
@@ -60,7 +61,7 @@ class API {
     async fetch(input: URL | RequestInfo, init?: RequestInit | undefined): Promise<Response> {
         const controller = new AbortController();
         const promise = fetch(input, { ...init, signal: controller.signal })
-        const timeout = setTimeout(() => controller.abort(Error("CWM")), 8000);
+        const timeout = setTimeout(() => controller.abort(Error("CWM")), 10000);
         return promise.finally(() => clearTimeout(timeout));
     }
 

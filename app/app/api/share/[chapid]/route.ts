@@ -14,7 +14,7 @@ export async function GET(request: Request, { params }: { params: { chapid: stri
     if (ci_login_token == undefined || ci_account == undefined) {
         return NextResponse.json({ "success": false })
     }
-    const a = new API(ci_login_token, ci_account)
+    const a = new API(ci_login_token, ci_account, cookie.get("cwm_mirror")?.value)
     const d = await a.chapter_new(params.chapid)
 
     if (d.code !== "100000") {

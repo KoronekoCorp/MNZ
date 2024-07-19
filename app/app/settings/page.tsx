@@ -2,6 +2,7 @@
 
 import { DatabaseSetting } from "@/components/DatabaseSetting"
 import { H2 } from "@/components/H2"
+import { MirrorSetting } from "@/components/MirrorSetting"
 import CachedIcon from '@mui/icons-material/Cached'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
 import StorageIcon from '@mui/icons-material/Storage'
@@ -176,8 +177,11 @@ export default function Setting() {
                 <div style={{ paddingTop: 10 }}>
                     <DatabaseSetting />
                 </div >
+                <H2>
+                    <StorageIcon />镜像设置
+                </H2>
+                <MirrorSetting />
             </Grid>
-
             <Grid item xs={12} md={12}>
                 <H2>
                     <ColorLensIcon />主题配色

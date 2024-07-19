@@ -47,10 +47,12 @@ export async function Link() {
     const DATA = new Promise<number>((r) => {
         fetch(`${process.env.DB_PROXY}/userchap/1`)
             .then(() => r(Date.now() - start))
+            .catch((e: Error) => { r(e.stack ?? e.message as any) })
     })
     const CWM = new Promise<number>((r) => {
-        fetch(process.env.CWM_MIRROR ?? "https://app.hbooker.com", { cache: 'no-cache' })
+        fetch(cookies().get("cwm_mirror")?.value ?? "https://app.hbooker.com", { cache: 'no-cache' })
             .then(() => r(Date.now() - start))
+            .catch((e: Error) => { r(e.stack ?? e.message as any) })
     })
     return Promise.all([CWM, DATA])
 }

@@ -32,7 +32,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
     if (ci_login_token == undefined || ci_account == undefined) {
         return <R url='/login' />
     }
-    const a = new API(ci_login_token.value, ci_account?.value)
+    const a = new API(ci_login_token.value, ci_account?.value, cookie.get("cwm_mirror")?.value)
     const _jt = a.tsukkomis(params.chapid)
     const [r, buy] = await a.buy_and_get_chaper(params.chapid)
     const _ln = a.find(params.chapid, r.data.chapter_info.book_id)

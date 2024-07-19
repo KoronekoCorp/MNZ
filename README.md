@@ -19,6 +19,10 @@ DB_PROXY=https://capi.koroneko.co
 TurnstileS=1x0000000000000000000000000000000AA	
 ```
 
+> 特别提示
+>
+>    capi.koroneko.co偶尔可能触发cloudflare的自动程序攻击模式，如果经常遇到，可以将IP提供给我，我会单独为你设置白名单
+
 ## 往期碎碎念（无用）
 
 <details>
