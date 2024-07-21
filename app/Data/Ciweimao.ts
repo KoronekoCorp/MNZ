@@ -26,7 +26,7 @@ function decrypt(encrypted: string, key: string = 'zG2nSeEfSHfvTCHy5LCcqtBbQehKN
 
 type params = "app_version" | "device_token" | "login_token" | "account"
 
-/** 刺猬猫签名涉及Key */
+/** 签名涉及Key */
 const key = "a90f3731745f1c30ee77cb13fc00005a"
 const signatures = "CkMxWNB666"
 
@@ -123,24 +123,28 @@ class API {
 
     /**
      * 获取是否需要人机验证geetest
+     * @deprecated 等待验证
      * @param mode 
      * @returns 
      */
     async geetest(mode: "get" | "post" = "post") {
-        const u = new URL(`https://app.hbooker.com/signup/use_geetest?app_version=${this.app_version}device_token=ciweimao_`)
+        const u = this.URL(`/signup/use_geetest?app_version=${this.app_version}device_token=ciweimao_`)
+        u.searchParams.delete("login_token")
         const r = await this[mode](u, [`geetest`], false)
         return JSON.parse(r) as geetest
     }
 
     /**
      * 使用手机号以及密码进行登录
+     * @deprecated 等待验证
      * @param phone 
      * @param password 
      * @param mode 
      * @returns 
      */
     async login(phone: string, password: string, mode: "get" | "post" = "post") {
-        const u = new URL(`https://app.hbooker.com/signup/login?login_name=${phone}&app_version=${this.app_version}&passwd=${password}&device_token=ciweimao_`)
+        const u = this.URL(`/signup/login?login_name=${phone}&app_version=${this.app_version}&passwd=${password}&device_token=ciweimao_`)
+        u.searchParams.delete("login_token")
         const r = await this[mode](u, [`login`, phone], false)
         return JSON.parse(r) as login
     }

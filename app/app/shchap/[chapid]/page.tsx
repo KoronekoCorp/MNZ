@@ -31,7 +31,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
     const a = await UseAPI()
     const r = await a.chapter_new(params.chapid)
     if (r.code != "100000") { notFound() }
-    if (r.data.chapter_info.is_paid == "0" && r.data.chapter_info.auth_access == "1") {
+    if (r.data.chapter_info.is_paid == "0" && r.data.chapter_info.auth_access == "1" && r.data.chapter_info.chapter_title !== '该章节未审核通过') {
         return <R url={`/chap/${params.chapid}`} />
     }
     const _shchp = unstable_cache(async () => db.Shchap(params.chapid, r.data.chapter_info.book_id),

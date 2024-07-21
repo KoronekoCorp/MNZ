@@ -2,6 +2,7 @@
 
 import { DatabaseSetting } from '@/components/DatabaseSetting';
 import { H2 } from '@/components/H2';
+import { MirrorSetting } from '@/components/MirrorSetting';
 import { Top } from '@/components/push';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { Button, Container } from "@mui/material";
@@ -23,6 +24,7 @@ export default function Error({
         <div style={{ paddingTop: 10 }}>
             <DatabaseSetting />
         </div>
+        <MirrorSetting />
         <Button variant="contained" sx={{ m: 1 }}
             onClick={async () => {
                 // reset()

@@ -1,3 +1,4 @@
+import Share from '@/app/buy/[chapid]/client';
 import { H2 } from '@/components/H2';
 import { Prefetch, R, S } from '@/components/push';
 import { UseAPI } from "@/Data/Use";
@@ -108,7 +109,10 @@ export default async function Page({ params, searchParams }: { params: { chapid:
                 <b>更新时间:</b>
                 <span>{r.data.chapter_info.ctime}</span>
             </Stack>
-            <ClientButton body={r.data.chapter_info.txt_content} />
+            {(r.data.chapter_info.is_paid === "1" && r.data.chapter_info.auth_access === "1")
+                ? <Share chap={params.chapid} auto={cookie.get("auto_share_chapter_vip")?.value == "on"} body={r.data.chapter_info.txt_content} />
+                : <ClientButton body={r.data.chapter_info.txt_content} />
+            }
             {r.data.chapter_info.auth_access == "0" && <Link prefetch={false} href={`/shchap/${params.chapid}/Cache`}>
                 <Button variant='contained' color='error' startIcon={<DeleteIcon />}>
                     清除缓存
