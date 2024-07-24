@@ -1,7 +1,7 @@
 import { History } from '@/app/chap/[chapid]/client';
 import { H2 } from '@/components/H2';
 import { Back, Prefetch, R, S } from '@/components/push';
-import { API } from '@/Data/Ciweimao';
+import { UseAPI } from '@/Data/Use';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import BookIcon from '@mui/icons-material/Book';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -26,13 +26,12 @@ import Share from './client';
 
 export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
     const cookie = cookies()
-    const ci_login_token = cookie.get("ci_login_token")
-    const ci_account = cookie.get("ci_account")
-    const share = cookie.get("auto_share_chapter_vip")?.value == "on"
-    if (ci_login_token == undefined || ci_account == undefined) {
+    const a = await UseAPI()
+    if (a.is_login === false) {
         return <R url='/login' />
     }
-    const a = new API(ci_login_token.value, ci_account?.value, cookie.get("cwm_mirror")?.value)
+    const share = cookie.get("auto_share_chapter_vip")?.value == "on"
+
     const _jt = a.tsukkomis(params.chapid)
     const [r, buy] = await a.buy_and_get_chaper(params.chapid)
     const _ln = a.find(params.chapid, r.data.chapter_info.book_id)

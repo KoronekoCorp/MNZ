@@ -31,16 +31,25 @@ const key = "a90f3731745f1c30ee77cb13fc00005a"
 const signatures = "CkMxWNB666"
 
 class API {
+    is_login: boolean = false
     BASEURL: string
     app_version = "2.9.328"
     device_token = "ciweimao_"
     UserAgent = `Android  com.kuangxiangciweimao.novel.c  ${this.app_version}, HONOR, TEL-AN10, 29, 10`
     login_token
     account
-    constructor(login_token: string = "ed54a385889abfa30a3d3bc1fe76c989", account: string = "书客3547619", endpoint = "https://app.happybooker.cn") {
-        this.login_token = login_token
-        this.account = account
-        this.BASEURL = endpoint
+    constructor({ login_token, account, UserAgent, endpoint }:
+        {
+            login_token?: string,
+            account?: string,
+            UserAgent?: string
+            endpoint?: string
+        }) {
+        this.login_token = login_token ?? "ed54a385889abfa30a3d3bc1fe76c989"
+        this.account = account ?? "书客3547619"
+        this.UserAgent = UserAgent ?? this.UserAgent
+        this.BASEURL = endpoint ?? process.env.CWM_MIRROR ?? "https://app.happybooker.cn"
+        if (login_token && account) this.is_login = true
     }
 
     URL(path: string) {

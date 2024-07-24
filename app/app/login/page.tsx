@@ -12,19 +12,22 @@ import { geetest, login, sign } from "./server";
 export default function Login() {
     const [ci_login_token, setci_login_token] = useState<string>()
     const [ci_account, setci_account] = useState<string>()
+    const [ci_useragent, setci_useragent] = useState<string>()
     const [phone, setphone] = useState("")
     const [pwd, setpwd] = useState("")
 
     useEffect(() => {
         setci_account(Cookies.get("ci_account"))
         setci_login_token(Cookies.get("ci_login_token"))
+        setci_useragent(Cookies.get("ci_useragent"))
     }, []);
 
     const putCookie = async () => {
-        if (ci_login_token && ci_account && ci_login_token.length > 4 && ci_account?.length > 4) {
+        if (ci_login_token && ci_account && ci_useragent && ci_login_token.length > 4 && ci_account?.length > 4) {
             const domain = document.location.hostname.replace(/.*?\./, ".")
             document.cookie = `ci_login_token=${ci_login_token}; max-age=604800; path=/; domain=${domain}`;
             document.cookie = `ci_account=${encodeURI(ci_account)}; max-age=604800; path=/; domain=${domain}`;
+            document.cookie = `ci_useragent=${ci_useragent}; max-age=604800; path=/; domain=${domain}`;
             enqueueSnackbar('登录成功', { variant: 'success' });
             return false
         } else {
@@ -34,8 +37,10 @@ export default function Login() {
     };
 
     const removeCookie = () => {
-        Cookies.remove("ci_account");
-        Cookies.remove("ci_login_token");
+        const domain = document.location.hostname.replace(/.*?\./, ".")
+        document.cookie = `ci_login_token=; max-age=-1; path=/; domain=${domain}`;
+        document.cookie = `ci_account=; max-age=-1; path=/; domain=${domain}`;
+        document.cookie = `ci_useragent=; max-age=-1; path=/; domain=${domain}`;
         setci_account(undefined)
         setci_login_token(undefined)
         enqueueSnackbar('已退出登录', { variant: 'error' });
@@ -124,10 +129,14 @@ export default function Login() {
                         <TextField label="ci_login_token" variant="outlined"
                             value={ci_login_token}
                             onChange={(e) => { setci_login_token(e.target.value.trim()) }} />
+                        <TextField label="ci_useragent" variant="outlined"
+                            value={ci_useragent}
+                            onChange={(e) => { setci_useragent(e.target.value.trim()) }} />
                     </Grid>
                     <Grid item sm={12} md={6} sx={{ "& > div": { m: 1 } }}>
                         <TextField label="示例ci_account" variant="outlined" disabled value="书客644333222111" />
                         <TextField label="示例ci_login_token" variant="outlined" disabled value="d8c5e9f227ec11fda1ee023ea1ea5337" />
+                        <TextField label="示例ci_useragent" variant="outlined" disabled value="Android  com.kuangxiangciweimao.novel.c  2.9.328, HONOR, TEL-AN10, 29, 10" />
 
                     </Grid>
                 </Grid>
