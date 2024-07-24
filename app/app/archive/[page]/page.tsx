@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 import { Suspense } from "react"
+import Userchap from "../archive"
 import Loading from "../loading"
-import Userchap from "../userchap"
 
 export const metadata: Metadata = {
-    title: 'User Chap',
+    title: 'User Chap Archive',
 }
 
 export default function Page({ params }: { params: { page: string } }) {

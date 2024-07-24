@@ -20,6 +20,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type ReactNode } from 'react';
 import { useTheme } from './Theme';
+import FolderZipIcon from '@mui/icons-material/FolderZip';
 
 const DRAWER_WIDTH = 240;
 
@@ -30,7 +31,8 @@ const LINKS = [
     { text: "Booklists", href: "/booklists", icon: LibraryBooksIcon },
     // { text: 'Subscription', href: '/watched', icon: LoyaltyIcon },
     { text: 'Bookmark', href: '/bookmark', icon: BookmarksIcon },
-    { text: 'History', href: '/history', icon: HistoryIcon }
+    { text: 'History', href: '/history', icon: HistoryIcon },
+    { text: 'Archive', href: '/archive/1', icon: FolderZipIcon }
 ];
 
 const PLACEHOLDER_LINKS = [

@@ -2,7 +2,7 @@ import { H1 } from "@/components/H2";
 import { Container } from "@mui/material";
 
 /**
- * not-Found目前存在BUG
+ * not-Found目前存在BUG(?好像已经修复)
  * 
  * 当存在`page.tsx`、`not-found.tsx`、`loading.tsx`时，且`page.tsx`调用`notFound()`时会触发
  * 
