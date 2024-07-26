@@ -37,7 +37,7 @@ export interface Shchap {
     chapter_id: number,
     /** 分享者 */
     author_name: string,
-    title: string
+    title?: string
     stime: number,
     spath: string
     /** 托管类型 */

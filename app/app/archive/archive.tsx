@@ -55,7 +55,7 @@ export default async function Archive({ page }: { page: number }) {
         <Grid container spacing={2} sx={{ p: 1 }} alignItems="center" justifyContent="center">
             {books.map((book) => <Grid item xs={6} md={3} key={book.book_id}>
                 <Card>
-                    <CardActionArea LinkComponent={Link} href={`/archivebook/${book.book_id}`}>
+                    <CardActionArea LinkComponent={Link} href={`/archive/book/${book.book_id}`}>
                         <CardContent>
                             {book.book_id}
                         </CardContent>

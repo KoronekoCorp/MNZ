@@ -11,7 +11,7 @@ import BookIcon from '@mui/icons-material/Book';
 export default function Loading({ page }: { page?: number }) {
     return <Container sx={{ textAlign: 'center' }}>
         <H2>
-            <ShareIcon />用户分享的Ciweimao VIP章节
+            <ShareIcon />存档库
         </H2>
         <Box sx={{ textAlign: 'start', color: 'text.secondary' }}>
             <p>
