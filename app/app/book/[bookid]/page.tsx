@@ -5,6 +5,7 @@ import { H2 } from "@/components/H2"
 import { Prefetch } from "@/components/push"
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive'
+import AnalyticsIcon from '@mui/icons-material/Analytics'
 import Battery2BarIcon from '@mui/icons-material/Battery2Bar'
 import Battery5BarIcon from '@mui/icons-material/Battery5Bar'
 import BatteryFullIcon from '@mui/icons-material/BatteryFull'
@@ -76,6 +77,12 @@ export default async function Page({ params }: { params: { bookid: string } }) {
                     variant="contained" color="success"
                     startIcon={<MenuBookIcon />}>
                     章节目录
+                </Button>
+                <br />
+                <Button LinkComponent={Link} href={`/book/${r.data.book_info.book_id}/state/`}
+                    variant="contained" color="secondary"
+                    startIcon={<AnalyticsIcon />}>
+                    书籍数据
                 </Button>
                 <br />
                 <ClientButton book_id={r.data.book_info.book_id} book_name={r.data.book_info.book_name} book_cover={r.data.book_info.cover} />
