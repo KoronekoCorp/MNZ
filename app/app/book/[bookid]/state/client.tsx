@@ -20,13 +20,14 @@ export function Chart({ Catalog }: { Catalog: Catalog }) {
         }
         chaps = chaps.sort((i, j) => i.chapter_index - j.chapter_index)
 
-        const count = chaps.length / min | 0
+        const count = (chaps.length / min | 0) + (100 / min | 0)  // 补全采样
         const selected: { chapter_id: number, chapter_index: number }[] = []
 
         for (let i = 0; i < min; i++) {
             const index = Math.min(i * count, chaps.length - 1); // 确保索引不超出范围
             selected.push(chaps[index]);
         }
+
         selected.push(chaps[chaps.length - 1]);
         setselected(selected)
     }, [Catalog, min])
