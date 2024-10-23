@@ -58,7 +58,7 @@ export function BookSingle({ book, req }: { book: Userchap, req: bookinfo }) {
     const [r, setr] = useState(req)
 
     const bookinfo = () => {
-        fetch(`https://zapi.koroneko.co/cwm/book/get_info_by_id?book_id=${book.book_id}`)
+        fetch(`https://zapi.elysia.rip/cwm/book/get_info_by_id?book_id=${book.book_id}`)
             .then((res) => res.json())
             .then((r) => setr(r as bookinfo))
             .catch(() => bookinfo())
@@ -75,7 +75,7 @@ export function BookSingle({ book, req }: { book: Userchap, req: bookinfo }) {
             //@ts-ignore 修复书籍不存在的问题
             "book_info": {
                 "book_name": "书籍不存在",
-                "cover": "https://cos.koroneko.co/off.gif",
+                "cover": "https://cos.elysia.rip/off.gif",
                 "author_name": "书籍不存在",
             }
         }

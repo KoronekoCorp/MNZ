@@ -18,7 +18,7 @@ export function AutoBookCard({ book, userchap, free, error }:
 
     const [Userchap, setUserchap] = useState(userchap)
     useEffect(() => {
-        if (error) fetch(`https://capi.koroneko.co/UserchapInfo/${book.book_id}`, { referrer: "about:client", referrerPolicy: "origin" })
+        if (error) fetch(`https://db.elysia.rip/UserchapInfo/${book.book_id}`, { referrer: "about:client", referrerPolicy: "origin" })
             .then(e => e.json())
             .then(e => setUserchap(e))
             .catch(() => { enqueueSnackbar(`${book.book_id}数据库重连失败`, { variant: "error" }) })

@@ -32,4 +32,4 @@ if (localStorage.getItem("noSw") !== "true") {
 
 update()
 
-fetch("https://zapi.koroneko.co/auth/check", { credentials: "include" })
+fetch("https://zapi.elysia.rip/auth/check", { credentials: "include" })

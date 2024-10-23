@@ -25,7 +25,7 @@ export default function Search() {
         </Stack>
         <Top index={crypto.randomUUID()} />
         <Link href={"/filter"} prefetch={false}>
-            <img src="https://cos.koroneko.co/T_UI_Talk_Face_00100_0008.png" />
+            <img src="https://cos.elysia.rip/T_UI_Talk_Face_00100_0008.png" />
         </Link>
     </Container>
 }

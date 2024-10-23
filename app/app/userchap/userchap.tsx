@@ -35,7 +35,7 @@ export default async function userchap({ page }: { page: number }) {
                     //@ts-ignore 
                     "book_info": {
                         "book_name": "刺猬猫请求失败",
-                        "cover": "https://cos.koroneko.co/off.gif",
+                        "cover": "https://cos.elysia.rip/off.gif",
                         "author_name": "刺猬猫请求失败",
                     }
                 }

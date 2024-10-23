@@ -2,11 +2,87 @@ import { type AudioInfo } from "aplayer-react";
 
 export const audiolist: AudioInfo[] = [
     {
+        name: 'シリウスの心臓',
+        url: 'https://cos.elysia.rip/%E3%83%B0%E4%B8%96%E7%95%8C%E6%83%85%E7%B7%92%20-%20%E3%82%B7%E3%83%AA%E3%82%A6%E3%82%B9%E3%81%AE%E5%BF%83%E8%87%93.flac',
+        cover: "https://cos.elysia.rip/%E3%83%B0%E4%B8%96%E7%95%8C%E6%83%85%E7%B7%92%20-%20%E3%82%B7%E3%83%AA%E3%82%A6%E3%82%B9%E3%81%AE%E5%BF%83%E8%87%93.jpg",
+        artist: "ヰ世界情緒",
+        lrc: `[00:00.00] 作词 : 傘村ﾄｰﾀ
+        [00:00.23] 作曲 : 傘村ﾄｰﾀ
+        [00:00.46] 编曲 : 傘村トータ
+        [00:00.70]歌を歌うのは寂しいから
+        [00:07.43]目を閉じるのは聞きたいから
+        [00:14.06]風を読むのはあなたを
+        [00:20.62]少しでも近くに感じたいから
+        [00:28.44]明かりになったあなたへ
+        [00:35.04]宇宙を飛べるまで待っていて
+        [00:41.59]明かりになったあなたの
+        [00:48.42]心臓は点滅するかしら
+        [00:57.95]歌を歌うのは哀しいから
+        [01:04.84]目を閉じるのは泣きたいから
+        [01:11.40]風を読むのはあなたに
+        [01:17.95]少しでも早く会いたいから
+        [01:25.81]明かりになったあなたへ
+        [01:32.35]宇宙に届くまで待っていて
+        [01:38.84]明かりになったあなたの
+        [01:45.65]心臓は凍らずいるかしら
+        [01:56.13]・・ ・ー・・ ーーー ・・・ー ・ ー・ーー ーーー ・・ー
+        [02:09.76]・・ ・ー・・ ーーー ・・・ー ・ ー・ーー ーーー ・・ー
+        [02:40.06]（ I Love You ）
+        [02:49.19]明かりになったあなたへ
+        [02:55.73]宇宙で会えるまで待っていて
+        [03:02.37]明かりになったあなたの
+        [03:09.15]心臓は赤く光るかしら
+        [03:18.01]・・ ・ー・・ ーーー ・・・ー ・ ー・ーー ーーー ・・ー
+        [03:31.81]・・ ・ー・・ ーーー ・・・ー ・ ー・ーー ーーー ・・ー
+        [03:44.31]（ I Love You ）
+        [03:44.90]・・ ・ー・・ ーーー ・・・ー ・ ー・ーー ーーー ・・ー
+        [03:57.78]・・ ・ー・・ ーーー ・・・ー ・ ー・ーー ーーー ・・ー
+        [04:13.26]（ I Love You ）
+        [04:22.49]明かりになったあなたへ
+        [04:29.01]宇宙を飛べるまで待っていて
+        [04:35.60]明かりになったあなたの
+        [04:42.43]心臓は点滅するかしら
+        [by:神们自己亦缄口不言]
+        [00:00.70]唱着歌儿是因为感到寂寞
+        [00:07.43]闭上眼睛是因为想要聆听
+        [00:14.06]阅读微风是因为
+        [00:20.62]想要更近地感受你
+        [00:28.44]致化作光明的你
+        [00:35.04]在能够飞向宇宙前还请等等
+        [00:41.59]化作光明的你的那颗心脏
+        [00:48.42]仍忽明忽暗地闪烁着吗
+        [00:57.95]唱起歌儿是因为感到悲伤
+        [01:04.84]闭上眼睛是因为想要哭泣
+        [01:11.40]阅读微风是因为
+        [01:17.95]怎样也想快些见到你
+        [01:25.81]致化作光明的你
+        [01:32.35]在到达宇宙之前还请等等
+        [01:38.84]化作光明的你的那颗心脏
+        [01:45.65]仍没有冻结地跳动着吗
+        [01:56.13]
+        [02:09.76]
+        [02:40.06]（我爱你）
+        [02:49.19]致化作光明的你
+        [02:55.73]在能够相会于宇宙之前还请等等
+        [03:02.37]化作光明的你的那颗心脏
+        [03:09.15]仍闪烁着红色的光芒吗
+        [03:18.01]
+        [03:31.81]
+        [03:44.31]（我爱你）
+        [03:44.90]
+        [03:57.78]
+        [04:13.26]（我爱你）
+        [04:22.49]致化作光明的你
+        [04:29.01]在能够飞向宇宙前还请等等
+        [04:35.60]化作光明的你的那颗心脏
+        [04:42.43]仍忽明忽暗地闪烁着吗`
+    }
+    , {
         name: 'Fly, my wings',
-        url: "https://cos.koroneko.co/Mili%20-%20Fly%2C%20My%20Wings.flac",
+        url: "https://cos.elysia.rip/Mili%20-%20Fly%2C%20My%20Wings.flac",
         // url: "/api/music/download/2058124989",
-        // cover: "https://zapi.koroneko.co/music/cover/2058124989",
-        cover: "https://cos.koroneko.co/Mili%20-%20Fly%2C%20My%20Wings.jpg",
+        // cover: "https://zapi.elysia.rip/music/cover/2058124989",
+        cover: "https://cos.elysia.rip/Mili%20-%20Fly%2C%20My%20Wings.jpg",
         artist: "Mili",
         lrc: `[by:已过期i]
         [00:13.535]飞呀，破碎的翅膀
@@ -96,8 +172,8 @@ export const audiolist: AudioInfo[] = [
     },
     {
         name: "Compass",
-        url: "https://cos.koroneko.co/Mili%20-%20Compass.flac",
-        cover: "https://cos.koroneko.co/Mili%20-%20Compass.jpg",
+        url: "https://cos.elysia.rip/Mili%20-%20Compass.flac",
+        cover: "https://cos.elysia.rip/Mili%20-%20Compass.jpg",
         artist: "Mili",
         lrc: `[00:00.000] 作词 : Cassie Wei
         [00:01.000] 作曲 : Yamato Kasai/Cassie Wei
@@ -178,8 +254,8 @@ export const audiolist: AudioInfo[] = [
     },
     {
         name: "Through Patches of Violet",
-        url: "https://cos.koroneko.co/Mili%20-%20Through%20Patches%20of%20Violet.flac",
-        cover: "https://cos.koroneko.co/Mili%20-%20Through%20Patches%20of%20Violet.jpg",
+        url: "https://cos.elysia.rip/Mili%20-%20Through%20Patches%20of%20Violet.flac",
+        cover: "https://cos.elysia.rip/Mili%20-%20Through%20Patches%20of%20Violet.jpg",
         artist: "Mili",
         lrc: `[00:00.000] 作词 : Cassie Wei
         [00:00.822] 作曲 : Cassie Wei/Yamato Kasai
@@ -267,8 +343,8 @@ export const audiolist: AudioInfo[] = [
     },
     {
         name: "黄龄 HOYO-MiX - TruE",
-        url: "https://cos.koroneko.co/%E9%BB%84%E9%BE%84%20HOYO-MiX%20-%20TruE.flac",
-        cover: "https://cos.koroneko.co/%E9%BB%84%E9%BE%84%20HOYO-MiX%20-%20TruE.jpg",
+        url: "https://cos.elysia.rip/%E9%BB%84%E9%BE%84%20HOYO-MiX%20-%20TruE.flac",
+        cover: "https://cos.elysia.rip/%E9%BB%84%E9%BE%84%20HOYO-MiX%20-%20TruE.jpg",
         artist: "爱莉爱莉爱",
         lrc: `
         [00:00.000] 作词 : TetraCalyx

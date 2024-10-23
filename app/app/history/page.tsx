@@ -21,11 +21,11 @@ export default function History() {
             return Promise.all(ids.map(i => BookServer(i)))
         }
         return Promise.all(ids.map(i => new Promise<bookinfo>((resolve) => {
-            fetch(`https://zapi.koroneko.co/cwm/book/get_info_by_id?book_id=${i}`)
+            fetch(`https://zapi.elysia.rip/cwm/book/get_info_by_id?book_id=${i}`)
                 .then((res) => res.json())
                 .then((r) => resolve(r as bookinfo))
                 //@ts-ignore
-                .catch(() => { resolve({ data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "请求失败" } } }) })
+                .catch(() => { resolve({ data: { book_info: { cover: "https://cos.elysia.rip/off.gif", book_name: "请求失败" } } }) })
 
         })))
     }
@@ -74,7 +74,7 @@ export default function History() {
     }
 
     const Book = ({ r, index }: { r: Chaper, index: number }) => {
-        const b = Bookinfo.find(i => i.data?.book_info.book_id === r.data.chapter_info.book_id) ?? { data: { book_info: { cover: "https://cos.koroneko.co/off.gif", book_name: "加载中" } } }
+        const b = Bookinfo.find(i => i.data?.book_info.book_id === r.data.chapter_info.book_id) ?? { data: { book_info: { cover: "https://cos.elysia.rip/off.gif", book_name: "加载中" } } }
         const t = convertTimestamp(parseInt(r.data.chapter_info.txt_content))
         return <Grid item xs={6} md={3} key={r.data.chapter_info.book_id}>
             <ImgCard

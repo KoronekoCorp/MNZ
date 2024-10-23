@@ -31,7 +31,7 @@ export default function RootLayout({
               {children}
             </Suspense>
           </Snackbar>
-          <AnnouncementProvider endpoint='https://zapi.koroneko.co/ann' />
+          <AnnouncementProvider endpoint='https://zapi.elysia.rip/ann' />
         </Root>
         <Music />
         <Sync />

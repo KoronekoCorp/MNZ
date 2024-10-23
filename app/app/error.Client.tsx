@@ -74,7 +74,7 @@ export default function Error({
                     重新加载
                 </button>
             </div>
-            <img src='https://cos.koroneko.co/憧憬成為魔法少女-50-3.png' />
+            <img src='https://cos.elysia.rip/憧憬成為魔法少女-50-3.png' />
         </div>
     )
 }

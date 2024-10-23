@@ -44,20 +44,20 @@ export default function Music() {
 
     const InputAsync = async () => {
         try {
-            const all = await (await fetch(`https://w.koroneko.co/playlist/detail?id=${playid}&s=0`)).json() as Playlist
+            const all = await (await fetch(`https://w.elysia.rip/playlist/detail?id=${playid}&s=0`)).json() as Playlist
             if (all.code === 200) {
                 const l = all.playlist.trackIds.length
                 const data = audio.slice()
                 enqueueSnackbar(`总计${l}首歌，开始导入`, { variant: "info" })
                 for (let offset = 0; offset <= l; offset += 50) {
-                    const r = await (await fetch(`https://w.koroneko.co/playlist/track/all?id=${playid}&limit=50&offset=${offset}`)).json() as Info
+                    const r = await (await fetch(`https://w.elysia.rip/playlist/track/all?id=${playid}&limit=50&offset=${offset}`)).json() as Info
                     if (r.code === 200) {
                         r.songs.forEach((one) => {
-                            if (!data.find(i => i.url === `https://koroneko.co/mirror/zapi.koroneko.co/music/url/${one.id}`)) {
+                            if (!data.find(i => i.url === `https://elysia.rip/mirror/zapi.elysia.rip/music/url/${one.id}`)) {
                                 data.push({
                                     name: one.name,
                                     cover: one.al.picUrl,
-                                    url: `https://koroneko.co/mirror/zapi.koroneko.co/music/url/${one.id}`,
+                                    url: `https://elysia.rip/mirror/zapi.elysia.rip/music/url/${one.id}`,
                                     artist: one.ar[0].name
                                 })
                             }

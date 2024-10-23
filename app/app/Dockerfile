@@ -2,7 +2,7 @@ FROM node
 
 WORKDIR /app
 
-ENV DB_PROXY=https://capi.koroneko.co \
+ENV DB_PROXY=https://db.elysia.rip \
 TurnstileS=1x0000000000000000000000000000000AA	\
 s3_domain=nmsl.s3.tebi.io
 

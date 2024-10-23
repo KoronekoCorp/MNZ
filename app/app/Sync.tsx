@@ -16,8 +16,8 @@ interface book_mark {
     "cover": string
 }
 
-const get = async (key: string) => (await fetch(`https://zapi.koroneko.co/Sync?key=${key}`)).text()
-const set = async (key: string, data: string) => fetch(`https://zapi.koroneko.co/Sync?key=${key}`, {
+const get = async (key: string) => (await fetch(`https://zapi.elysia.rip/Sync?key=${key}`)).text()
+const set = async (key: string, data: string) => fetch(`https://zapi.elysia.rip/Sync?key=${key}`, {
     method: "POST",
     body: data
 })

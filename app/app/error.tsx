@@ -34,7 +34,7 @@ export default function Error({
                 document.location.href = document.location.href
             }}>重新加载</Button>
         <br />
-        <img src='https://cos.koroneko.co/憧憬成為魔法少女-50-3.png' />
+        <img src='https://cos.elysia.rip/憧憬成為魔法少女-50-3.png' />
         <Top index={crypto.randomUUID()} />
     </Container>
 }
