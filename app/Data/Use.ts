@@ -8,12 +8,13 @@ export async function UseAPI() {
     const ci_login_token = cookie.get("ci_login_token")?.value
     const ci_account = cookie.get("ci_account")?.value
     const UserAgent = cookie.get("ci_useragent")?.value
-    if (ci_login_token && ci_account) {
+    const endpoint = cookie.get("cwm_mirror")?.value
+    if (ci_login_token && ci_account && endpoint) {
         return new API({
             login_token: ci_login_token,
             account: ci_account,
             UserAgent: UserAgent,
-            endpoint: cookie.get("cwm_mirror")?.value
+            endpoint: endpoint
         })
     } else {
         // redirect("/login")
