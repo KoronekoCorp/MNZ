@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 const option = [
     "https://app.happybooker.cn",
     "https://app.hbooker.com",
+    "https://sk.hbooker.com",
     "https://ciweimao.b-cdn.net"
 ]
 
