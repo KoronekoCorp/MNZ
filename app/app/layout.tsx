@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
-import { Heads } from './Head'
+import { AnnouncementProvider } from '@/components/Announcement';
+import { Music } from '@/Music/Client';
+import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import { Suspense } from "react";
+import { Root } from './Drawer';
+import { Heads } from './Head';
 import Loading from './loading';
 import Snackbar from './Snackbar';
 import Sync from './Sync';
-import { Music } from '@/Music/Client';
-import { Root } from './Drawer';
-import { cookies } from 'next/headers';
-import { AnnouncementProvider } from '@/components/Announcement';
 
 export const metadata: Metadata = {
   title: 'Koroneko Corp',
