@@ -25,7 +25,7 @@ export function AnnouncementProvider({ endpoint }: { endpoint: string }) {
             .catch(() => {
                 enqueueSnackbar("公告信息获取失败，页面将在5秒后刷新", { variant: "error" })
                 setTimeout(() => {
-                    location.href = location.href
+                    //location.href = location.href
                 }, 5000);
             })
     }, [])
