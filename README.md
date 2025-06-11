@@ -5,7 +5,7 @@
 React+Nextjs、Redis、Mysql
 
 ```
-docker push registry.docker.com/koronekobot/mnz
+docker pull koronekobot/mnz
 ```
 
 ## 相关说明
