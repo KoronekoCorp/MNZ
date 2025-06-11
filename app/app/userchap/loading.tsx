@@ -1,13 +1,14 @@
 
-import PaginationTotalElement from "@/components/Pagination"
-import Fix from "./client";
-import { Box, Card, Container, Grid, Skeleton, Stack } from "@mui/material";
 import { H2 } from "@/components/H2";
-import ShareIcon from '@mui/icons-material/Share';
-import BatteryFullIcon from '@mui/icons-material/BatteryFull';
-import Battery5BarIcon from '@mui/icons-material/Battery5Bar';
+import PaginationTotalElement from "@/components/Pagination";
 import Battery2BarIcon from '@mui/icons-material/Battery2Bar';
+import Battery5BarIcon from '@mui/icons-material/Battery5Bar';
+import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import BookIcon from '@mui/icons-material/Book';
+import ShareIcon from '@mui/icons-material/Share';
+import { Box, Card, Container, Skeleton, Stack } from "@mui/material";
+import Grid from '@mui/material/GridLegacy';
+import Fix from "./client";
 
 export default function Loading({ page }: { page?: number }) {
     return <Container sx={{ textAlign: 'center' }}>

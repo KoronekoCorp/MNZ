@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     description: '黑猫科技,毛线球Corp',
 }
 
-export default async function Page({ params }: { params: { tag: string, page: string } }) {
+export default async function Page(props: { params: Promise<{ tag: string, page: string }> }) {
+    const params = await props.params;
     return <Suspense fallback={<Loading tag={params.tag} page={parseInt(params.page)} />}>
         <Tags Tag={params.tag} page={parseInt(params.page)}></Tags>
     </Suspense>

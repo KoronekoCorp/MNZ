@@ -24,8 +24,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Share from './client';
 
-export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
-    const cookie = cookies()
+export default async function Page(
+    props: { params: Promise<{ chapid: string }>, searchParams: Promise<{ [key: string]: string | undefined }> }
+) {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
+    const cookie = await cookies()
     const a = await UseAPI()
     if (a.is_login === false) {
         return <R url='/login' />

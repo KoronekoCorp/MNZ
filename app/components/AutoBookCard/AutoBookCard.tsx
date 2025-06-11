@@ -7,7 +7,7 @@ import BatteryFullIcon from '@mui/icons-material/BatteryFull'
 import { Button, Stack, Typography } from "@mui/material"
 import Link from "next/link"
 import { enqueueSnackbar } from "notistack"
-import { useEffect, useState } from "react"
+import { type JSX, useEffect, useState } from "react"
 import { ImgCard } from "../ImgCard"
 
 export function AutoBookCard({ book, userchap, free, error }:

@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     description: '黑猫科技,毛线球Corp',
 }
 
-export default async function Page({ params }: { params: { type: string } }) {
+export default async function Page(props: { params: Promise<{ type: string }> }) {
+    const params = await props.params;
     if (["hot", "new", "top"].includes(params.type)) {
         //@ts-ignore
         return <BookLists type={params.type} page={1} />

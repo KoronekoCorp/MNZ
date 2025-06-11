@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState, type BaseSyntheticEvent, useRef } from 'react'
+import { useEffect, useState, type BaseSyntheticEvent, useRef, type JSX } from 'react'
 import { useRouter } from 'next/navigation'
 import { List, CircularProgress, ListItem } from '@mui/material'
 import { Dig } from '@/components/Modals'

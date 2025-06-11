@@ -1,7 +1,8 @@
-import { Card, Container, Grid, Skeleton } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
 import { H2 } from "@/components/H2";
 import { PaginationElement } from "@/components/Pagination";
+import SearchIcon from '@mui/icons-material/Search';
+import { Card, Container, Skeleton } from "@mui/material";
+import Grid from '@mui/material/GridLegacy';
 
 
 export default function Loading({ word, page, }: { word?: string, page?: number }) {

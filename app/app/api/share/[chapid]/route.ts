@@ -6,8 +6,9 @@ import { unstable_cache } from 'next/cache'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
-export async function GET(request: Request, { params }: { params: { chapid: string } }) {
-    const cookie = cookies()
+export async function GET(request: Request, props: { params: Promise<{ chapid: string }> }) {
+    const params = await props.params;
+    const cookie = await cookies()
     const a = await UseAPI()
     if (a.is_login === false) {
         return NextResponse.json({ "success": false })

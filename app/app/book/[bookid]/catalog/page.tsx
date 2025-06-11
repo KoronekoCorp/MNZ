@@ -12,17 +12,20 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import LockIcon from '@mui/icons-material/Lock'
 import MoneyIcon from '@mui/icons-material/Money'
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'
-import { Button, Container, Grid, ListItem, ListItemButton, ListItemText, Stack } from '@mui/material'
+import { Button, Container, ListItem, ListItemButton, ListItemText, Stack } from '@mui/material'
+import Grid from '@mui/material/GridLegacy'
 import { Metadata } from 'next'
 import { unstable_cache } from 'next/cache'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+
 export const metadata: Metadata = {
     title: '目录',
 }
 
-export default async function Page({ params }: { params: { bookid: string } }) {
+export default async function Page(props: { params: Promise<{ bookid: string }> }) {
+    const params = await props.params;
     const [db, db_n] = UseDB()
     const _b = unstable_cache(async () => db.Bookchaps(params.bookid),
         [`${db_n}_Catalog_${params.bookid}`], { revalidate: 7200, tags: [`${db_n}_Catalog_${params.bookid}`] })()

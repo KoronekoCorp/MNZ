@@ -2,7 +2,7 @@
 
 import { UseAPI } from "@/Data/Use"
 import { revalidateTag } from "next/cache"
-import { cookies } from "next/headers"
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 
 export interface IP {
     "status": "success",
@@ -33,7 +33,7 @@ export interface IP {
 }
 
 export async function Get_ip() {
-    if (process.env.secrets !== undefined && cookies().get("secrets")?.value !== process.env.secrets) {
+    if (process.env.secrets !== undefined && (await cookies()).get("secrets")?.value !== process.env.secrets) {
         return {
             "status": "error",
             "message": "Invalid secret key"
@@ -50,7 +50,7 @@ export async function Link() {
             .catch((e: Error) => { r(e.stack ?? e.message as any) })
     })
     const CWM = new Promise<number>((r) => {
-        fetch(cookies().get("cwm_mirror")?.value ?? "https://app.hbooker.com", { cache: 'no-cache' })
+        fetch((cookies() as unknown as UnsafeUnwrappedCookies).get("cwm_mirror")?.value ?? "https://app.hbooker.com", { cache: 'no-cache' })
             .then(() => r(Date.now() - start))
             .catch((e: Error) => { r(e.stack ?? e.message as any) })
     })
@@ -58,7 +58,7 @@ export async function Link() {
 }
 
 export async function clearReg() {
-    if (process.env.secrets !== undefined && cookies().get("secrets")?.value !== process.env.secrets) {
+    if (process.env.secrets !== undefined && (await cookies()).get("secrets")?.value !== process.env.secrets) {
         return null
     }
     revalidateTag("auto_reg_v2")
@@ -66,7 +66,7 @@ export async function clearReg() {
 }
 
 export async function Reg() {
-    if (process.env.secrets !== undefined && cookies().get("secrets")?.value !== process.env.secrets) {
+    if (process.env.secrets !== undefined && (await cookies()).get("secrets")?.value !== process.env.secrets) {
         return ["", ""]
     }
     const a = await UseAPI()

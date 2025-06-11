@@ -4,7 +4,9 @@
 
 React+Nextjs、Redis、Mysql
 
-[mnz.koroneko.co](https://mnz.koroneko.co/)
+```
+docker push registry.docker.com/koronekobot/mnz
+```
 
 ## 相关说明
 
@@ -15,13 +17,13 @@ React+Nextjs、Redis、Mysql
 请自行配置环境变量
 
 ```
-DB_PROXY=https://capi.koroneko.co
+DB_PROXY=https://db.elysia.rip
 TurnstileS=1x0000000000000000000000000000000AA	
 ```
 
 > 特别提示
 >
->    capi.koroneko.co偶尔可能触发cloudflare的自动程序攻击模式，如果经常遇到，可以将IP提供给我，我会单独为你设置白名单
+>    db.elysia.rip偶尔可能触发cloudflare的自动程序攻击模式，如果经常遇到，可以将IP提供给我，我会单独为你设置白名单
 
 ## 往期碎碎念（无用）
 

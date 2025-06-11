@@ -16,7 +16,8 @@ import { unstable_cache } from 'next/cache';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-export default async function Page({ params }: { params: { bookid: string, chapid: string } }) {
+export default async function Page(props: { params: Promise<{ bookid: string, chapid: string }> }) {
+    const params = await props.params;
     const [db, db_n] = UseDB()
     const shchap = await unstable_cache(async () => db.Shchap(params.chapid, params.bookid),
         [`${db_n}_shChap_${params.chapid}`], { revalidate: 2592000, tags: [`${db_n}_shChap_${params.chapid}`] })()

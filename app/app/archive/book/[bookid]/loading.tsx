@@ -1,4 +1,5 @@
-import { Card, Container, Grid, Skeleton } from "@mui/material";
+import { Card, Container, Skeleton } from "@mui/material";
+import Grid from '@mui/material/GridLegacy';
 
 
 export default function Loading() {

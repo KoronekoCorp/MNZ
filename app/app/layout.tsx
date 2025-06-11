@@ -14,18 +14,20 @@ export const metadata: Metadata = {
   description: '黑猫科技',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function RootLayout(
+  {
+    children,
+  }: {
+    children: React.ReactNode
+  }
+) {
   return (
     <html lang="zh">
       <head>
         <Heads />
       </head>
       <body style={{ margin: "auto" }} suppressHydrationWarning={true}>
-        <Root darkmode={cookies().get("dark")?.value === "true"}>
+        <Root darkmode={(await cookies()).get("dark")?.value === "true"}>
           <Snackbar>
             <Suspense fallback={<Loading />}>
               {children}
@@ -37,5 +39,5 @@ export default function RootLayout({
         <Sync />
       </body>
     </html>
-  )
+  );
 }

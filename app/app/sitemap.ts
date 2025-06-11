@@ -4,7 +4,7 @@ import { UseAPI } from "@/Data/Use";
 import { headers } from 'next/headers';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const host = headers().get("host")
+    const host = (await headers()).get("host")
     const fin: MetadataRoute.Sitemap = []
     const a = await UseAPI()
     const r = await a.bookcity("newtime", "50")

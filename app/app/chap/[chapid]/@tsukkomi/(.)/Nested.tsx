@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { type JSX, useState } from "react"
 import { ListItemButton, Collapse, List, Divider } from "@mui/material"
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';

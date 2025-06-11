@@ -26,7 +26,11 @@ import { unstable_cache } from 'next/cache';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
+export default async function Page(
+    props: { params: Promise<{ chapid: string }>, searchParams: Promise<{ [key: string]: string | undefined }> }
+) {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
     const [db, db_n] = UseDB()
     const a = await UseAPI()
     const r = await a.chapter_new(params.chapid)

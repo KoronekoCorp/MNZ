@@ -1,5 +1,6 @@
 import { UseDB } from '@/Data/UseDB';
-import { Card, CardActionArea, CardContent, Container, Grid } from "@mui/material";
+import { Card, CardActionArea, CardContent, Container } from "@mui/material";
+import Grid from '@mui/material/GridLegacy';
 import { Metadata } from 'next';
 import { unstable_cache } from 'next/cache';
 import Link from 'next/link';
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 }
 
 
-export default async function Page({ params }: { params: { bookid: string } }) {
+export default async function Page(props: { params: Promise<{ bookid: string }> }) {
+    const params = await props.params;
 
     const [db, db_n] = UseDB()
     const b = await unstable_cache(async () => db.Bookchaps(params.bookid),

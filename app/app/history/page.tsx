@@ -5,7 +5,8 @@ import { bookinfo, Chaper } from "@/Data/CiweiType"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import HistoryIcon from '@mui/icons-material/History'
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
-import { Button, Container, Grid, IconButton, Tooltip, Typography } from "@mui/material"
+import { Button, Container, IconButton, Tooltip, Typography } from "@mui/material"
+import Grid from '@mui/material/GridLegacy'
 import Link from "next/link"
 import { closeSnackbar, enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"

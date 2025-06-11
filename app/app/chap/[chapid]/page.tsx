@@ -25,7 +25,11 @@ import { notFound } from 'next/navigation';
 import { ClientButton, History } from './client';
 // import { Baned } from '@/Security/Chap.server';
 
-export default async function Page({ params, searchParams }: { params: { chapid: string }, searchParams: { [key: string]: string | undefined } }) {
+export default async function Page(
+    props: { params: Promise<{ chapid: string }>, searchParams: Promise<{ [key: string]: string | undefined }> }
+) {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
     // const b = Baned()
     const [db, db_n] = UseDB()
     const a = await UseAPI()
@@ -38,7 +42,7 @@ export default async function Page({ params, searchParams }: { params: { chapid:
     const _jt = a.tsukkomis(params.chapid)
     const _ln = a.find(params.chapid, r.data.chapter_info.book_id)
 
-    const cookie = cookies()
+    const cookie = await cookies()
 
     let error = false
     let isChapterPurchased: boolean

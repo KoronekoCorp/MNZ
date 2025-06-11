@@ -6,7 +6,8 @@ export const metadata: Metadata = {
     title: '搜索',
 }
 
-export default async function Page({ params }: { params: { word: string } }) {
+export default async function Page(props: { params: Promise<{ word: string }> }) {
+    const params = await props.params;
     return <Suspense fallback={<Loading word={params.word} page={1} />}>
         <Search search_word={params.word} page={1}></Search>
     </Suspense>

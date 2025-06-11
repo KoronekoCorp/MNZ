@@ -12,7 +12,13 @@ export async function GET(request: Request) {
     })
 }
 
-export async function POST(request: Request, { params: { chapid } }: { params: { chapid: string } }) {
+export async function POST(request: Request, props: { params: Promise<{ chapid: string }> }) {
+    const params = await props.params;
+
+    const {
+        chapid
+    } = params;
+
     try {
         const token = await request.text()
         const r = await Check(token)

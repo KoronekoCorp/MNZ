@@ -6,10 +6,11 @@ import Battery5BarIcon from '@mui/icons-material/Battery5Bar'
 import BatteryFullIcon from '@mui/icons-material/BatteryFull'
 import BookIcon from '@mui/icons-material/Book'
 import ShareIcon from '@mui/icons-material/Share'
-import { Box, Card, CardActionArea, CardContent, Container, Grid, Stack } from "@mui/material"
+import { Box, Card, CardActionArea, CardContent, Container, Stack } from "@mui/material"
+import Grid from '@mui/material/GridLegacy'
 import { unstable_cache } from "next/cache"
-import Fix from "../userchap/client"
 import Link from "next/link"
+import Fix from "../userchap/client"
 
 
 export default async function Archive({ page }: { page: number }) {

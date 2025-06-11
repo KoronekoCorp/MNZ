@@ -1,3 +1,4 @@
+import type { JSX } from "react"
 import ErrorClient from "./error.Client"
 
 function E(e: Error) {

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     title: 'User Chap',
 }
 
-export default function Page({ params }: { params: { page: string } }) {
+export default async function Page(props: { params: Promise<{ page: string }> }) {
+    const params = await props.params;
     return <Suspense fallback={<Loading page={parseInt(params.page)} />}><Userchap page={parseInt(params.page)} /></Suspense>
 }

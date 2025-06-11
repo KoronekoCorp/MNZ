@@ -44,7 +44,7 @@ async function getDerivedEncryptionKey(secret: string) {
 
 
 export async function GetOauth<T>() {
-    const cookie = cookies().get("oauth")
+    const cookie = (await cookies()).get("oauth")
     if (!cookie) {
         return
     }

@@ -1,5 +1,5 @@
 "use client"
-import { type CSSProperties, useEffect, useState } from 'react'
+import { type CSSProperties, type JSX, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Modal, Backdrop, Fade, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import { type AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'

@@ -6,7 +6,8 @@ import { PaginationElement } from "@/components/Pagination";
 import { Back } from '@/components/push';
 import SearchIcon from '@mui/icons-material/Search';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import { Container, Grid } from "@mui/material";
+import { Container } from "@mui/material";
+import Grid from '@mui/material/GridLegacy';
 
 export default async function Tags({ Tag, page }: { Tag: string, page: number }) {
     const tag = decodeURI(Tag)

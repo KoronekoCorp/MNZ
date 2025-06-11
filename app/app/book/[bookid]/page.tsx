@@ -21,7 +21,8 @@ import PersonIcon from '@mui/icons-material/Person'
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer'
 import TagIcon from '@mui/icons-material/Tag'
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'
-import { Button, Container, Grid, Link as LinkC, Stack } from "@mui/material"
+import { Button, Container, Link as LinkC, Stack } from "@mui/material"
+import Grid from '@mui/material/GridLegacy'
 import { unstable_cache } from 'next/cache'
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -40,7 +41,8 @@ const categories = {
     '11': '女频',
 }
 
-export default async function Page({ params }: { params: { bookid: string } }) {
+export default async function Page(props: { params: Promise<{ bookid: string }> }) {
+    const params = await props.params;
     const [db, db_n] = UseDB()
     const _Userchap = unstable_cache(async () => db.UserchapInfo(params.bookid),
         [`${db_n}_UserchapInfo_${params.bookid}`], { revalidate: 7200, tags: [`${db_n}_UserchapInfo_${params.bookid}`] })()

@@ -7,7 +7,7 @@ import { UseDB } from "@/Data/UseDB";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import { Tooltip } from "@mui/material";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Grid from '@mui/material/GridLegacy'
 import Stack from "@mui/material/Stack";
 import { notFound } from "next/navigation";
 import { Fav } from "./client";

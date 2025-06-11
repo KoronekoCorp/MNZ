@@ -15,7 +15,7 @@ const prefix = "V4."
  * @returns 
  */
 async function Pre(chapid: string) {
-    const ip = headers().get("cf-connecting-ip") ?? headers().get("x-forwarded-for")
+    const ip = (await headers()).get("cf-connecting-ip") ?? (await headers()).get("x-forwarded-for")
     if (ip) {
         const redis = await UseRedis()
         const uuid = randomUUID()
@@ -40,7 +40,7 @@ async function Pre(chapid: string) {
  * @returns 
  */
 async function buy(chapid: string) {
-    const ip = headers().get("cf-connecting-ip") ?? headers().get("x-forwarded-for")
+    const ip = (await headers()).get("cf-connecting-ip") ?? (await headers()).get("x-forwarded-for")
     if (ip) {
         const redis = await UseRedis()
         const d = await redis.json.GET(prefix + ip, { path: ".uuid" }) as string | null
@@ -55,7 +55,7 @@ async function buy(chapid: string) {
  * @deprecated
  */
 async function check(uuid: string, chapid: string) {
-    const ip = headers().get("cf-connecting-ip") ?? headers().get("x-forwarded-for")
+    const ip = (await headers()).get("cf-connecting-ip") ?? (await headers()).get("x-forwarded-for")
     if (ip) {
         const redis = await UseRedis()
         const d = await redis.sendCommand(["TFCALL", "SecurityV2.success", "0", ip, uuid])
@@ -70,7 +70,7 @@ async function check(uuid: string, chapid: string) {
  * @deprecated
  */
 async function Baned(): Promise<[true, number] | [false, undefined]> {
-    const ip = headers().get("cf-connecting-ip") ?? headers().get("x-forwarded-for")
+    const ip = (await headers()).get("cf-connecting-ip") ?? (await headers()).get("x-forwarded-for")
     const redis = await UseRedis()
     if (ip) {
         return CacheEveryThing(async (): Promise<[true, number] | [false, undefined]> => {

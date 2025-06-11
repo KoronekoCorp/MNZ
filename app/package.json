@@ -9,33 +9,33 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.654.0",
-    "@aws-sdk/s3-request-presigner": "^3.654.0",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.1",
-    "@mui/material": "^6.1.1",
-    "@mui/x-charts": "^7.17.0",
+    "@aws-sdk/client-s3": "^3.826.0",
+    "@aws-sdk/s3-request-presigner": "^3.826.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.1",
+    "@mui/material": "^7.1.1",
+    "@mui/x-charts": "^8.5.1",
     "@panva/hkdf": "^1.2.1",
     "aplayer": "^1.10.1",
     "aplayer-react": "^1.6.0",
-    "jose": "^5.9.2",
+    "jose": "^6.0.11",
     "js-cookie": "^3.0.5",
-    "mysql2": "^3.11.3",
-    "next": "^14.2.12",
-    "notistack": "^3.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "redis": "^4.7.0",
-    "typescript": "5.6.2"
+    "mysql2": "^3.14.1",
+    "next": "^15.3.3",
+    "notistack": "^3.0.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "redis": "^5.5.6",
+    "typescript": "5.8.3"
   },
   "devDependencies": {
     "@types/cloudflare-turnstile": "^0.2.2",
     "@types/js-cookie": "^3.0.6",
-    "@types/node": "22.5.5",
-    "@types/react": "18.3.7",
-    "@types/react-dom": "18.3.0",
-    "eslint": "^8.0.0",
-    "eslint-config-next": "^14.2.12"
+    "@types/node": "24.0.0",
+    "@types/react": "19.1.7",
+    "@types/react-dom": "19.1.6",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "^15.3.3"
   }
 }

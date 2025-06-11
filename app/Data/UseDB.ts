@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
 import { DDB, PDB } from "./Database";
 
 
@@ -17,7 +17,7 @@ const a = new DDB({
 export const stable = new PDB(process.env.DB_PROXY)
 
 export function UseDB(): [DDB | PDB, string] {
-    const c = cookies()
+    const c = (cookies() as unknown as UnsafeUnwrappedCookies)
     const t = c.get("db")?.value ?? "stable"
     console.log(t)
     switch (t) {

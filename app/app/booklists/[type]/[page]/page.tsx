@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 }
 
 
-export default async function Page({ params }: { params: { type: string, page: string } }) {
+export default async function Page(props: { params: Promise<{ type: string, page: string }> }) {
+    const params = await props.params;
     if (["hot", "new", "top"].includes(params.type)) {
         //@ts-ignore
         return <BookLists type={params.type} page={parseInt(params.page)} />

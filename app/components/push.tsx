@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { type JSX, useEffect } from "react";
 import Loading from "../app/loading";
 
 export function R({ url, children }: { url: string, children?: JSX.Element }) {

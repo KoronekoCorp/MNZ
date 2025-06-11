@@ -1,7 +1,7 @@
 "use client"
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from '@mui/material/CircularProgress';
-import { createContext, useState } from "react";
+import { createContext, type JSX, useState } from "react";
 
 export const SetBackDrop = createContext((state: boolean) => { })
 

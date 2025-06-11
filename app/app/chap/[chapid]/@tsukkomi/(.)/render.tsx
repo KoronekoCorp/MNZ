@@ -1,8 +1,9 @@
-import { UseAPI } from '@/Data/Use'
 import { tsukkomi_info_single, tsukkomi_reply_info } from '@/Data/CiweiType'
+import { UseAPI } from '@/Data/Use'
+import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
+import type { JSX } from 'react'
 import ModalS, { Roll } from './client'
 import { Nested } from './Nested'
-import { ListItemAvatar, Avatar, ListItem, Typography, ListItemText, Divider } from '@mui/material'
 
 /**
  * 单个间贴的UI

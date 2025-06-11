@@ -1,11 +1,12 @@
 "use client"
 
-import { enqueueSnackbar } from "notistack";
-import { clearReg, Get_ip, IP, Link, Reg } from "./server";
-import { Table, TableHead, TableCell, TableRow, TableBody, Button, Grid } from "@mui/material";
-import { useState } from "react";
-import StorageIcon from '@mui/icons-material/Storage';
 import { H2 } from "@/components/H2";
+import StorageIcon from '@mui/icons-material/Storage';
+import { Button, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import Grid from '@mui/material/GridLegacy';
+import { enqueueSnackbar } from "notistack";
+import { useState } from "react";
+import { clearReg, Get_ip, IP, Link, Reg } from "./server";
 
 
 export default function Setting() {

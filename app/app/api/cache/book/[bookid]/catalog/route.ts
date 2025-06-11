@@ -12,7 +12,13 @@ export async function GET(request: Request) {
     })
 }
 
-export async function POST(request: Request, { params: { bookid } }: { params: { bookid: string } }) {
+export async function POST(request: Request, props: { params: Promise<{ bookid: string }> }) {
+    const params = await props.params;
+
+    const {
+        bookid
+    } = params;
+
     try {
         const token = await request.text()
         const r = await Check(token)

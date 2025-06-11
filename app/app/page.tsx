@@ -1,7 +1,8 @@
 "use client"
 
-import style from './style.module.css'
-import { Grid, Container } from "@mui/material";
+import { Container } from "@mui/material";
+import Grid from '@mui/material/GridLegacy';
+import style from './style.module.css';
 
 export default function Home() {
   return (

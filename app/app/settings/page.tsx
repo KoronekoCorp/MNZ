@@ -7,10 +7,12 @@ import CachedIcon from '@mui/icons-material/Cached'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
 import StorageIcon from '@mui/icons-material/Storage'
 import SyncIcon from '@mui/icons-material/Sync'
-import { Button, Grid, Stack, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@mui/material"
+import { Button, Stack, Table, TableBody, TableCell, TableHead, TableRow, TextField } from "@mui/material"
+import Grid from '@mui/material/GridLegacy'
 import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import ColorSetting from "./Color"
+
 
 export default function Setting() {
     const [syncid, setsyncid] = useState("")

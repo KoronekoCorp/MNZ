@@ -5,7 +5,8 @@ import { notFound } from "next/navigation"
 import BarChartIcon from '@mui/icons-material/BarChart';
 import { Chart } from "./client";
 
-export default async function Page({ params }: { params: { bookid: string } }) {
+export default async function Page(props: { params: Promise<{ bookid: string }> }) {
+    const params = await props.params;
 
     const a = await UseAPI()
     const r = await a.bookinfo(params.bookid)

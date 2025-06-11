@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 // import { redirect } from "next/navigation";
 
 export async function UseAPI() {
-    const cookie = cookies()
+    const cookie = await cookies()
     const ci_login_token = cookie.get("ci_login_token")?.value
     const ci_account = cookie.get("ci_account")?.value
     const UserAgent = cookie.get("ci_useragent")?.value

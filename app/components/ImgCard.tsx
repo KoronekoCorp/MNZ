@@ -2,6 +2,7 @@
 
 import { Card, CardActionArea, CardActions, CardContent } from "@mui/material"
 import Link from "next/link"
+import type { JSX } from "react"
 
 type jsxs = JSX.Element | JSX.Element[]
 
