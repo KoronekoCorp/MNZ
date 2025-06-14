@@ -1,0 +1,60 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout main
+      uses: actions/checkout@v4
+      
+    - name: Docker Login
+      uses: docker/login-action@v3.4.0
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    # - name: Login to GitHub Container Registry
+    #   uses: docker/login-action@v3
+    #   with:
+    #     registry: ghcr.io
+    #     username: ${{ github.repository_owner }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
+
+    # - name: Build the Docker image
+    #   run: cd app/ && docker build . --file Dockerfile --tag mnz:$(date +%Y-%m-%d)
+            
+    # - name: Push the Docker image 
+    #   run: |
+    #     cd app/
+    #     docker tag mnz:$(date +%Y-%m-%d) registry.docker.com/koronekobot/mnz:$(date +%Y-%m-%d)
+    #     docker push registry.docker.com/koronekobot/mnz:$(date  +%Y-%m-%d)
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: generate tag
+      id: vars
+      run: echo "tag=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        platforms: linux/amd64,linux/arm64
+        context: ./app
+        file: ./app/Dockerfile
+        push: true
+        tags: |
+          koronekobot/mnz:latest
+          koronekobot/mnz:${{ steps.vars.outputs.tag }}
+        cache-from: type=registry,ref=koronekobot/mnz:cache
+        cache-to: type=registry,ref=koronekobot/mnz:cache,mode=max
