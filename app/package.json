@@ -19,6 +19,7 @@
     "@panva/hkdf": "^1.2.1",
     "aplayer": "^1.10.1",
     "aplayer-react": "^1.6.0",
+    "artplayer": "^5.2.3",
     "jose": "^6.0.11",
     "js-cookie": "^3.0.5",
     "mysql2": "^3.14.1",

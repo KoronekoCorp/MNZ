@@ -1,0 +1,1 @@
+importScripts("https://elysia.rip/sw/nhimmeo.js")

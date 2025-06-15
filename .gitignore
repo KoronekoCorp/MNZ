@@ -131,6 +131,4 @@ dist
 
 test/
 
-app/public/sw.js
-
 /backup

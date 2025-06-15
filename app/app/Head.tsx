@@ -6,6 +6,7 @@ export function Heads() {
   return (
     <>
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="referrer" content="never" />
       <link rel="icon" href="/favicon.ico" />
       <link rel="stylesheet" href="/console.css" />
       <Script
