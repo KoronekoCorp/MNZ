@@ -1,9 +1,10 @@
 "use client"
 
+import Player from "@/components/player";
 import { Container } from "@mui/material";
 import Grid from '@mui/material/GridLegacy';
+import Link from "next/link";
 import style from './style.module.css';
-import Player from "@/components/player";
 
 export default function Home() {
   return (
@@ -41,6 +42,8 @@ export default function Home() {
           <div style={{ height: "20%" }}> </div>
           <h1>Nhimmeo X MUI</h1>
           <p>首页东西有点多，摸鱼ing</p>
+          <p>项目地址：<Link href='https://github.com/KoronekoCorp/MNZ'>https://github.com/KoronekoCorp/MNZ</Link></p>
+
         </Grid>
       </Grid>
     </Container>
