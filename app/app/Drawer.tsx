@@ -6,6 +6,8 @@ import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import LoginIcon from '@mui/icons-material/Login';
 // import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import { CacheCleanIconButton } from '@/components/CacheCleaner';
+import { getRootDomain } from '@/components/getDomain';
+import FolderZipIcon from '@mui/icons-material/FolderZip';
 import HistoryIcon from '@mui/icons-material/History';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -20,7 +22,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type ReactNode } from 'react';
 import { useTheme } from './Theme';
-import FolderZipIcon from '@mui/icons-material/FolderZip';
 
 const DRAWER_WIDTH = 240;
 
@@ -74,7 +75,8 @@ export function Root({ darkmode, children }: { darkmode?: boolean, children: Rea
                     <Box sx={{ flexGrow: 1 }} />
                     <CacheCleanIconButton container={'#drawer'} />
                     <IconButton sx={{ ml: 1 }} onClick={() => {
-                        document.cookie = `dark=${!dark}; max-age=604800; path=/; domain=${document.location.hostname.replace(/.*?\./, ".")}`;
+                        const domain = getRootDomain()
+                        document.cookie = `dark=${!dark}; max-age=604800; path=/; domain=${domain}`;
                         setdark(!dark)
                     }} color="inherit">
                         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}

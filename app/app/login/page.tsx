@@ -1,4 +1,5 @@
 'use client'
+import { getRootDomain } from "@/components/getDomain";
 import { H2 } from "@/components/H2";
 import { Accordions } from "@/components/Modals";
 import KeyIcon from '@mui/icons-material/Key';
@@ -25,7 +26,7 @@ export default function Login() {
 
     const putCookie = async () => {
         if (ci_login_token && ci_account && ci_useragent && ci_login_token.length > 4 && ci_account?.length > 4) {
-            const domain = document.location.hostname.replace(/.*?\./, ".")
+            const domain = getRootDomain()
             document.cookie = `ci_login_token=${ci_login_token}; max-age=604800; path=/; domain=${domain}`;
             document.cookie = `ci_account=${encodeURI(ci_account)}; max-age=604800; path=/; domain=${domain}`;
             document.cookie = `ci_useragent=${ci_useragent}; max-age=604800; path=/; domain=${domain}`;

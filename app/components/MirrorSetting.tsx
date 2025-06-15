@@ -5,6 +5,7 @@ import Cookies from "js-cookie"
 import Link from "next/link"
 import { enqueueSnackbar } from "notistack"
 import { useEffect, useState } from "react"
+import { getRootDomain } from "./getDomain"
 
 const option = [
     "https://app.happybooker.cn",
@@ -37,7 +38,7 @@ export function MirrorSetting() {
         </FormControl>
         <Button variant="contained" color="primary"
             onClick={() => {
-                const domain = document.location.hostname.replace(/.*?\./, ".")
+                const domain = getRootDomain()
                 if (value) {
                     document.cookie = `cwm_mirror=${value}; max-age=2592000; path=/; domain=${domain}`;
                     enqueueSnackbar("镜像设置已修改为" + value, { variant: 'success' })
