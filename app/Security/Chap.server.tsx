@@ -15,6 +15,9 @@ const prefix = "V4."
  * @returns 
  */
 async function Pre(chapid: string) {
+    if (process.env.SECURITY_ENABLE == undefined || process.env.SECURITY_ENABLE == "false") {
+        return undefined
+    }
     const ip = (await headers()).get("cf-connecting-ip") ?? (await headers()).get("x-forwarded-for")
     if (ip) {
         const redis = await UseRedis()
