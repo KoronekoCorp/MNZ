@@ -75,6 +75,12 @@ img.anime {
     box-shadow: 0 0 0 0 #cc4998
 }
 
+div.anime {
+    animation: 2.4s infinite img-anime;
+    border-radius: 10px;
+    box-shadow: 0 0 0 0 #cc4998
+}
+
 @keyframes img-anime {
     0% {
         box-shadow: 0 0 0 0 #cc499899

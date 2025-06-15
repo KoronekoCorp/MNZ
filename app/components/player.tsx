@@ -4,11 +4,12 @@ import Artplayer from 'artplayer';
 import { useEffect, useRef } from 'react';
 
 
-export default function Player({ option, callback, ...rest }: {
-    option: Artplayer["Option"],
-    callback?: (art: Artplayer) => void,
-    rest?: React.HTMLAttributes<HTMLDivElement>
-}) {
+type PlayerProps = {
+    option: Artplayer["Option"];
+    callback?: (art: Artplayer) => void;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+export default function Player({ option, callback, ...rest }: PlayerProps) {
     const artRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -17,8 +18,16 @@ export default function Player({ option, callback, ...rest }: {
             container: artRef.current,
         }) : undefined
 
-        if (art && callback && typeof callback === 'function') {
-            callback(art);
+        if (art) {
+            art.on('error', (err) => {
+                console.error('Artplayer Error:', err);
+            });
+            art.on('ready', () => {
+                console.log('Artplayer is ready');
+            })
+            if (callback && typeof callback === 'function') {
+                callback(art);
+            }
         }
 
         return () => {
