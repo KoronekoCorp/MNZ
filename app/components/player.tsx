@@ -17,7 +17,7 @@ export default function Player({ option, callback, ...rest }: PlayerProps) {
             ...option,
             container: artRef.current,
             moreVideoAttr:{
-                crossOrigin: 'anonymous',
+                // crossOrigin: 'anonymous',
             },
         }) : undefined
 
