@@ -16,6 +16,9 @@ export default function Player({ option, callback, ...rest }: PlayerProps) {
         const art = artRef.current != null ? new Artplayer({
             ...option,
             container: artRef.current,
+            moreVideoAttr:{
+                crossOrigin: 'anonymous',
+            },
         }) : undefined
 
         if (art) {
