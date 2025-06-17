@@ -1,7 +1,7 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci --force
+RUN npm ci
 
 FROM node:20-alpine AS builder
 WORKDIR /app
@@ -23,7 +23,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 RUN mkdir -p /app/.next/cache/fetch-cache && chown nextjs:nodejs /app/.next/cache/fetch-cache 
-VOLUME [/app/.next/cache/fetch-cache]
+VOLUME /app/.next/cache/fetch-cache
 
 USER nextjs
 EXPOSE 3000

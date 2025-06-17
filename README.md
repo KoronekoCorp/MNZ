@@ -2,11 +2,17 @@
 
 ## 技术栈
 
-React+Nextjs、Redis、Mysql
+React+Nextjs、MUI、Redis、Mysql
 
 ```
-docker pull koronekobot/mnz
+docker run --rm -d -p 3000:3000/tcp koronekobot/mnz:latest
 ```
+
+## 往期碎碎念（无用）
+
+<details>
+<summary>往期碎碎念（无用）</summary>
+
 
 ## 相关说明
 
@@ -16,7 +22,7 @@ docker pull koronekobot/mnz
 
 请自行配置环境变量
 
-```
+```bash
 DB_PROXY=https://db.elysia.rip
 TurnstileS=1x0000000000000000000000000000000AA	
 ```
@@ -25,10 +31,63 @@ TurnstileS=1x0000000000000000000000000000000AA
 >
 >    db.elysia.rip偶尔可能触发cloudflare的自动程序攻击模式，如果经常遇到，可以将IP提供给我，我会单独为你设置白名单
 
-## 往期碎碎念（无用）
+</details>
+
+
+## 知识
 
 <details>
-<summary>往期碎碎念（无用）</summary>
+<summary>知识</summary>
+
+### npm包年久失修，依赖冲突如何修复
+
+```bash
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: aplayer-react@1.6.0
+npm error Found: react@19.1.0
+npm error node_modules/react
+npm error   react@"^19.1.0" from the root project
+npm error   peer react@"^17.0.0 || ^18.0.0 || ^19.0.0" from @mui/utils@7.1.1
+npm error   node_modules/@mui/utils
+npm error     @mui/utils@"^7.1.1" from @mui/material@7.1.1
+npm error     node_modules/@mui/material
+npm error       @mui/material@"^7.1.1" from the root project
+npm error       2 more (@mui/icons-material, @mui/x-charts)
+npm error     @mui/utils@"^7.1.1" from @mui/x-charts@8.5.1
+npm error     node_modules/@mui/x-charts
+npm error       @mui/x-charts@"^8.5.1" from the root project
+npm error     3 more (@mui/system, @mui/x-internals, @mui/private-theming)
+npm error   16 more (@emotion/react, notistack, @mui/styled-engine, ...)
+npm error
+npm error Could not resolve dependency:
+npm error peer react@"^18.2.0" from aplayer-react@1.6.0
+npm error node_modules/aplayer-react
+npm error   aplayer-react@"^1.6.0" from the root project
+npm error
+npm error Conflicting peer dependency: react@18.3.1
+npm error node_modules/react
+npm error   peer react@"^18.2.0" from aplayer-react@1.6.0
+npm error   node_modules/aplayer-react
+npm error     aplayer-react@"^1.6.0" from the root project
+npm error
+```
+
+使用 `overrides` 强制锁定版本（npm v8.3+）
+
+在 `package.json` 中添加：
+
+```json
+{
+  "overrides": {
+    "aplayer-react": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  }
+}
+```
 
 ### Mysql2
 

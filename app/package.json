@@ -9,6 +9,12 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "aplayer-react": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.826.0",
     "@aws-sdk/s3-request-presigner": "^3.826.0",
