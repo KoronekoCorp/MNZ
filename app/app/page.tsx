@@ -42,9 +42,8 @@ export default function Home() {
         <Grid item xs={12} md={6} sx={{ height: '100vh', color: "text.primary", width: "100%" }} >
           <div style={{ height: "20%" }}> </div>
           <h1>Nhimmeo X MUI</h1>
-          <p>首页东西有点多，摸鱼ing</p>
           <p>项目地址：<Link href='https://github.com/KoronekoCorp/MNZ'>https://github.com/KoronekoCorp/MNZ</Link></p>
-
+          <iframe src="https://elysia.betteruptime.com/badge?theme=light" width="250" height="30" frameBorder="0" scrolling="no" />
         </Grid>
       </Grid>
     </Container>
