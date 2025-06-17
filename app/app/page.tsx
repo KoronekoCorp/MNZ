@@ -19,7 +19,8 @@ export default function Home() {
           /> */}
           <Player
             option={{
-              url: "https://cos.elysia.rip/bb13933a8d406f041b05ab5ec7863754_1080p%2B.mp4",
+              url: "https://cos.elysia.rip/exusiai/index.m3u8",
+              type: "m3u8",
               container: "",
               poster: "https://cos.elysia.rip/PRTS_new_N.jpg",
               autoplay: true,
