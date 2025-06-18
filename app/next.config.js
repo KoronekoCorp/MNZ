@@ -85,7 +85,7 @@ const nextConfig = {
       //   ]
       // },
       {
-        source: "/:path(|assets/images/logo.png|history|bookmark|bbs.php|settings|login|account|rank)",
+        source: "/:path(favicon.ico|favicon.svg|assets/images/logo.png|history|bookmark|bbs.php|settings|login|account|rank)",
         headers: [
           { key: "Vercel-CDN-Cache-Control", value: "max-age=2592000" },
           { key: "CDN-Cache-Control", value: "max-age=3600, must-revalidate" },

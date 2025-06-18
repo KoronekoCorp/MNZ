@@ -32,7 +32,7 @@ export default function Page() {
     const [page, setpage] = useState(0)
 
     useEffect(() => {
-        fetch("https://zapi.elysia.rip/cwm/book/get_official_tag_list")
+        fetch("/api/cwm/book/get_official_tag_list")
             .then(e => e.json())
             .then(e => setdefault(e.data.official_tag_list.map((i: { tag_name: any; }) => { return { isTag: true, name: i.tag_name, score: 10 } })))
     }, [])
@@ -57,7 +57,7 @@ export default function Page() {
             return enqueueSnackbar("虚空搜索？", { variant: "info" })
         }
         setloading(true)
-        fetch(`https://zapi.elysia.rip/cwm/bookcity/get_filter_search_book_list?category_index=0&count=10&filter_uptime=&filter_word=${key !== undefined ? key : ""}&is_paid=&key=&order=&page=${p}&tags=${JSON.stringify(tags)}&up_status=&use_daguan=0`)
+        fetch(`/api/cwm/bookcity/get_filter_search_book_list?category_index=0&count=10&filter_uptime=&filter_word=${key !== undefined ? key : ""}&is_paid=&key=&order=&page=${p}&tags=${JSON.stringify(tags)}&up_status=&use_daguan=0`)
             .then(e => e.json())
             .then(e => {
                 setloading(false)

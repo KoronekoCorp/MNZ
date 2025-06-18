@@ -22,7 +22,7 @@ export default function History() {
             return Promise.all(ids.map(i => BookServer(i)))
         }
         return Promise.all(ids.map(i => new Promise<bookinfo>((resolve) => {
-            fetch(`https://zapi.elysia.rip/cwm/book/get_info_by_id?book_id=${i}`)
+            fetch(`/api/cwm/book/get_info_by_id?book_id=${i}`)
                 .then((res) => res.json())
                 .then((r) => resolve(r as bookinfo))
                 //@ts-ignore

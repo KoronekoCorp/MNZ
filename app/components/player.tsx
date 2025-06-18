@@ -59,7 +59,7 @@ export default function Player({ option, callback, ...rest }: PlayerProps) {
                 art.destroy(false);
             }
         };
-    }, []);
+    }, [option.url]);
 
     return <div ref={artRef} {...rest}></div>;
 }

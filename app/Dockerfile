@@ -31,5 +31,8 @@ ENV PORT=3000
 ENV DB_PROXY=https://db.elysia.rip \
     TurnstileS=1x0000000000000000000000000000000AA	\
     s3_domain=nmsl.s3.tebi.io
+    
+# Environment variables for secrets
+ENV secrets=secrets
 
 CMD ["node", "server.js"]
