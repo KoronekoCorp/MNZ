@@ -57,7 +57,7 @@ export default function Home() {
           <div style={{ height: "20%" }}> </div>
           <h1>Eexusiai</h1>
           <p>项目地址：<Link href='https://github.com/KoronekoCorp/MNZ'>https://github.com/KoronekoCorp/MNZ</Link></p>
-          <iframe src="https://elysia.betteruptime.com/badge?theme=light" width="250" height="30" frameBorder="0" scrolling="no" />
+          <iframe id="status" width="250" height="30" frameBorder="0" scrolling="no" />
         </Grid>
       </Grid>
     </Container>

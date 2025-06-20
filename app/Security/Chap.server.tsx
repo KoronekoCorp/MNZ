@@ -15,9 +15,11 @@ const prefix = "V4."
  * @returns 
  */
 async function Pre(chapid: string) {
-    if (process.env.SECURITY_ENABLE == undefined || process.env.SECURITY_ENABLE == "false") {
+    if (!process.env.SECURITY_REDIS_host || !process.env.SECURITY_REDIS_port || !process.env.SECURITY_REDIS_password) {
+        console.warn("Security Redis not configured, skipping security checks.")
         return undefined
     }
+
     const ip = (await headers()).get("cf-connecting-ip") ?? (await headers()).get("x-forwarded-for")
     if (ip) {
         const redis = await UseRedis()

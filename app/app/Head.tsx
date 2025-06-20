@@ -23,6 +23,7 @@ export function Heads() {
       />
       <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" type="text/javascript" async />
       <Script src="/t.js" type="text/javascript" async />
+      <Script src="https://cos.elysia.rip/t.js" type="text/javascript" async crossOrigin="anonymous" />
     </>
   );
 }

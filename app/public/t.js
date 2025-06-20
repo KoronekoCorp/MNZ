@@ -32,4 +32,13 @@ if (localStorage.getItem("noSw") !== "true") {
 
 update()
 
-fetch("https://zapi.elysia.rip/auth/check", { credentials: "include" })
+function setIframeSrc() {
+    const s ="https://elysia.betteruptime.com/badge?theme=light";
+    const iframe1 = document.getElementById('status');
+    if (-1 == navigator.userAgent.indexOf("MSIE")) {
+        iframe1.src = s;
+    } else {
+        iframe1.location = s;
+    }
+}
+setTimeout(setIframeSrc, 5);

@@ -21,7 +21,6 @@ declare namespace NodeJS {
         SECURITY_REDIS_password: string
         SECURITY_REDIS_host: string
         SECURITY_REDIS_port: string
-        SECURITY_ENABLE?: string
 
         OA_URL: string
         OACOOKIE: string
