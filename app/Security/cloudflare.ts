@@ -22,9 +22,9 @@ class cloudflare {
             case "block":
                 const r = await this.POST(url, JSON.stringify({
                     "configuration": {
-                        "target": v6 ? "ipv6" : "ip",
-                        "value": ip
-                    }, "mode": mode, "notes": ""
+                        "target": v6 ? "ip_range" : "ip",
+                        "value": v6 ? ip + "/64" : ip
+                    }, "mode": mode, "notes": new Date().toLocaleDateString()
                 }))
                 console.log(r)
             case "challenge":
@@ -32,7 +32,7 @@ class cloudflare {
                     "configuration": {
                         "target": "ip_range",
                         "value": v6 ? ip + "/48" : ip + "/24"
-                    }, "mode": mode, "notes": ""
+                    }, "mode": mode, "notes": new Date().toLocaleDateString()
                 }))
                 console.log(r2)
         }
